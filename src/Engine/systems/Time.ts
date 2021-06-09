@@ -1,15 +1,20 @@
 import { System } from '../System';
 
 export class Time extends System {
-	private static lastTime: number = 0;
+	static lastTime: number = 0;
 	static deltaTime: number = 0;
+	static getCurrTime(): number {
+		return performance.now() / 1000;
+	}
+
 	init() {
-		Time.lastTime = performance.now();
-		Time.deltaTime = performance.now() - Time.lastTime;
+		Time.deltaTime = Time.getCurrTime() - Time.lastTime;
+		Time.lastTime = Time.getCurrTime();
 	}
 	start() {}
+
 	update() {
-		Time.deltaTime = performance.now() - Time.lastTime;
-		Time.lastTime = performance.now();
+		Time.deltaTime = Time.getCurrTime() - Time.lastTime;
+		Time.lastTime = Time.getCurrTime();
 	}
 }

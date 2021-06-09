@@ -10,6 +10,7 @@ module.exports = {
 	entry: {
 		app: ['./src/client/index'],
 	},
+	target: 'web',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
@@ -48,7 +49,8 @@ module.exports = {
 		historyApiFallback: true,
 		overlay: true,
 		compress: true,
-		allowedHosts: ['.joshh.moe'],
+		hot: true,
+		disableHostCheck: true,
 	},
 	optimization: {
 		minimizer: [
