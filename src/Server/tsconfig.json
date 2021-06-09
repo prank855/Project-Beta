@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"lib": ["ESNext", "DOM"],
+		"sourceMap": true,
+		"outDir": "../../dist",
+		"moduleResolution": "node",
+		"removeComments": true,
+		"strict": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"rootDir": ".."
+	},
+	"exclude": ["node_modules"],
+	"files": ["./index.ts"]
+}

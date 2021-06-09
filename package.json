@@ -1,0 +1,45 @@
+{
+  "name": "project-beta",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:client": "webpack serve",
+    "dev:server": "tsc-watch -p ./src/server --onSuccess \"node dist/server/index.js\"",
+    "start:server": "node index.js",
+    "build:client": "webpack && cp -r ./src/client/assets/* ./dist",
+    "build:server": "tsc -p ./src/server",
+    "build": "npm run build:client && npm run build:server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prank855/Project-Beta.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prank855/Project-Beta/issues"
+  },
+  "homepage": "https://github.com/prank855/Project-Beta#readme",
+  "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.14.2",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-typescript": "^7.13.0",
+    "@babel/runtime": "^7.14.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "html-webpack-plugin": "^5.3.1",
+    "prettier": "^2.3.1",
+    "terser-webpack-plugin": "^5.1.3",
+    "tsc-watch": "^4.4.0",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
