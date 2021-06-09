@@ -1,8 +1,8 @@
 import { System } from '../../Engine/System';
 
 export class ScreenSystem extends System {
-	static canvas: HTMLCanvasElement;
-	static context: CanvasRenderingContext2D | null;
+	canvas: HTMLCanvasElement | null = null;
+	context: CanvasRenderingContext2D | null = null;
 	init() {
 		let canvas = document.createElement('canvas');
 		canvas.id = 'canvas';
@@ -19,8 +19,8 @@ export class ScreenSystem extends System {
 		document.body.style.overflow = 'hidden';
 		document.body.style.margin = '0';
 		//document.body.style.cursor = 'none';
-		ScreenSystem.canvas = canvas;
-		ScreenSystem.context = canvas.getContext('2d', { alpha: false });
+		this.canvas = canvas;
+		this.context = canvas.getContext('2d', { alpha: false });
 	}
 	start() {}
 	update() {}

@@ -1,3 +1,4 @@
+import { Color } from '../Client/COLOR';
 import { GameObject } from './GameObject';
 
 export class Scene {
@@ -11,5 +12,6 @@ export class Scene {
 
 	addGameObject(go: GameObject) {
 		this.gameObjects.push(go);
+		console.log(`Added ${Color.GAMEOBJECT}GameObject ID: ${go.id}`);
 	}
 }

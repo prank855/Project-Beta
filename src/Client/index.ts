@@ -4,6 +4,7 @@ import { Scene } from '../Engine/Scene';
 import { Time } from '../Engine/systems/Time';
 import { TestComponent } from './components/TestComponent';
 import { CameraSystem } from './systems/CameraSystem';
+import { RendererSystem } from './systems/RendererSystem';
 import { ScreenSystem } from './systems/ScreenSystem';
 
 window.onload = () => {
@@ -17,6 +18,7 @@ window.onload = () => {
 	engine.addSystem(Time);
 	engine.addSystem(ScreenSystem);
 	engine.addSystem(CameraSystem);
+	engine.addSystem(RendererSystem);
 
 	var epicScene = new Scene();
 	epicScene.name = 'Epic Scene';

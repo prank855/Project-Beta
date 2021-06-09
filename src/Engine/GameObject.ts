@@ -1,12 +1,19 @@
+import { Color } from '../Client/COLOR';
 import { GameComponent } from './GameComponent';
 import { Transform } from './Transform';
 import { Vector2 } from './Vector2';
 
 export class GameObject {
+	static latestID = 0;
+	id: number;
 	private transform = new Transform();
 	parent: GameObject | null = null;
 	components: GameComponent[] = [];
 	children: GameObject[] = [];
+
+	constructor() {
+		this.id = GameObject.latestID++;
+	}
 
 	update() {
 		for (var co of this.components) {
@@ -40,6 +47,9 @@ export class GameObject {
 		var temp = new type();
 		temp.parent = this;
 		this.components.push(temp);
+		console.log(
+			`Added Component ${Color.COMPONENT}${type.name}${Color.DEFAULT} to ${Color.GAMEOBJECT}GameObject ID: ${this.id}`
+		);
 		return temp;
 	}
 

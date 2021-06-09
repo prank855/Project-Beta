@@ -1,16 +1,27 @@
+import { Color } from '../Client/COLOR';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
 
 export class Engine {
+	public static self: Engine;
 	systems: System[] = [];
 	private scenes: Scene[] = [];
 	private currentScene: Scene = new Scene();
 
-	framerate = 20;
+	framerate = 240;
+
+	constructor() {
+		if (Engine.self != null) {
+			return;
+		}
+		Engine.self = this;
+	}
 
 	start() {
-		console.log(`Scene name is "${this.currentScene.name}"`);
+		console.log(
+			`Started ENGINE with Scene: ${Color.SCENE}"${this.currentScene.name}"`
+		);
 
 		for (var s of this.systems) {
 			s.start();
@@ -24,7 +35,7 @@ export class Engine {
 		let currTime = Time.getCurrTime();
 		let self = this;
 		let tickDelta = 1 / this.framerate;
-		if (this.framerate > 4) {
+		if (this.framerate != 0) {
 			if (currTime - Time.lastTime < tickDelta) {
 				if (
 					currTime - Time.lastTime + this.setTimeoutError / 1000 <
@@ -46,8 +57,6 @@ export class Engine {
 			s.update();
 		}
 
-		console.log(1 / Time.deltaTime);
-
 		this.currentScene.update();
 
 		setImmediate(self.loop.bind(this));
@@ -55,10 +64,19 @@ export class Engine {
 
 	addSystem<T extends System>(type: new () => T): T {
 		var temp = new type();
-		console.log(`Added System: ${type.name}`);
+		console.log(`Added System: ${Color.SYSTEM}${type.name}`);
 		temp.init();
 		this.systems.push(temp);
 		return temp;
+	}
+
+	getSystem<T extends System>(type: new () => T): T {
+		for (var s of this.systems) {
+			if (s instanceof type) {
+				return s;
+			}
+		}
+		throw 'Could not find the System';
 	}
 
 	addScene(scene: Scene) {
