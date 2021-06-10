@@ -1,10 +1,12 @@
 import { Color } from '../Client/COLOR';
+import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
 
 export class Engine {
 	public static self: Engine;
+	environment: Environment = Environment.NONE;
 	systems: System[] = [];
 	private scenes: Scene[] = [];
 	private currentScene: Scene = new Scene();
@@ -34,6 +36,14 @@ export class Engine {
 	private loop() {
 		let currTime = Time.getCurrTime();
 		let self = this;
+		if (this.halts.length > 0) {
+			setTimeout(
+				self.loop.bind(this),
+				1000 / this.framerate -
+					((currTime - Time.lastTime) * 1000 + this.setTimeoutError)
+			);
+			return;
+		}
 		let tickDelta = 1 / this.framerate;
 		if (this.framerate != 0) {
 			if (currTime - Time.lastTime < tickDelta) {
@@ -90,5 +100,15 @@ export class Engine {
 				return;
 			}
 		}
+	}
+
+	halts: System[] = [];
+	halt(system: System) {
+		this.halts.push(system);
+		console.log(`Engine Halted by ${Color.SYSTEM}${system.constructor.name}`);
+	}
+	unhalt(system: System) {
+		this.halts.splice(this.halts.indexOf(system), 1);
+		console.log(`Engine Unhalted by ${Color.SYSTEM}${system.constructor.name}`);
 	}
 }

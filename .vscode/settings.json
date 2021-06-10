@@ -1,5 +1,10 @@
 {
     "cSpell.words": [
-        "gameobject"
+        "gameobject",
+        "unhalt",
+        "unhalted"
+    ],
+    "cSpell.ignoreWords": [
+        "trollface"
     ]
 }

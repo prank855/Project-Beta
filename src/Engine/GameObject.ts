@@ -6,13 +6,21 @@ import { Vector2 } from './Vector2';
 export class GameObject {
 	static latestID = 0;
 	id: number;
-	private transform = new Transform();
+	transform = new Transform();
 	parent: GameObject | null = null;
 	components: GameComponent[] = [];
 	children: GameObject[] = [];
 
+	started: boolean = false;
+
 	constructor() {
 		this.id = GameObject.latestID++;
+	}
+
+	start() {
+		for (var co of this.components) {
+			co.start();
+		}
 	}
 
 	update() {
@@ -21,14 +29,14 @@ export class GameObject {
 		}
 	}
 
-	getTransform(): Transform {
+	getWorldPosition(): Transform {
 		if (this.parent == null) {
 			return this.transform;
 		}
 		var tempTrans = new Transform();
-		tempTrans.position = Vector2.Copy(this.parent.getTransform().position).add(
-			this.transform.position
-		);
+		tempTrans.position = Vector2.Copy(
+			this.parent.getWorldPosition().position
+		).add(this.transform.position);
 		return tempTrans;
 	}
 

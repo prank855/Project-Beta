@@ -6,6 +6,10 @@ export class Scene {
 	private gameObjects: GameObject[] = [];
 	update() {
 		for (var go of this.gameObjects) {
+			if (!go.started) {
+				go.start();
+				go.started = true;
+			}
 			go.update();
 		}
 	}
