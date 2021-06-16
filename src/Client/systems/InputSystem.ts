@@ -1,7 +1,7 @@
 import { System } from '../../Engine/System';
 
 export class InputSystem extends System {
-	keys: string[] = [];
+	private keys: string[] = [];
 
 	init() {
 		window.addEventListener('keydown', (e) => {
@@ -10,7 +10,7 @@ export class InputSystem extends System {
 					return;
 				}
 			}
-			console.log(e.key);
+			//console.log(e.key);
 			this.keys.push(e.key);
 		});
 		window.addEventListener('keyup', (e) => {
@@ -29,6 +29,14 @@ export class InputSystem extends System {
 				//this.mousePos = new Vector2(-50, -50);
 			}
 		});
+	}
+
+	getKeys(): string[] {
+		var temp = [];
+		for (var k of this.keys) {
+			temp.push(k);
+		}
+		return temp;
 	}
 
 	start() {}

@@ -4,6 +4,7 @@ import { GameObject } from '../Engine/GameObject';
 import { Scene } from '../Engine/Scene';
 import { Time } from '../Engine/systems/Time';
 import { AssetType } from './AssetType';
+import { AudioRenderer } from './components/AudioRenderer';
 import { SimpleMovement } from './components/SimpleMovement';
 import { SpriteRenderer } from './components/SpriteRenderer';
 import { AssetSystem } from './systems/AssetSystem';
@@ -11,6 +12,7 @@ import { CameraSystem } from './systems/CameraSystem';
 import { InputSystem } from './systems/InputSystem';
 import { RendererSystem } from './systems/RendererSystem';
 import { ScreenSystem } from './systems/ScreenSystem';
+import { SoundSystem } from './systems/SoundSystem';
 
 window.onload = () => {
 	//Entry point for Client
@@ -25,6 +27,7 @@ window.onload = () => {
 	//TODO: add environment checks to game component, system, etc
 	engine.addSystem(Time);
 	engine.addSystem(InputSystem);
+	engine.addSystem(SoundSystem);
 	engine.addSystem(ScreenSystem);
 	engine.addSystem(AssetSystem);
 	engine.addSystem(CameraSystem);
@@ -42,13 +45,11 @@ window.onload = () => {
 		var go = new GameObject();
 		go.addComponent(SimpleMovement);
 		go.addComponent(SpriteRenderer);
-		go.getComponent(SpriteRenderer).setSprite('Trollface');
-		go.getComponent(SpriteRenderer).sprite.pixelPerUnit = 32;
-		epicScene.addGameObject(go);
-	}
-	{
-		var go = new GameObject();
-		go.addComponent(SpriteRenderer);
+
+		go.addComponent(AudioRenderer);
+		go.getComponent(AudioRenderer).soundSrc = 'poggers.wav';
+		go.getComponent(AudioRenderer).volume = 0.2;
+
 		go.getComponent(SpriteRenderer).setSprite('Trollface');
 		go.getComponent(SpriteRenderer).sprite.pixelPerUnit = 32;
 		epicScene.addGameObject(go);

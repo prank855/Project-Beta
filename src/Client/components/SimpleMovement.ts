@@ -3,6 +3,7 @@ import { GameComponent } from '../../Engine/GameComponent';
 import { Time } from '../../Engine/systems/Time';
 import { CameraSystem } from '../systems/CameraSystem';
 import { InputSystem } from '../systems/InputSystem';
+import { AudioRenderer } from './AudioRenderer';
 
 export class SimpleMovement extends GameComponent {
 	inputSystem: InputSystem | null = null;
@@ -12,9 +13,14 @@ export class SimpleMovement extends GameComponent {
 	start() {
 		this.inputSystem = Engine.self.getSystem(InputSystem);
 	}
+	private lastKeys: string[] = [];
 	update() {
 		if (this.inputSystem && this.parent) {
-			var keys = this.inputSystem.keys;
+			var keys = this.inputSystem.getKeys();
+			if (!this.lastKeys.includes(' ') && keys.includes(' ')) {
+				//play sound
+				this.parent.getComponent(AudioRenderer).play();
+			}
 			if (keys.includes('w')) {
 				this.parent.transform.position.y += this.speed * Time.deltaTime;
 			}
@@ -44,6 +50,8 @@ export class SimpleMovement extends GameComponent {
 				(this.parent.transform.position.y -
 					Engine.self.getSystem(CameraSystem).position.y) *
 				Time.deltaTime;
+
+			this.lastKeys = keys;
 		}
 	}
 }
