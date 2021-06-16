@@ -9,6 +9,7 @@ import { SimpleMovement } from './components/SimpleMovement';
 import { SpriteRenderer } from './components/SpriteRenderer';
 import { AssetSystem } from './systems/AssetSystem';
 import { CameraSystem } from './systems/CameraSystem';
+import { ClientNetworking } from './systems/ClientNetworking';
 import { InputSystem } from './systems/InputSystem';
 import { RendererSystem } from './systems/RendererSystem';
 import { ScreenSystem } from './systems/ScreenSystem';
@@ -23,6 +24,7 @@ window.onload = () => {
 
 	var engine = new Engine();
 	engine.environment = Environment.CLIENT;
+	engine.framerate = 200;
 
 	//TODO: add environment checks to game component, system, etc
 	engine.addSystem(Time);
@@ -32,6 +34,7 @@ window.onload = () => {
 	engine.addSystem(AssetSystem);
 	engine.addSystem(CameraSystem);
 	engine.addSystem(RendererSystem);
+	engine.addSystem(ClientNetworking);
 
 	engine
 		.getSystem(AssetSystem)

@@ -11,7 +11,8 @@ export class Engine {
 	private scenes: Scene[] = [];
 	private currentScene: Scene = new Scene();
 
-	framerate = 240;
+	framerate = 60;
+	frame: number = 0;
 
 	constructor() {
 		if (Engine.self != null) {
@@ -62,6 +63,7 @@ export class Engine {
 				return;
 			}
 		}
+		this.frame++;
 
 		for (var s of this.systems) {
 			s.update();

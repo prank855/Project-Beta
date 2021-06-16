@@ -17,39 +17,47 @@ export class SimpleMovement extends GameComponent {
 	update() {
 		if (this.inputSystem && this.parent) {
 			var keys = this.inputSystem.getKeys();
-			if (!this.lastKeys.includes(' ') && keys.includes(' ')) {
-				//play sound
-				this.parent.getComponent(AudioRenderer).play();
-			}
-			if (keys.includes('w')) {
-				this.parent.transform.position.y += this.speed * Time.deltaTime;
-			}
-			if (keys.includes('s')) {
-				this.parent.transform.position.y -= this.speed * Time.deltaTime;
-			}
-			if (keys.includes('d')) {
-				this.parent.transform.position.x += this.speed * Time.deltaTime;
-			}
-			if (keys.includes('a')) {
-				this.parent.transform.position.x -= this.speed * Time.deltaTime;
-			}
-			if (keys.includes('ArrowUp')) {
-				Engine.self.getSystem(CameraSystem).zoom *=
-					Math.E ** (Time.deltaTime * Math.log(1.5));
-			}
-			if (keys.includes('ArrowDown')) {
-				Engine.self.getSystem(CameraSystem).zoom /=
-					Math.E ** (Time.deltaTime * Math.log(1.5));
-			}
-			Engine.self.getSystem(CameraSystem).position.x +=
-				(this.parent.transform.position.x -
-					Engine.self.getSystem(CameraSystem).position.x) *
-				Time.deltaTime;
 
-			Engine.self.getSystem(CameraSystem).position.y +=
-				(this.parent.transform.position.y -
-					Engine.self.getSystem(CameraSystem).position.y) *
-				Time.deltaTime;
+			/*Play sound on space bar*/ {
+				if (!this.lastKeys.includes(' ') && keys.includes(' ')) {
+					this.parent.getComponent(AudioRenderer).play();
+				}
+			}
+
+			/** Movement */ {
+				if (keys.includes('w')) {
+					this.parent.transform.position.y += this.speed * Time.deltaTime;
+				}
+				if (keys.includes('s')) {
+					this.parent.transform.position.y -= this.speed * Time.deltaTime;
+				}
+				if (keys.includes('d')) {
+					this.parent.transform.position.x += this.speed * Time.deltaTime;
+				}
+				if (keys.includes('a')) {
+					this.parent.transform.position.x -= this.speed * Time.deltaTime;
+				}
+				if (keys.includes('ArrowUp')) {
+					Engine.self.getSystem(CameraSystem).zoom *=
+						Math.E ** (Time.deltaTime * Math.log(1.5));
+				}
+				if (keys.includes('ArrowDown')) {
+					Engine.self.getSystem(CameraSystem).zoom /=
+						Math.E ** (Time.deltaTime * Math.log(1.5));
+				}
+			}
+
+			/*Camera Control*/ {
+				Engine.self.getSystem(CameraSystem).position.x +=
+					(this.parent.transform.position.x -
+						Engine.self.getSystem(CameraSystem).position.x) *
+					Time.deltaTime;
+
+				Engine.self.getSystem(CameraSystem).position.y +=
+					(this.parent.transform.position.y -
+						Engine.self.getSystem(CameraSystem).position.y) *
+					Time.deltaTime;
+			}
 
 			this.lastKeys = keys;
 		}
