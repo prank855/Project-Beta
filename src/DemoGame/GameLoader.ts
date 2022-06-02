@@ -19,7 +19,7 @@ export class GameLoader {
 	init() {
 		var engine = new Engine();
 		engine.environment = Environment.CLIENT;
-		engine.framerate = 200;
+		engine.framerate = 240;
 
 		engine.addSystem(Time);
 		engine.addSystem(InputSystem);
@@ -30,9 +30,14 @@ export class GameLoader {
 		engine.addSystem(RendererSystem);
 		engine.addSystem(ClientNetworking);
 
-		engine
-			.getSystem(AssetSystem)
-			.loadAsset('Trollface', 'trollface.png', AssetType.Image);
+		engine.getSystem(RendererSystem).clearColor = 'Blue';
+
+		let assetSystem = engine.getSystem(AssetSystem);
+		assetSystem.loadAsset('Trollface', 'trollface.png', AssetType.Image);
+		assetSystem.loadAsset('Smiley', 'smiley.png', AssetType.Image);
+
+		let camSys = engine.getSystem(CameraSystem);
+		camSys.zoom = 1 / 2;
 
 		var epicScene = new Scene();
 		epicScene.name = 'Epic Scene';
@@ -49,6 +54,14 @@ export class GameLoader {
 
 			go.getComponent(SpriteRenderer).setSprite('Trollface');
 			go.getComponent(SpriteRenderer).sprite.pixelPerUnit = 32;
+			epicScene.addGameObject(go);
+		}
+
+		{
+			var go = new GameObject();
+			let sr = go.addComponent(SpriteRenderer);
+			sr.setSprite('Smiley');
+			sr.sprite.pixelPerUnit = 4;
 			epicScene.addGameObject(go);
 		}
 

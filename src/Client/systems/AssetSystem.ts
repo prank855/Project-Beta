@@ -1,4 +1,3 @@
-import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
 import { AssetType } from '../types/AssetType';
 
@@ -34,7 +33,6 @@ export class AssetSystem extends System {
 	}
 
 	private loadImage(assetName: string, url: string) {
-		Engine.self.halt(this);
 		var img = new Image();
 		img.src = url;
 		img.onerror = () => {
@@ -47,7 +45,6 @@ export class AssetSystem extends System {
 			canvas.getContext('2d')?.drawImage(img, 0, 0);
 			this.images.set(assetName, canvas);
 			console.log(`Loaded Image ${assetName} ${url}`);
-			Engine.self.unhalt(this);
 		};
 	}
 	private loadSound(assetName: string, url: string) {}

@@ -16,8 +16,12 @@ export class ServerNetworking extends System {
 		console.log('WebSockets initialized');
 		wss.on('connection', (ws, req) => {
 			console.log('Client Connected');
+
 			var packet = new TickPacket();
+
 			packet.data.currentTick = Engine.self.frame;
+			packet.data.currentTime = Time.elapsedTime;
+
 			ws.send(JSON.stringify(packet));
 			ws.onmessage = (msg) => {
 				console.log(msg.data.toString());

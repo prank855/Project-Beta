@@ -1,3 +1,4 @@
+import { StringMappingType } from 'typescript';
 import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';
@@ -35,21 +36,14 @@ export class Engine {
 
 	private setTimeoutError: number = 2;
 	private loop() {
-		let currTime = Time.getCurrTime();
+		let currTime = Time.getCurrentTime();
 		let self = this;
-		if (this.halts.length > 0) {
-			setTimeout(
-				self.loop.bind(this),
-				1000 / this.framerate -
-					((currTime - Time.lastTime) * 1000 + this.setTimeoutError)
-			);
-			return;
-		}
+
 		let tickDelta = 1 / this.framerate;
 		if (this.framerate != 0) {
 			if (currTime - Time.lastTime < tickDelta) {
 				if (
-					currTime - Time.lastTime + this.setTimeoutError / 1000 <
+					currTime - (Time.lastTime + this.setTimeoutError) / 1000 <
 					tickDelta
 				) {
 					setTimeout(
@@ -63,6 +57,7 @@ export class Engine {
 				return;
 			}
 		}
+
 		this.frame++;
 
 		for (var s of this.systems) {
@@ -102,15 +97,5 @@ export class Engine {
 				return;
 			}
 		}
-	}
-
-	halts: System[] = [];
-	halt(system: System) {
-		this.halts.push(system);
-		console.log(`Engine Halted by ${Color.SYSTEM}${system.constructor.name}`);
-	}
-	unhalt(system: System) {
-		this.halts.splice(this.halts.indexOf(system), 1);
-		console.log(`Engine Unhalted by ${Color.SYSTEM}${system.constructor.name}`);
 	}
 }

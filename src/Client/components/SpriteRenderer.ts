@@ -8,6 +8,7 @@ import { AssetType } from '../types/AssetType';
 export class SpriteRenderer extends GameComponent {
 	private renderer: RendererSystem | null = null;
 	sprite: Sprite = new Sprite();
+
 	start() {
 		if (Engine.self.getSystem(RendererSystem)) {
 			this.renderer = Engine.self.getSystem(RendererSystem);

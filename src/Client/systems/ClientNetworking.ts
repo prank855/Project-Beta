@@ -7,7 +7,7 @@ export class ClientNetworking extends System {
 	ws: WebSocket;
 	constructor() {
 		super();
-		this.ws = new WebSocket('ws://localhost:8080');
+		this.ws = new WebSocket('ws://kvm.joshh.moe:8080');
 		this.initSocket(this.ws);
 	}
 	initSocket(ws: WebSocket) {
@@ -20,7 +20,7 @@ export class ClientNetworking extends System {
 
 			if (t.type == PacketType.TickPacket) {
 				var p = t as TickPacket;
-				console.log('TICK PACKET, TICK:' + p.data.currentTick, p);
+				console.log('TICK PACKET', p.data);
 			}
 		};
 		ws.onclose = () => {
