@@ -4,3 +4,4 @@ reference sprites instead of readding to queue
 sprite depth/z value/height/ordering/layer
 sprite bounding boxes if image not loaded
 sprite render smooth/point
+private systems

@@ -2,21 +2,19 @@ import { Engine } from '../../Engine/Engine';
 import { GameComponent } from '../../Engine/GameComponent';
 import { Time } from '../../Engine/systems/Time';
 import { CameraSystem } from '../../Client/systems/CameraSystem';
-import { InputSystem } from '../../Client/systems/InputSystem';
+import { Input } from '../../Client/systems/Input';
 import { AudioRenderer } from '../../Client/components/AudioRenderer';
 
 export class SimpleMovement extends GameComponent {
-	inputSystem: InputSystem | null = null;
+	inputSystem: Input | null = null;
 
 	speed: number = 25;
 
-	start() {
-		this.inputSystem = Engine.self.getSystem(InputSystem);
-	}
+	start() {}
 	private lastKeys: string[] = [];
 	update() {
-		if (this.inputSystem && this.parent) {
-			var keys = this.inputSystem.getKeys();
+		if (this.parent) {
+			var keys = Input.getKeys();
 
 			/*Play sound on space bar*/ {
 				if (!this.lastKeys.includes(' ') && keys.includes(' ')) {

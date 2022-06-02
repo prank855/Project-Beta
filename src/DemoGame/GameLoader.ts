@@ -9,7 +9,7 @@ import { SpriteRenderer } from '../Client/components/SpriteRenderer';
 import { AssetSystem } from '../Client/systems/AssetSystem';
 import { CameraSystem } from '../Client/systems/CameraSystem';
 import { ClientNetworking } from '../Client/systems/ClientNetworking';
-import { InputSystem } from '../Client/systems/InputSystem';
+import { Input } from '../Client/systems/Input';
 import { RendererSystem } from '../Client/systems/RendererSystem';
 import { ScreenSystem } from '../Client/systems/ScreenSystem';
 import { SoundSystem } from '../Client/systems/SoundSystem';
@@ -22,7 +22,7 @@ export class GameLoader {
 		engine.framerate = 240;
 
 		engine.addSystem(Time);
-		engine.addSystem(InputSystem);
+		engine.addSystem(Input);
 		engine.addSystem(SoundSystem);
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);

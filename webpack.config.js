@@ -22,7 +22,7 @@ module.exports = {
 			filename: './index.html',
 			//favicon: './src/Client/assets/favicon.ico',
 			minify: true,
-		}),
+		})
 	],
 	module: {
 		rules: [
