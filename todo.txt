@@ -5,3 +5,4 @@ sprite depth/z value/height/ordering/layer
 sprite bounding boxes if image not loaded
 sprite render smooth/point
 private systems
+mouse input

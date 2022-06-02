@@ -1,3 +1,4 @@
 export enum PacketType {
-    TickPacket
+	null,
+	TickPacket,
 }

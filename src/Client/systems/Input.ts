@@ -24,9 +24,7 @@ export class Input extends System {
 
 		document.addEventListener('visibilitychange', () => {
 			if (document.visibilityState === 'hidden') {
-				//this.mouseDown = false;
 				Input.keys = [];
-				//this.mousePos = new Vector2(-50, -50);
 			}
 		});
 	}
@@ -39,17 +37,17 @@ export class Input extends System {
 		return temp;
 	}
 
-	static IsKeyDown(): boolean {
+	static IsKeyDown(keyName: string): boolean {
 		//TODO: implement
 		return false;
 	}
 
-	static IsKeyUp(): boolean {
+	static IsKeyUp(keyName: string): boolean {
 		//TODO: implement
 		return true;
 	}
 
-	static IsKeyHeld(): boolean {
+	static IsKeyHeld(keyName: string): boolean {
 		//TODO: implement
 		return false;
 	}
