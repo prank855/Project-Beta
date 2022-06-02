@@ -43,7 +43,7 @@ module.exports = {
 	},
 	devtool: `inline-source-map`,
 	devServer: {
-		contentBase: ['./dist', './src/client/assets'],
+		contentBase: ['./dist', './src/Client/assets'],
 		port: 3000,
 		host: '0.0.0.0',
 		historyApiFallback: true,
