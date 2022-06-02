@@ -1,0 +1,2 @@
+Handshake server/client and assign ids
+SyncVar? https://mirror-networking.gitbook.io/docs/guides/synchronization/syncvars

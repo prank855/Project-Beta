@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"esbenp.prettier-vscode",
+		"gruntfuggly.todo-tree",
+		"streetsidesoftware.code-spell-checker",
+		"aaron-bond.better-comments"
+	]
+}

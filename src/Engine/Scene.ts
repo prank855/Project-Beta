@@ -1,5 +1,5 @@
-import { Color } from '../Client/COLOR';
 import { GameObject } from './GameObject';
+import { Color } from './types/Color';
 
 export class Scene {
 	name: string = 'Untitled Scene';

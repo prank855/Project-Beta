@@ -1,8 +1,8 @@
-import { Color } from '../Client/COLOR';
 import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
+import { Color } from './types/Color';
 
 export class Engine {
 	public static self: Engine;

@@ -1,7 +1,7 @@
 import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
 import { Vector2 } from '../../Engine/Vector2';
-import { Sprite } from '../Sprite';
+import { Sprite } from '../types/Sprite';
 import { CameraSystem } from './CameraSystem';
 import { ScreenSystem } from './ScreenSystem';
 

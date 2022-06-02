@@ -1,9 +1,9 @@
 import { Engine } from '../../Engine/Engine';
 import { GameComponent } from '../../Engine/GameComponent';
 import { Time } from '../../Engine/systems/Time';
-import { CameraSystem } from '../systems/CameraSystem';
-import { InputSystem } from '../systems/InputSystem';
-import { AudioRenderer } from './AudioRenderer';
+import { CameraSystem } from '../../Client/systems/CameraSystem';
+import { InputSystem } from '../../Client/systems/InputSystem';
+import { AudioRenderer } from '../../Client/components/AudioRenderer';
 
 export class SimpleMovement extends GameComponent {
 	inputSystem: InputSystem | null = null;

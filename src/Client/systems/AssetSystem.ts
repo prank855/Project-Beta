@@ -1,6 +1,6 @@
 import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
-import { AssetType } from '../AssetType';
+import { AssetType } from '../types/AssetType';
 
 export class AssetSystem extends System {
 	private images: Map<string, HTMLCanvasElement> = new Map();

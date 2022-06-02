@@ -1,6 +1,6 @@
-import { Color } from '../Client/COLOR';
 import { GameComponent } from './GameComponent';
 import { Transform } from './Transform';
+import { Color } from './types/Color';
 import { Vector2 } from './Vector2';
 
 export class GameObject {

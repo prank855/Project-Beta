@@ -1,9 +1,9 @@
 import { Engine } from '../../Engine/Engine';
 import { GameComponent } from '../../Engine/GameComponent';
-import { AssetType } from '../AssetType';
-import { Sprite } from '../Sprite';
+import { Sprite } from '../types/Sprite';
 import { AssetSystem } from '../systems/AssetSystem';
 import { RendererSystem } from '../systems/RendererSystem';
+import { AssetType } from '../types/AssetType';
 
 export class SpriteRenderer extends GameComponent {
 	private renderer: RendererSystem | null = null;

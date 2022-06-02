@@ -1,5 +1,5 @@
-import { Transform } from '../Engine/Transform';
-import { Vector2 } from '../Engine/Vector2';
+import { Transform } from '../../Engine/Transform';
+import { Vector2 } from '../../Engine/Vector2';
 
 export class Sprite {
 	image: HTMLCanvasElement | null = null;

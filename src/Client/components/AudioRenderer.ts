@@ -4,8 +4,18 @@ import { SoundSystem } from '../systems/SoundSystem';
 
 export class AudioRenderer extends GameComponent {
 	private renderer: SoundSystem | null = null;
+
+	playCount: number = 0;
+
 	soundSrc: string = '';
 	volume: number = 1;
+
+	//TODO: these
+	loop: boolean = false;
+	// should the sound play over itself if directed to play again?
+	cascadeSound: boolean = false;
+
+
 	start() {
 		if (Engine.self.getSystem(SoundSystem)) {
 			this.renderer = Engine.self.getSystem(SoundSystem);
@@ -15,6 +25,7 @@ export class AudioRenderer extends GameComponent {
 	}
 	update() {}
 	play() {
+		this.playCount++;
 		if (this.volume > 1) {
 			this.volume = 1;
 		}

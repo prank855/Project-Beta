@@ -1,6 +1,6 @@
 import { System } from '../../Engine/System';
 import WebSocket from 'ws';
-import { TestPacket } from '../../Shared/Network/TestPacket';
+import { TickPacket as TickPacket } from '../../Shared/Network/TickPacket';
 import { Engine } from '../../Engine/Engine';
 import { Time } from '../../Engine/systems/Time';
 
@@ -16,9 +16,9 @@ export class ServerNetworking extends System {
 		console.log('WebSockets initialized');
 		wss.on('connection', (ws, req) => {
 			console.log('Client Connected');
-			var data = new TestPacket();
-			data.tick = Engine.self.frame;
-			ws.send(JSON.stringify(data));
+			var packet = new TickPacket();
+			packet.data.currentTick = Engine.self.frame;
+			ws.send(JSON.stringify(packet));
 			ws.onmessage = (msg) => {
 				console.log(msg.data.toString());
 			};

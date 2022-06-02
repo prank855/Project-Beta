@@ -1,6 +1,7 @@
 import { System } from '../../Engine/System';
 import { NetworkPacket } from '../../Shared/Network/NetworkPacket';
-import { TestPacket } from '../../Shared/Network/TestPacket';
+import { TickPacket } from '../../Shared/Network/TickPacket';
+import { PacketType } from '../../Shared/Network/PacketType';
 
 export class ClientNetworking extends System {
 	ws: WebSocket;
@@ -17,9 +18,9 @@ export class ClientNetworking extends System {
 		ws.onmessage = (msg) => {
 			var t = JSON.parse(msg.data) as NetworkPacket;
 
-			if (t.type == 'TestPacket') {
-				var p = t as TestPacket;
-				console.log('TEST PACKET, TICK:' + p.tick);
+			if (t.type == PacketType.TickPacket) {
+				var p = t as TickPacket;
+				console.log('TICK PACKET, TICK:' + p.data.currentTick, p);
 			}
 		};
 		ws.onclose = () => {
