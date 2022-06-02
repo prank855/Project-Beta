@@ -33,8 +33,8 @@ export class GameLoader {
 		engine.getSystem(RendererSystem).clearColor = 'Blue';
 
 		let assetSystem = engine.getSystem(AssetSystem);
-		assetSystem.loadAsset('Trollface', 'trollface.png', AssetType.Image);
-		assetSystem.loadAsset('Smiley', 'smiley.png', AssetType.Image);
+		assetSystem.addAsset('Trollface', 'trollface.png', AssetType.Image);
+		assetSystem.addAsset('Smiley', 'smiley.png', AssetType.Image);
 
 		let camSys = engine.getSystem(CameraSystem);
 		camSys.zoom = 1 / 2;

@@ -83,6 +83,8 @@ export class RendererSystem extends System {
 						(sprite.scale / sprite.pixelPerUnit) *
 						this.cameraSystem.getZoom()
 				);
+			} else {
+				console.warn('image not loaded');
 			}
 		}
 	}

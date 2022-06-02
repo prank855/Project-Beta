@@ -1,21 +1,43 @@
 import { System } from '../../Engine/System';
 import { AssetType } from '../types/AssetType';
 
+class imgToLoad {
+	assetName: string = '';
+	url: string = '';
+	assetType: AssetType = AssetType.Image;
+}
+
 export class AssetSystem extends System {
 	private images: Map<string, HTMLCanvasElement> = new Map();
 	init() {}
-	start() {}
+	start() {
+		this.loadAssets();
+	}
 	update() {}
-	loadAsset(assetName: string, url: string, assetType: AssetType) {
-		console.log(`Loading ${assetType}: ${assetName} "${url}"`);
-		switch (assetType) {
-			case AssetType.Image: {
-				this.loadImage(assetName, url);
-				break;
-			}
-			case AssetType.Sound: {
-				this.loadSound(assetName, url);
-				break;
+
+	imagesToLoad: imgToLoad[] = [];
+
+	addAsset(assetName: string, url: string, assetType: AssetType) {
+		let i = new imgToLoad();
+		i.assetName = assetName;
+		i.url = url;
+		i.assetType = assetType;
+		this.imagesToLoad.push(i);
+		console.log('a');
+	}
+
+	async loadAssets() {
+		for (var i of this.imagesToLoad) {
+			console.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
+			switch (i.assetType) {
+				case AssetType.Image: {
+					this.loadImage(i.assetName, i.url);
+					break;
+				}
+				case AssetType.Sound: {
+					this.loadSound(i.assetName, i.url);
+					break;
+				}
 			}
 		}
 	}
