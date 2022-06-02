@@ -8,7 +8,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 module.exports = {
 	mode: 'development',
 	entry: {
-		app: ['./src/client/index'],
+		app: ['./src/Client/index'],
 	},
 	target: 'web',
 	output: {
@@ -39,7 +39,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.tsx', '.ts', '.js', '.png'],
+		extensions: ['.tsx', '.ts', '.js', '.png', '.html'],
 	},
 	devtool: `inline-source-map`,
 	devServer: {
