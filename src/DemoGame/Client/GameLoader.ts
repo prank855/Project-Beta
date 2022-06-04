@@ -17,7 +17,7 @@ export class GameLoader {
 	init() {
 		var engine = new Engine();
 		engine.environment = Environment.CLIENT;
-		engine.framerate = 200;
+		engine.framerate = 240;
 
 		engine.addSystem(Input);
 		engine.addSystem(SoundSystem);

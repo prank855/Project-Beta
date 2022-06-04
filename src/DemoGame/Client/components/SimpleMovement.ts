@@ -16,12 +16,6 @@ export class SimpleMovement extends GameComponent {
 		if (this.parent) {
 			var keys = Input.getKeys();
 
-			/*Play sound on space bar*/ {
-				if (!this.lastKeys.includes(' ') && keys.includes(' ')) {
-					this.parent.getComponent(AudioRenderer).play();
-				}
-			}
-
 			/** Movement */ {
 				if (keys.includes('w')) {
 					this.parent.transform.position.y += this.speed * Time.deltaTime;

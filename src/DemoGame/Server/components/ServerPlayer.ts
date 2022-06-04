@@ -19,6 +19,10 @@ export class ServerPlayer {
 	}
 	sendPacket(packet: NetworkPacket) {
 		if (this.ws == null) return;
-		this.ws.send(JSON.stringify(packet));
+		try {
+			this.ws.send(JSON.stringify(packet));
+		} catch {
+			console.log('Socket closed');
+		}
 	}
 }

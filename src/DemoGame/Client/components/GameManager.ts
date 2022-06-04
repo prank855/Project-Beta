@@ -27,6 +27,8 @@ export class ClientGameManager extends GameComponent {
 
 	private networkID: number = -1;
 
+	disconnected: boolean = false;
+
 	getPlayer(): Player | null {
 		return this.player;
 	}
@@ -53,6 +55,10 @@ export class ClientGameManager extends GameComponent {
 			this.net?.sendPacket(new ClientHandshake());
 		};
 		this.net.onPacket = this.onPacket;
+		this.net.onClose = () => {
+			if (ClientGameManager.instance)
+				ClientGameManager.instance.disconnected = true;
+		};
 	}
 
 	start(): void {}
@@ -76,6 +82,7 @@ export class ClientGameManager extends GameComponent {
 
 	Tick(): void {
 		// send client state
+		if (this.disconnected) return;
 		this.net?.sendPacket(this.createClientState());
 	}
 
