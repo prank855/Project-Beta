@@ -1,9 +1,9 @@
-import { Engine } from '../../Engine/Engine';
-import { GameComponent } from '../../Engine/GameComponent';
-import { Time } from '../../Engine/systems/Time';
-import { CameraSystem } from '../../Client/systems/CameraSystem';
-import { Input } from '../../Client/systems/Input';
-import { AudioRenderer } from '../../Client/components/AudioRenderer';
+import { AudioRenderer } from '../../../Client/components/AudioRenderer';
+import { CameraSystem } from '../../../Client/systems/CameraSystem';
+import { Input } from '../../../Client/systems/Input';
+import { Engine } from '../../../Engine/Engine';
+import { GameComponent } from '../../../Engine/GameComponent';
+import { Time } from '../../../Engine/systems/Time';
 
 export class SimpleMovement extends GameComponent {
 	inputSystem: Input | null = null;
@@ -36,24 +36,24 @@ export class SimpleMovement extends GameComponent {
 					this.parent.transform.position.x -= this.speed * Time.deltaTime;
 				}
 				if (keys.includes('ArrowUp')) {
-					Engine.self.getSystem(CameraSystem).zoom *=
+					Engine.instance.getSystem(CameraSystem).zoom *=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
 				}
 				if (keys.includes('ArrowDown')) {
-					Engine.self.getSystem(CameraSystem).zoom /=
+					Engine.instance.getSystem(CameraSystem).zoom /=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
 				}
 			}
 
 			/*Camera Control*/ {
-				Engine.self.getSystem(CameraSystem).position.x +=
+				Engine.instance.getSystem(CameraSystem).position.x +=
 					(this.parent.transform.position.x -
-						Engine.self.getSystem(CameraSystem).position.x) *
+						Engine.instance.getSystem(CameraSystem).position.x) *
 					Time.deltaTime;
 
-				Engine.self.getSystem(CameraSystem).position.y +=
+				Engine.instance.getSystem(CameraSystem).position.y +=
 					(this.parent.transform.position.y -
-						Engine.self.getSystem(CameraSystem).position.y) *
+						Engine.instance.getSystem(CameraSystem).position.y) *
 					Time.deltaTime;
 			}
 

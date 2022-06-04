@@ -1,4 +1,4 @@
-import { GameLoader } from '../DemoGame/GameLoader';
+import { GameLoader } from '../DemoGame/Client/GameLoader';
 
 window.onload = () => {
 	//Entry point for Client

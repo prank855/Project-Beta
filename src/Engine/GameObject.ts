@@ -6,6 +6,7 @@ import { Vector2 } from './Vector2';
 export class GameObject {
 	static latestID = 0;
 	id: number;
+	name: string;
 	transform = new Transform();
 	parent: GameObject | null = null;
 	components: GameComponent[] = [];
@@ -15,6 +16,7 @@ export class GameObject {
 
 	constructor() {
 		this.id = GameObject.latestID++;
+		this.name = `GameObject (${this.id})`;
 	}
 
 	start() {
@@ -54,9 +56,10 @@ export class GameObject {
 	addComponent<T extends GameComponent>(type: new () => T): T {
 		var temp = new type();
 		temp.parent = this;
+		temp.init();
 		this.components.push(temp);
 		console.log(
-			`Added Component ${Color.COMPONENT}${type.name}${Color.DEFAULT} to ${Color.GAMEOBJECT}GameObject ID: ${this.id}`
+			`Added Component ${Color.COMPONENT}${type.name}${Color.DEFAULT} to ${Color.GAMEOBJECT}GameObject ID: ${this.id} ${Color.DEFAULT}"${this.name}"${Color.CLEAR}`
 		);
 		return temp;
 	}
@@ -69,4 +72,19 @@ export class GameObject {
 		}
 		throw 'Could not find the GameComponent';
 	}
+
+	getComponents<T extends GameComponent>(type: new () => T): T[] {
+		let a: T[] = [];
+		for (var co of this.components) {
+			if (co instanceof type) {
+				a.push(co);
+			}
+		}
+		if (a.length == 0) {
+			throw `Could not find the GameComponents`;
+		}
+		return a;
+	}
+
+	removeComponent(): void {}
 }

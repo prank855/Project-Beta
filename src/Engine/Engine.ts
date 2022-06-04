@@ -1,4 +1,3 @@
-import { StringMappingType } from 'typescript';
 import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';
@@ -6,7 +5,7 @@ import { Time } from './systems/Time';
 import { Color } from './types/Color';
 
 export class Engine {
-	public static self: Engine;
+	public static instance: Engine;
 	environment: Environment = Environment.NONE;
 	systems: System[] = [];
 	private scenes: Scene[] = [];
@@ -16,15 +15,16 @@ export class Engine {
 	frame: number = 0;
 
 	constructor() {
-		if (Engine.self != null) {
+		if (Engine.instance != null) {
 			return;
 		}
-		Engine.self = this;
+		Engine.instance = this;
+		this.addSystem(Time);
 	}
 
 	start() {
 		console.log(
-			`Started ENGINE with Scene: ${Color.SCENE}"${this.currentScene.name}"`
+			`Started ENGINE with Scene: ${Color.SCENE}"${this.currentScene.name}"${Color.CLEAR}`
 		);
 
 		for (var s of this.systems) {
@@ -71,7 +71,7 @@ export class Engine {
 
 	addSystem<T extends System>(type: new () => T): T {
 		var temp = new type();
-		console.log(`Added System: ${Color.SYSTEM}${type.name}`);
+		console.log(`Added System: ${Color.SYSTEM}${type.name}${Color.CLEAR}`);
 		temp.init();
 		this.systems.push(temp);
 		return temp;
@@ -83,11 +83,15 @@ export class Engine {
 				return s;
 			}
 		}
-		throw 'Could not find the System';
+		throw `Could not find the System ${type}`;
 	}
 
 	addScene(scene: Scene) {
 		this.scenes.push(scene);
+	}
+
+	getScene(): Scene {
+		return this.currentScene;
 	}
 
 	setScene(sceneName: string) {

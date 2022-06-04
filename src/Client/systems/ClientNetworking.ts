@@ -1,33 +1,50 @@
 import { System } from '../../Engine/System';
-import { NetworkPacket } from '../../Shared/Network/NetworkPacket';
-import { TickPacket } from '../../Shared/Network/TickPacket';
-import { PacketType } from '../../Shared/Network/PacketType';
+import { NetworkPacket } from '../../Network/NetworkPacket';
+import { PacketType } from '../../Network/PacketType';
 
 export class ClientNetworking extends System {
-	ws: WebSocket;
+	ws: WebSocket | null = null;
+	private connected: boolean = false;
 	constructor() {
 		super();
-		this.ws = new WebSocket('ws://kvm.joshh.moe:8080');
+	}
+
+	isConnected(): boolean {
+		return this.connected;
+	}
+
+	connect(url: string) {
+		this.ws = new WebSocket(url);
 		this.initSocket(this.ws);
 	}
-	initSocket(ws: WebSocket) {
+
+	private initSocket(ws: WebSocket) {
 		console.log('WebSockets initialized');
 		ws.onopen = () => {
 			console.warn('Connected to Server');
+			this.connected = true;
+			this.onOpen();
 		};
 		ws.onmessage = (msg) => {
-			var t = JSON.parse(msg.data) as NetworkPacket;
-
-			if (t.type == PacketType.TickPacket) {
-				var p = t as TickPacket;
-				console.log('TICK PACKET', p.data);
-			}
+			var incPacket = JSON.parse(msg.data) as NetworkPacket;
+			this.onPacket(incPacket);
 		};
 		ws.onclose = () => {
 			console.log('Server Connection Closed');
+			this.connected = false;
+			this.onClose();
 		};
 	}
 	init() {}
 	start() {}
 	update() {}
+
+	sendPacket(packet: NetworkPacket) {
+		this.ws?.send(JSON.stringify(packet));
+	}
+
+	// events
+	onOpen(): void {}
+	onPacket(packet: NetworkPacket): void {}
+	onClose(): void {}
 }

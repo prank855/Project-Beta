@@ -15,10 +15,9 @@ export class AudioRenderer extends GameComponent {
 	// should the sound play over itself if directed to play again?
 	cascadeSound: boolean = false;
 
-
 	start() {
-		if (Engine.self.getSystem(SoundSystem)) {
-			this.renderer = Engine.self.getSystem(SoundSystem);
+		if (Engine.instance.getSystem(SoundSystem)) {
+			this.renderer = Engine.instance.getSystem(SoundSystem);
 		} else {
 			throw `Did not find Renderer System`;
 		}

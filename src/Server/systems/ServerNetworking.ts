@@ -1,60 +1,55 @@
 import { System } from '../../Engine/System';
 import WebSocket from 'ws';
-import { TickPacket as TickPacket } from '../../Shared/Network/TickPacket';
-import { Engine } from '../../Engine/Engine';
-import { Time } from '../../Engine/systems/Time';
-import { PacketType } from '../../Shared/Network/PacketType';
+import { NetworkPacket } from '../../Network/NetworkPacket';
 
 export class ServerNetworking extends System {
-	wss: WebSocket.Server;
+	wss: WebSocket.Server | null = null;
 
 	clients: WebSocket[] = [];
 	constructor() {
 		super();
-		this.wss = new WebSocket.Server({ port: 8080 });
+	}
+
+	startServer(port: number) {
+		this.wss = new WebSocket.Server({ port: port });
 		this.initSocket(this.wss);
 	}
 
-	initSocket(wss: WebSocket.Server) {
-		console.log('WebSockets initialized');
+	private initSocket(wss: WebSocket.Server) {
+		console.log('WebSockets Server initialized');
 		wss.on('connection', (ws, req) => {
+			this.onConnection(ws);
 			this.clients.push(ws);
 			console.log(
 				`Client Connected: ${req.socket.remoteAddress?.substring(
 					7,
 					7 + 6
-				)}.XXX.XX}`
+				)}.XXX.XX`
 			);
 
 			ws.onmessage = (msg) => {
-				console.log(msg.data.toString());
+				var incPacket = JSON.parse(msg.data.toString()) as NetworkPacket;
+				this.onPacket(ws, incPacket);
 			};
 
 			ws.onclose = () => {
+				this.onDisconnect(ws);
 				console.log('Client Disconnected');
 				this.clients.splice(this.clients.indexOf(ws), 1);
 			};
 		});
 	}
 
-	sendPacket(ws: WebSocket, packetType: PacketType) {
-		switch (packetType) {
-			case PacketType.TickPacket:
-				var packet = new TickPacket();
-
-				packet.data.currentTick = Engine.self.frame;
-				packet.data.currentTime = Time.elapsedTime;
-
-				ws.send(JSON.stringify(packet));
-				break;
-		}
-	}
-
 	init() {}
 	start() {}
-	update() {
-		for (var ws of this.clients) {
-			this.sendPacket(ws, PacketType.TickPacket);
-		}
+	update() {}
+
+	sendPacket(client: WebSocket, packet: NetworkPacket): void {
+		client.send(JSON.stringify(packet));
 	}
+
+	// events
+	onConnection(ws: WebSocket): void {}
+	onPacket(ws: WebSocket, packet: NetworkPacket): void {}
+	onDisconnect(ws: WebSocket): void {}
 }

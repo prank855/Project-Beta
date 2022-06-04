@@ -13,8 +13,8 @@ export class RendererSystem extends System {
 	clearColor: string = 'White';
 	debug: boolean = true;
 	init() {
-		this.screenSystem = Engine.self.getSystem(ScreenSystem);
-		this.cameraSystem = Engine.self.getSystem(CameraSystem);
+		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
+		this.cameraSystem = Engine.instance.getSystem(CameraSystem);
 	}
 	start() {}
 	update() {
