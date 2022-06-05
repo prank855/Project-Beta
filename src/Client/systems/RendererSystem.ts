@@ -43,30 +43,7 @@ export class RendererSystem extends System {
 						10,
 						50
 					);
-					ctx.fillText(
-						`Sprite Calls: ${this.sprites.length}`,
-						10,
-						50 + 50 + 10
-					);
-					var gm = ClientGameManager.instance;
-					ctx.fillText(
-						`ServerTime ${Math.round(gm.serverTime * 100) / 100}`,
-						10,
-						50 + 50 + 10 + 50 + 10
-					);
-					ctx.fillText(
-						`ServerTick ${gm.serverTick}`,
-						10,
-						50 + 50 + 10 + 50 + 10 + 60
-					);
-					ctx.fillText(
-						`Server Rate ${gm.serverTickRate}`,
-						10,
-						50 + 50 + 10 + 50 + 10 + 120
-					);
 				}
-
-				//Draw Cursor
 
 				this.sprites.length = 0;
 			}

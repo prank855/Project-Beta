@@ -1,55 +1,49 @@
 import { System } from '../../Engine/System';
+import { PacketBatch } from '../../Network/PacketBatch';
+import { Handshake } from '../../Network/packets/Handshake';
 import WebSocket from 'ws';
 import { NetworkPacket } from '../../Network/NetworkPacket';
 
 export class ServerNetworking extends System {
 	wss: WebSocket.Server | null = null;
-
-	clients: WebSocket[] = [];
-	constructor() {
-		super();
-	}
-
-	startServer(port: number) {
-		this.wss = new WebSocket.Server({ port: port });
-		this.initSocket(this.wss);
-	}
-
-	private initSocket(wss: WebSocket.Server) {
-		console.log('WebSockets Server initialized');
-		wss.on('connection', (ws, req) => {
-			this.onConnection(ws);
-			this.clients.push(ws);
-			console.log(
-				`Client Connected: ${req.socket.remoteAddress?.substring(
-					7,
-					7 + 6
-				)}.XXX.XX`
-			);
-
-			ws.onmessage = (msg) => {
-				var incPacket = JSON.parse(msg.data.toString()) as NetworkPacket;
-				this.onPacket(ws, incPacket);
-			};
-
-			ws.onclose = () => {
-				this.onDisconnect(ws);
-				console.log('Client Disconnected');
-				this.clients.splice(this.clients.indexOf(ws), 1);
-			};
-		});
-	}
+	port: number = 8080;
 
 	init() {}
 	start() {}
 	update() {}
 
-	sendPacket(client: WebSocket, packet: NetworkPacket): void {
-		client.send(JSON.stringify(packet));
+	startServer(port: number) {
+		this.port = port;
+		this.wss = new WebSocket.Server({ port: this.port });
+		console.log(`Live on port :${this.port}`);
+		this.initSocketEvents(this.wss);
 	}
 
-	// events
-	onConnection(ws: WebSocket): void {}
-	onPacket(ws: WebSocket, packet: NetworkPacket): void {}
-	onDisconnect(ws: WebSocket): void {}
+	private initSocketEvents(wss: WebSocket.Server) {
+		console.log('WebSocket Server initialized');
+		wss.on('connection', (ws, req) => {
+			this.sendPacket(ws, new Handshake());
+
+			ws.onmessage = (msg) => {
+				var packetBatch = JSON.parse(msg.data.toString()) as PacketBatch;
+				this.events.OnPacketBatch(packetBatch);
+			};
+
+			ws.onclose = () => {
+				// client disconnected
+			};
+		});
+	}
+
+	sendPacket(ws: WebSocket, packet: NetworkPacket) {
+		var batch = new PacketBatch();
+		batch.packets.push(packet);
+		this.sendPacketBatch(ws, batch);
+	}
+
+	sendPacketBatch(ws: WebSocket, batch: PacketBatch) {
+		ws.send(JSON.stringify(batch));
+	}
+
+	events = { OnPacketBatch: (batch: PacketBatch) => {} };
 }

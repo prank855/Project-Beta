@@ -5,25 +5,31 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+
+pages = ['index','editor']
 module.exports = {
 	mode: 'development',
-	entry: {
-		app: ['./src/Client/index'],
-	},
+	entry: pages.reduce((config, page) => {
+		config[page] = `./src/pages/${page}.ts`;
+		return config;
+	  }, {}),
 	target: 'web',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
 	},
-	plugins: [
+	plugins: [].concat(
+		pages.map(
+		  (page) =>
+			new HtmlWebPackPlugin({
+			  inject: true,
+			  template: `./src/pages/${page}.html`,
+			  filename: `${page}.html`,
+			  chunks: [page],
+			})
+		),
 		new CleanWebpackPlugin(),
-		new HtmlWebPackPlugin({
-			template: './src/Client/index.html',
-			filename: './index.html',
-			//favicon: './src/Client/assets/favicon.ico',
-			minify: true,
-		})
-	],
+	  ),
 	module: {
 		rules: [
 			{
@@ -43,7 +49,7 @@ module.exports = {
 	},
 	devtool: `inline-source-map`,
 	devServer: {
-		contentBase: ['./dist', './src/Client/assets'],
+		contentBase: ['./dist', './src/pages/assets'],
 		port: 3000,
 		host: '0.0.0.0',
 		historyApiFallback: true,
@@ -53,6 +59,9 @@ module.exports = {
 		disableHostCheck: true,
 	},
 	optimization: {
+		splitChunks: {
+			chunks: "all",
+		  },
 		minimizer: [
 			new TerserPlugin({
 				extractComments: true,

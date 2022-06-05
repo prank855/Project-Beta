@@ -1,50 +1,46 @@
 import { System } from '../../Engine/System';
-import { NetworkPacket } from '../../Network/NetworkPacket';
+import { PacketBatch } from '../../Network/PacketBatch';
 import { PacketType } from '../../Network/PacketType';
 
 export class ClientNetworking extends System {
 	ws: WebSocket | null = null;
-	private connected: boolean = false;
-	constructor() {
-		super();
-	}
+	url: string = 'no server url';
+	connected: boolean = false;
 
-	isConnected(): boolean {
-		return this.connected;
-	}
-
-	connect(url: string) {
-		this.ws = new WebSocket(url);
-		this.initSocket(this.ws);
-	}
-
-	private initSocket(ws: WebSocket) {
-		console.log('WebSockets initialized');
-		ws.onopen = () => {
-			console.warn('Connected to Server');
-			this.connected = true;
-			this.onOpen();
-		};
-		ws.onmessage = (msg) => {
-			var incPacket = JSON.parse(msg.data) as NetworkPacket;
-			this.onPacket(incPacket);
-		};
-		ws.onclose = () => {
-			console.warn('Server Connection Closed');
-			this.connected = false;
-			this.onClose();
-		};
-	}
 	init() {}
 	start() {}
 	update() {}
 
-	sendPacket(packet: NetworkPacket) {
-		this.ws?.send(JSON.stringify(packet));
+	connect(url: string) {
+		this.url = url;
+		this.ws = new WebSocket(url);
+		this.initSocketEvents(this.ws);
 	}
 
-	// events
-	onOpen(): void {}
-	onPacket(packet: NetworkPacket): void {}
-	onClose(): void {}
+	private initSocketEvents(ws: WebSocket) {
+		ws.onopen = () => {
+			console.log(`Connecting to "${this.url}"`);
+		};
+
+		ws.onmessage = (msg) => {
+			var packetBatch = JSON.parse(msg.data) as PacketBatch;
+			if (!this.connected) {
+				for (var packet of packetBatch.packets) {
+					if (packet.type == PacketType.Handshake) {
+						this.connected = true;
+						console.warn(`Successful Server Connection`);
+						return;
+					}
+				}
+			}
+			this.events.OnPacketBatch(packetBatch);
+		};
+
+		ws.onclose = () => {};
+	}
+
+	events = {
+		OnPacketBatch: (batch: PacketBatch) => {},
+		OnDisconnect: () => {},
+	};
 }

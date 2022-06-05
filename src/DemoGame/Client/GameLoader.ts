@@ -24,38 +24,22 @@ export class GameLoader {
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);
 		engine.addSystem(CameraSystem);
-		engine.addSystem(RendererSystem);
+		engine.addSystem(RendererSystem).clearColor = 'Blue';
 		engine.addSystem(ClientNetworking);
-
-		engine.getSystem(RendererSystem).clearColor = 'Blue';
 
 		let assetSystem = engine.getSystem(AssetSystem);
 		assetSystem.addAsset('Trollface', 'trollface.png', AssetType.Image);
 		assetSystem.addAsset('Smiley', 'smiley.png', AssetType.Image);
 
-		let camSys = engine.getSystem(CameraSystem);
-		camSys.zoom = 1 / 2;
-
 		var clientScene = new Scene();
 		clientScene.name = 'Client Scene';
 		engine.addScene(clientScene);
 
-		{
+		/*Create Game Manager*/ {
 			var gameManager = new GameObject();
 			gameManager.name = 'Client Game Manager';
 			gameManager.addComponent(ClientGameManager);
 			clientScene.addGameObject(gameManager);
-		}
-
-		for (var i = 0; i < 1; i++) {
-			var go = new GameObject();
-			go.transform.position.x = Math.random() * 100 - 50;
-			go.transform.position.y = Math.random() * 100 - 50;
-			go.name = 'Smiley';
-			let sr = go.addComponent(SpriteRenderer);
-			sr.setSprite('Smiley');
-			sr.sprite.pixelPerUnit = 4;
-			clientScene.addGameObject(go);
 		}
 
 		engine.setScene('Client Scene');

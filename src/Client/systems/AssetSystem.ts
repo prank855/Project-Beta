@@ -23,7 +23,6 @@ export class AssetSystem extends System {
 		i.url = url;
 		i.assetType = assetType;
 		this.imagesToLoad.push(i);
-		console.log('a');
 	}
 
 	async loadAssets() {
