@@ -12,6 +12,7 @@ import { WorldState } from '../../packets/WorldState';
 import { Vector2 } from '../../../Engine/Vector2';
 import { RemovePlayer } from '../../packets/RemovePlayer';
 import { ClientState } from '../../packets/ClientState';
+import { Time } from '../../../Engine/systems/Time';
 
 export class ServerGameManager extends GameComponent {
 	static instance: ServerGameManager | null = null;
@@ -44,6 +45,7 @@ export class ServerGameManager extends GameComponent {
 		var worldState = new WorldState();
 		worldState.data.tick = Engine.instance.frame;
 		worldState.data.tickRate = Engine.instance.framerate;
+		worldState.data.time = Time.elapsedTime;
 		let playerList: { id: number; position: Vector2 }[] = [];
 		for (var player of this.players) {
 			var p = { id: player.getID(), position: player.position };

@@ -1,3 +1,4 @@
+import { ClientGameManager } from '../../DemoGame/Client/components/GameManager';
 import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
 import { Time } from '../../Engine/systems/Time';
@@ -46,6 +47,22 @@ export class RendererSystem extends System {
 						`Sprite Calls: ${this.sprites.length}`,
 						10,
 						50 + 50 + 10
+					);
+					var gm = ClientGameManager.instance;
+					ctx.fillText(
+						`ServerTime ${Math.round(gm.serverTime * 100) / 100}`,
+						10,
+						50 + 50 + 10 + 50 + 10
+					);
+					ctx.fillText(
+						`ServerTick ${gm.serverTick}`,
+						10,
+						50 + 50 + 10 + 50 + 10 + 60
+					);
+					ctx.fillText(
+						`Server Rate ${gm.serverTickRate}`,
+						10,
+						50 + 50 + 10 + 50 + 10 + 120
 					);
 				}
 

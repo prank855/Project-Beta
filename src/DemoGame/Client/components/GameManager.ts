@@ -70,8 +70,9 @@ export class ClientGameManager extends GameComponent {
 
 	serverTickRate: number | null = null;
 	serverTick: number | null = null;
-	lastTick: number | null = null;
+	serverTime: number = 0;
 
+	lastTick: number | null = null;
 	update(): void {
 		if (this.serverTickRate && this.serverTick) {
 			if (this.lastTick == null) {
@@ -133,6 +134,7 @@ export class ClientGameManager extends GameComponent {
 			var worldState = packet as WorldState;
 			self.serverTickRate = worldState.data.tickRate;
 			self.serverTick = worldState.data.tick;
+			self.serverTime = worldState.data.time;
 
 			var knownIDs: number[] = [];
 

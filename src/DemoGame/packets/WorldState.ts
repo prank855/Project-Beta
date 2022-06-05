@@ -7,10 +7,12 @@ export class WorldState implements NetworkPacket {
 	data: {
 		tick: number;
 		tickRate: number;
+		time: number;
 		players: { id: number; position: Vector2 }[];
 	} = {
 		tick: 0,
 		tickRate: 0,
+		time: 0,
 		players: [],
 	};
 }
