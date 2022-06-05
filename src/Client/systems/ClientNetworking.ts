@@ -30,7 +30,7 @@ export class ClientNetworking extends System {
 			this.onPacket(incPacket);
 		};
 		ws.onclose = () => {
-			console.log('Server Connection Closed');
+			console.warn('Server Connection Closed');
 			this.connected = false;
 			this.onClose();
 		};

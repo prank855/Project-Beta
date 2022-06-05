@@ -47,8 +47,10 @@ export class GameLoader {
 			clientScene.addGameObject(gameManager);
 		}
 
-		{
+		for (var i = 0; i < 1; i++) {
 			var go = new GameObject();
+			go.transform.position.x = Math.random() * 100 - 50;
+			go.transform.position.y = Math.random() * 100 - 50;
 			go.name = 'Smiley';
 			let sr = go.addComponent(SpriteRenderer);
 			sr.setSprite('Smiley');

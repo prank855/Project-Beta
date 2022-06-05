@@ -80,28 +80,42 @@ export class RendererSystem extends System {
 		}
 		if (this.screenSystem && sprite.image && this.cameraSystem) {
 			pos = this.cameraSystem.toScreenSpace(pos);
-			if (this.screenSystem.context) {
-				this.screenSystem.context.drawImage(
-					sprite.image,
-					pos.x -
-						sprite.image.width *
-							(sprite.scale / sprite.pixelPerUnit) *
-							sprite.origin.x *
-							this.cameraSystem.getZoom(),
-					pos.y -
-						sprite.image.height *
-							(sprite.scale / sprite.pixelPerUnit) *
-							sprite.origin.y *
-							this.cameraSystem.getZoom(),
-					sprite.image.width *
-						(sprite.scale / sprite.pixelPerUnit) *
-						this.cameraSystem.getZoom(),
-					sprite.image.height *
-						(sprite.scale / sprite.pixelPerUnit) *
-						this.cameraSystem.getZoom()
-				);
-			} else {
-				console.warn('image not loaded');
+			if (!this.screenSystem.canvas) return;
+			var spriteHeight =
+				sprite.image.height *
+				(sprite.scale / sprite.pixelPerUnit) *
+				this.cameraSystem.getZoom();
+
+			var spriteWidth =
+				sprite.image.width *
+				(sprite.scale / sprite.pixelPerUnit) *
+				this.cameraSystem.getZoom();
+
+			if (
+				pos.x + spriteWidth > 0 &&
+				pos.x - spriteWidth < this.screenSystem.canvas.width &&
+				pos.y + spriteHeight > 0 &&
+				pos.y - spriteHeight < this.screenSystem.canvas.height
+			) {
+				if (this.screenSystem.context) {
+					this.screenSystem.context.drawImage(
+						sprite.image,
+						pos.x -
+							sprite.image.width *
+								(sprite.scale / sprite.pixelPerUnit) *
+								sprite.origin.x *
+								this.cameraSystem.getZoom(),
+						pos.y -
+							sprite.image.height *
+								(sprite.scale / sprite.pixelPerUnit) *
+								sprite.origin.y *
+								this.cameraSystem.getZoom(),
+						spriteWidth,
+						spriteHeight
+					);
+				} else {
+					console.warn('image not loaded');
+				}
 			}
 		}
 	}

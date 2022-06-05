@@ -10,7 +10,7 @@ export class ServerLoader {
 	init() {
 		var engine = new Engine();
 		engine.environment = Environment.SERVER;
-		engine.framerate = 64;
+		engine.framerate = 100;
 
 		let net = engine.addSystem(ServerNetworking);
 		net.startServer(8080);

@@ -1,4 +1,3 @@
-import { AudioRenderer } from '../../../Client/components/AudioRenderer';
 import { CameraSystem } from '../../../Client/systems/CameraSystem';
 import { Input } from '../../../Client/systems/Input';
 import { Engine } from '../../../Engine/Engine';
@@ -29,6 +28,21 @@ export class SimpleMovement extends GameComponent {
 				if (keys.includes('a')) {
 					this.parent.transform.position.x -= this.speed * Time.deltaTime;
 				}
+			}
+
+			/*Camera Control*/ {
+				var camera = Engine.instance.getSystem(CameraSystem);
+
+				var deltaX =
+					(this.parent.transform.position.x - camera.position.x) *
+					Time.deltaTime;
+				camera.position.x += deltaX;
+
+				var deltaY =
+					(this.parent.transform.position.y - camera.position.y) *
+					Time.deltaTime;
+				camera.position.y += deltaY;
+
 				if (keys.includes('ArrowUp')) {
 					Engine.instance.getSystem(CameraSystem).zoom *=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
@@ -37,18 +51,6 @@ export class SimpleMovement extends GameComponent {
 					Engine.instance.getSystem(CameraSystem).zoom /=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
 				}
-			}
-
-			/*Camera Control*/ {
-				Engine.instance.getSystem(CameraSystem).position.x +=
-					(this.parent.transform.position.x -
-						Engine.instance.getSystem(CameraSystem).position.x) *
-					Time.deltaTime;
-
-				Engine.instance.getSystem(CameraSystem).position.y +=
-					(this.parent.transform.position.y -
-						Engine.instance.getSystem(CameraSystem).position.y) *
-					Time.deltaTime;
 			}
 
 			this.lastKeys = keys;

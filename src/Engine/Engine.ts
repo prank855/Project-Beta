@@ -34,26 +34,20 @@ export class Engine {
 		this.loop();
 	}
 
-	private setTimeoutError: number = 2;
 	private loop() {
-		let currTime = Time.getCurrentTime();
 		let self = this;
+
+		let currTime = Time.getCurrentTime();
 
 		let tickDelta = 1 / this.framerate;
 		if (this.framerate != 0) {
-			if (currTime - Time.lastTime < tickDelta) {
-				if (
-					currTime - (Time.lastTime + this.setTimeoutError) / 1000 <
-					tickDelta
-				) {
-					setTimeout(
-						self.loop.bind(this),
-						1000 / this.framerate -
-							((currTime - Time.lastTime) * 1000 + this.setTimeoutError)
-					);
-				} else {
-					setImmediate(self.loop.bind(this));
+			var timeSinceLastFrame = currTime - Time.lastTime;
+			if (timeSinceLastFrame <= tickDelta) {
+				if (timeSinceLastFrame < tickDelta / 2) {
+					setTimeout(self.loop.bind(this));
+					return;
 				}
+				setImmediate(self.loop.bind(this));
 				return;
 			}
 		}
