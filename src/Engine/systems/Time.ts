@@ -9,14 +9,16 @@ export class Time extends System {
 	}
 
 	init() {
-		Time.deltaTime = Time.getCurrentTime() - Time.lastTime;
-		Time.lastTime = Time.getCurrentTime();
+		let curr = Time.getCurrentTime();
+		Time.deltaTime = curr - Time.lastTime;
+		Time.lastTime = curr;
 	}
 	start() {}
 
 	update() {
-		Time.deltaTime = Time.getCurrentTime() - Time.lastTime;
-		Time.lastTime = Time.getCurrentTime();
+		let curr = Time.getCurrentTime();
+		Time.deltaTime = curr - Time.lastTime;
+		Time.lastTime = curr;
 		Time.elapsedTime += Time.deltaTime;
 	}
 }

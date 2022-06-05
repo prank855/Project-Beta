@@ -17,17 +17,13 @@ import { Player } from './Player';
 import { SimpleMovement } from './SimpleMovement';
 
 export class ClientGameManager extends GameComponent {
-	static instance: ClientGameManager | null = null;
+	static instance: ClientGameManager;
 
 	private net: ClientNetworking | null = null;
 
 	private player: Player | null = null;
 
 	players: Player[] = [];
-
-	private networkID: number = -1;
-
-	disconnected: boolean = false;
 
 	getPlayer(): Player | null {
 		return this.player;
@@ -37,7 +33,12 @@ export class ClientGameManager extends GameComponent {
 		this.player = playerGO;
 	}
 
-	init(): void {
+	private networkID: number = -1;
+
+	disconnected: boolean = false;
+
+	constructor() {
+		super();
 		if (ClientGameManager.instance == null) {
 			ClientGameManager.instance = this;
 			console.log(`Game Manager created.`);
@@ -45,6 +46,10 @@ export class ClientGameManager extends GameComponent {
 			throw `There are more than one ClientGameManager components in scene.`;
 		}
 
+		this.initPackets();
+	}
+
+	init(): void {
 		this.net = Engine.instance.getSystem(ClientNetworking);
 		if (this.net == null) {
 			throw `Could not find ClientNetworking system`;
@@ -66,15 +71,16 @@ export class ClientGameManager extends GameComponent {
 	serverTickRate: number | null = null;
 	serverTick: number | null = null;
 	lastTick: number | null = null;
+
 	update(): void {
 		if (this.serverTickRate && this.serverTick) {
 			if (this.lastTick == null) {
 				this.Tick();
 				this.lastTick = Time.elapsedTime;
 			} else {
-				if (Time.elapsedTime - this.lastTick >= 1 / this.serverTickRate) {
+				while (Time.elapsedTime - this.lastTick >= 1 / this.serverTickRate) {
 					this.Tick();
-					this.lastTick = Time.elapsedTime;
+					this.lastTick += 1 / this.serverTickRate;
 				}
 			}
 		}
@@ -93,66 +99,73 @@ export class ClientGameManager extends GameComponent {
 		return clientState;
 	}
 
-	onPacket(packet: NetworkPacket) {
+	private packetDictionary: Map<PacketType, (packet: NetworkPacket) => void> =
+		new Map<PacketType, (packet: NetworkPacket) => void>();
+
+	private initPackets() {
 		var self = ClientGameManager.instance;
 		if (self == null) return;
-		switch (packet.type) {
-			case PacketType.AssignID:
-				var assignIDPacket = packet as AssignID;
-				self.networkID = assignIDPacket.data.id;
-				console.log(`Set Network ID to ${self.networkID}`);
-				break;
-			case PacketType.CreatePlayer:
-				var createPlayerPacket = packet as CreatePlayer;
-				self.CreatePlayer(
-					createPlayerPacket.data.id,
-					createPlayerPacket.data.position
-				);
-				break;
-			case PacketType.WorldState:
-				var worldState = packet as WorldState;
-				self.serverTickRate = worldState.data.tickRate;
-				self.serverTick = worldState.data.tick;
 
-				var knownIDs: number[] = [];
-
-				for (var p of worldState.data.players) {
-					knownIDs.push(p.id);
+		this.packetDictionary.set(PacketType.AssignID, (packet) => {
+			var assignIDPacket = packet as AssignID;
+			self.networkID = assignIDPacket.data.id;
+			console.log(`Set Network ID to ${self.networkID}`);
+		});
+		this.packetDictionary.set(PacketType.CreatePlayer, (packet) => {
+			var createPlayerPacket = packet as CreatePlayer;
+			self.CreatePlayer(
+				createPlayerPacket.data.id,
+				createPlayerPacket.data.position
+			);
+		});
+		this.packetDictionary.set(PacketType.RemovePlayer, (packet) => {
+			var removePlayerPacket = packet as RemovePlayer;
+			console.log(`Remove player ID: ${removePlayerPacket.data.id}`);
+			for (var player of self.players) {
+				if (player.networkID == removePlayerPacket.data.id) {
+					// delete go
+					if (player.parent)
+						Engine.instance.getScene().removeGameObject(player.parent.id);
 				}
+			}
+		});
+		this.packetDictionary.set(PacketType.WorldState, (packet) => {
+			var worldState = packet as WorldState;
+			self.serverTickRate = worldState.data.tickRate;
+			self.serverTick = worldState.data.tick;
 
-				// update position of exisiting players
-				for (let player of self.players) {
-					for (var packetPlayer of worldState.data.players) {
-						if (player.networkID == packetPlayer.id) {
-							knownIDs.splice(knownIDs.indexOf(player.networkID, 1));
-							if (player.parent)
-								player.parent.transform.position = packetPlayer.position;
-						}
-					}
-				}
-				knownIDs.splice(knownIDs.indexOf(self.networkID, 1));
+			var knownIDs: number[] = [];
 
-				// add players that do not exist yet
-				for (var p of worldState.data.players) {
-					if (knownIDs.includes(p.id)) {
-						self.CreatePlayer(p.id, p.position);
-						console.log('create unknown player');
-					}
-				}
-				break;
-			case PacketType.RemovePlayer:
-				var removePlayerPacket = packet as RemovePlayer;
-				console.log(`Remove player ID: ${removePlayerPacket.data.id}`);
-				for (var player of self.players) {
-					if (player.networkID == removePlayerPacket.data.id) {
-						// delete go
+			for (var p of worldState.data.players) {
+				knownIDs.push(p.id);
+			}
+
+			// update position of existing players
+			for (let player of self.players) {
+				for (var packetPlayer of worldState.data.players) {
+					if (player.networkID == packetPlayer.id) {
+						knownIDs.splice(knownIDs.indexOf(player.networkID, 1));
 						if (player.parent)
-							Engine.instance.getScene().removeGameObject(player.parent.id);
+							player.parent.transform.position = packetPlayer.position;
 					}
 				}
-				break;
-		}
+			}
+			knownIDs.splice(knownIDs.indexOf(self.networkID, 1));
+
+			// add players that do not exist yet
+			for (var p of worldState.data.players) {
+				if (knownIDs.includes(p.id)) {
+					self.CreatePlayer(p.id, p.position);
+					console.log('create unknown player');
+				}
+			}
+		});
 	}
+
+	onPacket(packet: NetworkPacket) {
+		ClientGameManager.instance.packetDictionary.get(packet.type)?.(packet);
+	}
+
 	CreatePlayer(id: number, position: Vector2) {
 		if (id == this.networkID) {
 			// self

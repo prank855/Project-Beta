@@ -6,3 +6,6 @@ sprite bounding boxes if image not loaded
 sprite render smooth/point
 private systems
 mouse input
+batch network packets instead of sending one by one
+
+dictionary<PacketType,anon func OR per case class> instead of switch

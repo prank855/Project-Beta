@@ -66,7 +66,11 @@ export class Engine {
 
 		this.currentScene.update();
 
-		setImmediate(self.loop.bind(this));
+		if (this.framerate == 0) {
+			requestAnimationFrame(self.loop.bind(this));
+		} else {
+			setImmediate(self.loop.bind(this));
+		}
 	}
 
 	addSystem<T extends System>(type: new () => T): T {

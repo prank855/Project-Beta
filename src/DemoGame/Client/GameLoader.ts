@@ -17,7 +17,7 @@ export class GameLoader {
 	init() {
 		var engine = new Engine();
 		engine.environment = Environment.CLIENT;
-		engine.framerate = 240;
+		engine.framerate = 0;
 
 		engine.addSystem(Input);
 		engine.addSystem(SoundSystem);
@@ -46,27 +46,6 @@ export class GameLoader {
 			gameManager.addComponent(ClientGameManager);
 			clientScene.addGameObject(gameManager);
 		}
-
-		/*
-		{
-			var go = new GameObject();
-			go.name = 'Player';
-
-			go.addComponent(Player);
-
-			go.addComponent(SimpleMovement);
-			let sr = go.addComponent(SpriteRenderer);
-
-			let ar = go.addComponent(AudioRenderer);
-			ar.soundSrc = 'poggers.wav';
-			ar.volume = 0.2;
-
-			sr.setSprite('Trollface');
-			sr.sprite.pixelPerUnit = 32;
-			ClientGameManager.instance?.setPlayer(go.getComponent(Player));
-			clientScene.addGameObject(go);
-		}
-		*/
 
 		{
 			var go = new GameObject();
