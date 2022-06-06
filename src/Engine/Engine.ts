@@ -54,11 +54,18 @@ export class Engine {
 
 		this.frame++;
 
+		// update systems
 		for (var s of this.systems) {
 			s.update();
 		}
 
+		// update scene / game objects
 		this.currentScene.update();
+
+		// late update systems
+		for (var s of this.systems) {
+			s.lateUpdate();
+		}
 
 		if (this.framerate == 0) {
 			requestAnimationFrame(self.loop.bind(this));

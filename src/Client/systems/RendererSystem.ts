@@ -14,12 +14,15 @@ export class RendererSystem extends System {
 	clearColor: string = 'White';
 	debug: boolean = true;
 	filtering: RenderFilterType = RenderFilterType.POINT;
+	spriteCalls: number = 0;
 	init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
 		this.cameraSystem = Engine.instance.getSystem(CameraSystem);
 	}
 	start() {}
-	update() {
+	update(): void {}
+	lateUpdate() {
+		this.spriteCalls = 0;
 		if (this.screenSystem) {
 			let ctx = this.screenSystem.context;
 			if (ctx) {
@@ -69,6 +72,7 @@ export class RendererSystem extends System {
 				pos.y - spriteHeight < this.screenSystem.canvas.height
 			) {
 				if (this.screenSystem.context) {
+					this.spriteCalls++;
 					this.screenSystem.context.drawImage(
 						sprite.image,
 						pos.x -

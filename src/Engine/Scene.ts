@@ -38,4 +38,20 @@ export class Scene {
 	getGameObjects(): GameObject[] {
 		return this.gameObjects;
 	}
+
+	getGameObjectAmount(gos?: GameObject[], count?: { value: number }): number {
+		if (!gos) {
+			gos = this.gameObjects;
+		}
+		if (!count) {
+			count = { value: 0 };
+		}
+		for (var go of gos) {
+			count.value++;
+			if (go.getChildren().length != 0) {
+				this.getGameObjectAmount(go.getChildren(), count);
+			}
+		}
+		return count.value;
+	}
 }

@@ -3,6 +3,7 @@ import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
 import { System } from '../../Engine/System';
 import { Time } from '../../Engine/systems/Time';
+import { RendererSystem } from './RendererSystem';
 
 export class EngineDebugRenderer extends System {
 	updateRate = 4;
@@ -38,7 +39,7 @@ export class EngineDebugRenderer extends System {
 	sceneReference: Scene | undefined;
 
 	private lastUpdate = -1;
-	update(): void {
+	update() {
 		var curr = Time.getCurrentTime();
 		if (curr - this.lastUpdate >= 1 / this.updateRate) {
 			if (this.isHovered) return;
@@ -55,6 +56,14 @@ export class EngineDebugRenderer extends System {
 		this.AddText(
 			this.sceneBody,
 			`FPS: ${Math.round((1 / Time.deltaTime + Number.EPSILON) * 100) / 100}`
+		);
+		this.AddText(
+			this.sceneBody,
+			`Draw Calls: ${Engine.instance.getSystem(RendererSystem).spriteCalls}`
+		);
+		this.AddText(
+			this.sceneBody,
+			`Game Objects: ${scene.getGameObjectAmount()}`
 		);
 		this.AddText(this.sceneBody, `Scene View "${scene.name}"`);
 		for (var go of scene.getGameObjects()) {
