@@ -13,7 +13,11 @@ INetworkSerializable interface
 
 put world logic into server
 
-sprite can sometimes still render when not seen
-
 
 assetmanager scene (forces initial scene to load assets then loads into main)
+
+webworker for rendering
+
+get render/update timing info
+
+jsdoc /** */ on all engine types

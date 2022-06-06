@@ -47,14 +47,14 @@ export class RendererSystem extends System {
 		}
 	}
 
-	drawSprite(sprite: Sprite) {
+	drawSprite(sprite: Sprite): boolean {
 		var pos = new Vector2();
 		if (sprite.transform) {
 			pos = sprite.transform.position;
 		}
 		if (this.screenSystem && sprite.image && this.cameraSystem) {
 			pos = this.cameraSystem.toScreenSpace(pos);
-			if (!this.screenSystem.canvas) return;
+			if (!this.screenSystem.canvas) return false;
 			var spriteHeight =
 				sprite.image.height *
 				(sprite.scale / sprite.pixelsPerUnit) *
@@ -65,34 +65,41 @@ export class RendererSystem extends System {
 				(sprite.scale / sprite.pixelsPerUnit) *
 				this.cameraSystem.getZoom();
 
+			var offSetPos = new Vector2(
+				pos.x -
+					sprite.image.width *
+						(sprite.scale / sprite.pixelsPerUnit) *
+						sprite.origin.x *
+						this.cameraSystem.getZoom(),
+				pos.y -
+					sprite.image.height *
+						(sprite.scale / sprite.pixelsPerUnit) *
+						sprite.origin.y *
+						this.cameraSystem.getZoom()
+			);
+
 			if (
-				pos.x + spriteWidth > 0 &&
-				pos.x - spriteWidth < this.screenSystem.canvas.width &&
-				pos.y + spriteHeight > 0 &&
-				pos.y - spriteHeight < this.screenSystem.canvas.height
+				offSetPos.x + spriteWidth >= 0 &&
+				offSetPos.x <= this.screenSystem.canvas.width &&
+				offSetPos.y + spriteHeight >= 0 &&
+				offSetPos.y <= this.screenSystem.canvas.height
 			) {
 				if (this.screenSystem.context) {
 					this.spriteCalls++;
 					this.screenSystem.context.drawImage(
 						sprite.image,
-						pos.x -
-							sprite.image.width *
-								(sprite.scale / sprite.pixelsPerUnit) *
-								sprite.origin.x *
-								this.cameraSystem.getZoom(),
-						pos.y -
-							sprite.image.height *
-								(sprite.scale / sprite.pixelsPerUnit) *
-								sprite.origin.y *
-								this.cameraSystem.getZoom(),
+						offSetPos.x,
+						offSetPos.y,
 						spriteWidth,
 						spriteHeight
 					);
+					return true;
 				} else {
 					console.warn('image not loaded');
 				}
 			}
 		}
+		return false;
 	}
 
 	registerSprite(sprite: Sprite) {
