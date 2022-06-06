@@ -40,4 +40,9 @@ export class SpriteRenderer extends GameComponent {
 		this.assetName = assetName;
 		this.loadedAsset = false;
 	}
+	setImage(image: HTMLCanvasElement) {
+		this.assetName = 'Raw Image';
+		this.loadedAsset = true;
+		this.sprite.image = image;
+	}
 }

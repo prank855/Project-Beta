@@ -23,7 +23,7 @@ export class DemoGameLoader {
 		engine.addSystem(SoundSystem);
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);
-		engine.addSystem(CameraSystem);
+		engine.addSystem(CameraSystem).zoom = 2;
 		engine.addSystem(RendererSystem).clearColor = 'Blue';
 		engine.addSystem(SceneViewRenderer);
 		engine.addSystem(ClientNetworking);

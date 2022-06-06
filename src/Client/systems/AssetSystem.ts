@@ -41,6 +41,15 @@ export class AssetSystem extends System {
 		}
 	}
 
+	getImg(assetName: string): HTMLCanvasElement | null {
+		var img = this.images.get(assetName);
+		if (img) {
+			return img;
+		} else {
+			return null;
+		}
+	}
+
 	getAsset(assetName: string, assetType: AssetType): HTMLCanvasElement | null {
 		switch (assetType) {
 			case AssetType.Image: {

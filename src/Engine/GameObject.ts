@@ -80,7 +80,9 @@ export class GameObject {
 		return tempComponent;
 	}
 
-	getComponent<T extends GameComponent>(type: new () => T): T {
+	getComponent<T extends GameComponent>(
+		type: new (parent: GameObject) => T
+	): T {
 		for (var co of this.components) {
 			if (co instanceof type) {
 				return co;

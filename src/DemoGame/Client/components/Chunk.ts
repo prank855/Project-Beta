@@ -2,6 +2,7 @@ import { SpriteRenderer } from '../../../Client/components/SpriteRenderer';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
 import { Vector2 } from '../../../Engine/Vector2';
+import { ChunkRenderer } from './ChunkRenderer';
 import { Tile } from './Tile';
 
 export class Chunk extends GameComponent {
@@ -14,21 +15,14 @@ export class Chunk extends GameComponent {
 	update(): void {}
 
 	private FillTiles() {
-		console.warn(`asd`);
+		console.warn(`Fill Tiles`);
 		for (var i = 0; i < this.size * this.size; i++) {
-			this.tiles[i] = this.CreateTile(i % this.size, Math.floor(i / this.size));
+			this.tiles[i] = this.CreateTile();
 		}
 	}
 
-	private CreateTile(x: number, y: number): Tile {
-		var go = new GameObject();
-		go.transform.position = new Vector2(x, y);
-		go.name = 'Tile';
-		var sr = go.addComponent(SpriteRenderer);
-		sr.setSprite('Grass1');
-		sr.sprite.pixelsPerUnit = 32;
-		var tile = go.addComponent(Tile);
-		this.parent.addChild(go);
+	private CreateTile(): Tile {
+		var tile = new Tile();
 		return tile;
 	}
 }

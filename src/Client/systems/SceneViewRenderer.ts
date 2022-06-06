@@ -46,7 +46,7 @@ export class SceneViewRenderer extends System {
 				this.padding + this.fontSize * this.index
 			);
 			for (var child of go.getChildren()) {
-				this.RenderChildText(child, ctx, this.padding);
+				this.RenderChildText(child, ctx);
 			}
 		}
 	}
@@ -61,11 +61,11 @@ export class SceneViewRenderer extends System {
 				this.padding + this.fontSize * this.index
 			);
 			for (var c of root.getChildren()) {
-				this.RenderChildText(c, ctx, this.padding);
+				this.RenderChildText(c, ctx);
 			}
 		} else {
 			ctx.fillText(
-				`${root.getChildren().length}+ more children`,
+				`+${root.getChildren().length} children`,
 				this.fontSize + this.childIndex * this.fontSize,
 				this.padding + this.fontSize * this.index
 			);
