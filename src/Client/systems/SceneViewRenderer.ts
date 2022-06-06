@@ -65,7 +65,7 @@ export class SceneViewRenderer extends System {
 			}
 		} else {
 			ctx.fillText(
-				`+${root.getChildren().length} children`,
+				`${root.name} +${root.getChildren().length} children`,
 				this.fontSize + this.childIndex * this.fontSize,
 				this.padding + this.fontSize * this.index
 			);

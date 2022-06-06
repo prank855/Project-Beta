@@ -24,9 +24,10 @@ export class ChunkRenderer extends GameComponent {
 
 	canvas: HTMLCanvasElement = document.createElement('canvas');
 	setupChunkImage(): boolean {
+		var imgSize = 32;
 		if (!this.chunk) return false;
-		this.canvas.width = this.chunk.size * 32;
-		this.canvas.height = this.chunk.size * 32;
+		this.canvas.width = this.chunk.size * imgSize;
+		this.canvas.height = this.chunk.size * imgSize;
 		var ctx = this.canvas.getContext('2d');
 		if (!ctx || !this.chunk) return false;
 		var assetSystem = Engine.instance.getSystem(AssetSystem);
@@ -35,14 +36,14 @@ export class ChunkRenderer extends GameComponent {
 			if (!img) return false;
 			ctx.drawImage(
 				img,
-				(i % this.chunk.size) * 32,
-				Math.floor(i / this.chunk.size) * 32,
-				32,
-				32
+				(i % this.chunk.size) * imgSize,
+				Math.floor(i / this.chunk.size) * imgSize,
+				imgSize,
+				imgSize
 			);
 		}
 		if (!this.spriteRenderer) return false;
-		this.spriteRenderer.sprite.pixelsPerUnit = 32;
+		this.spriteRenderer.sprite.pixelsPerUnit = imgSize;
 		this.spriteRenderer.setImage(this.canvas);
 		return true;
 	}

@@ -8,7 +8,9 @@ private systems
 mouse input
 ++batch network packets instead of sending one by one
 
-dictionary<PacketType,anon func OR per case class> instead of switch
+improve on Tile class
+INetworkSerializable interface
 
-optimize sprite rendering !!!! IMPORTANT
+put world logic into server
 
+scene view as floating movable div http://jsfiddle.net/wfbY8/4/

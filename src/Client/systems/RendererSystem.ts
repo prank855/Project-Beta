@@ -2,6 +2,7 @@ import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
 import { Time } from '../../Engine/systems/Time';
 import { Vector2 } from '../../Engine/Vector2';
+import { RenderFilterType } from '../types/RenderFilterType';
 import { Sprite } from '../types/Sprite';
 import { CameraSystem } from './CameraSystem';
 import { ScreenSystem } from './ScreenSystem';
@@ -12,6 +13,7 @@ export class RendererSystem extends System {
 	sprites: Sprite[] = [];
 	clearColor: string = 'White';
 	debug: boolean = true;
+	filtering: RenderFilterType = RenderFilterType.POINT;
 	init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
 		this.cameraSystem = Engine.instance.getSystem(CameraSystem);
@@ -21,6 +23,12 @@ export class RendererSystem extends System {
 		if (this.screenSystem) {
 			let ctx = this.screenSystem.context;
 			if (ctx) {
+				if ((this.filtering = RenderFilterType.POINT)) {
+					ctx.imageSmoothingEnabled = false;
+				}
+				if ((this.filtering = RenderFilterType.SMOOTH)) {
+					ctx.imageSmoothingEnabled = true;
+				}
 				//Clear Screen
 				ctx.fillStyle = this.clearColor;
 				ctx.fillRect(0, 0, innerWidth, innerHeight);
