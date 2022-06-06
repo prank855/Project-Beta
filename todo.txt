@@ -12,5 +12,3 @@ improve on Tile class
 INetworkSerializable interface
 
 put world logic into server
-
-scene view as floating movable div http://jsfiddle.net/wfbY8/4/

@@ -3,6 +3,7 @@ import { GameObject } from './GameObject';
 export abstract class GameComponent {
 	parent: GameObject;
 	private enabled: boolean = false;
+
 	constructor(parent: GameObject) {
 		this.parent = parent;
 	}

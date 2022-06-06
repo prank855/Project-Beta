@@ -11,7 +11,7 @@ import { ScreenSystem } from '../../Client/systems/ScreenSystem';
 import { SoundSystem } from '../../Client/systems/SoundSystem';
 import { AssetType } from '../../Client/types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
-import { SceneViewRenderer } from '../../Client/systems/SceneViewRenderer';
+import { EngineDebugRenderer } from '../../Client/systems/EngineDebugRenderer';
 
 export class DemoGameLoader {
 	init() {
@@ -25,7 +25,7 @@ export class DemoGameLoader {
 		engine.addSystem(AssetSystem);
 		engine.addSystem(CameraSystem).zoom = 2;
 		engine.addSystem(RendererSystem).clearColor = 'Blue';
-		engine.addSystem(SceneViewRenderer);
+		engine.addSystem(EngineDebugRenderer);
 		engine.addSystem(ClientNetworking);
 
 		let assetSystem = engine.getSystem(AssetSystem);

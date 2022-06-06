@@ -7,7 +7,7 @@ import { ChunkRenderer } from './ChunkRenderer';
 export class World extends GameComponent {
 	chunks: Chunk[] = [];
 	init() {
-		var renderDistance = 4;
+		var renderDistance = 2;
 		for (var x = -renderDistance; x < renderDistance; x++) {
 			for (var y = -renderDistance; y < renderDistance; y++) {
 				this.CreateChunk(new Vector2(x, y));
@@ -19,7 +19,7 @@ export class World extends GameComponent {
 	private CreateChunk(position: Vector2): Chunk {
 		var go = new GameObject();
 
-		go.name = 'Chunk';
+		go.name = `Chunk (${position.x}, ${position.y})`;
 		var chunk = go.addComponent(Chunk);
 		go.addComponent(ChunkRenderer);
 		go.transform.position = new Vector2(

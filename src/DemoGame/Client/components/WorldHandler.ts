@@ -18,9 +18,9 @@ export class WorldHandler extends GameComponent {
 	}
 	CreatePlayer() {
 		console.log(`Create Player`);
-		var go = new GameObject('Player');
-		var player = go.addComponent(Player);
+		var playerGO = new GameObject('Player');
+		var player = playerGO.addComponent(Player);
 		this.player = player;
-		this.parent.addChild(go);
+		this.parent.addChild(playerGO);
 	}
 }

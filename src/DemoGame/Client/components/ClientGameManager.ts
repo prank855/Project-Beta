@@ -16,7 +16,7 @@ export class ClientGameManager extends GameComponent {
 			ClientGameManager.instance = this;
 			console.log(`Game Manager created.`);
 		} else {
-			throw `There are more than one ClientGameManager components in scene.`;
+			//throw `There are more than one ClientGameManager components in scene.`;
 		}
 	}
 

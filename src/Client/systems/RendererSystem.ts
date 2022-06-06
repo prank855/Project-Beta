@@ -39,19 +39,6 @@ export class RendererSystem extends System {
 					this.drawSprite(s);
 				}
 
-				//Draw GUI
-				if (this.debug) {
-					ctx.fillStyle = 'Black';
-					ctx.font = '40px Arial';
-					ctx.fillText(
-						`FPS: ${
-							Math.round((1 / Time.deltaTime + Number.EPSILON) * 100) / 100
-						}`,
-						10,
-						50
-					);
-				}
-
 				this.sprites.length = 0;
 			}
 		}
