@@ -1,6 +1,6 @@
 import { GameComponent } from './GameComponent';
 import { Transform } from './Transform';
-import { Color } from './types/Color';
+import { LogColor } from './types/LogColor';
 import { Vector2 } from './Vector2';
 
 export class GameObject {
@@ -14,20 +14,30 @@ export class GameObject {
 
 	started: boolean = false;
 
-	constructor() {
+	constructor(name?: string | undefined) {
 		this.id = GameObject.latestID++;
-		this.name = `GameObject (${this.id})`;
+		this.name = name || `GameObject (${this.id})`;
 	}
 
 	start() {
 		for (var co of this.components) {
 			co.start();
 		}
+		for (var go of this.children) {
+			go.start();
+		}
 	}
 
 	update() {
-		for (var co of this.components) {
+		for (let co of this.components) {
 			co.update();
+		}
+		for (let go of this.children) {
+			if (!go.started) {
+				go.start();
+				go.started = true;
+			}
+			go.update();
 		}
 	}
 
@@ -47,21 +57,27 @@ export class GameObject {
 		this.children.push(go);
 	}
 
+	getChildren(): GameObject[] {
+		return this.children;
+	}
+
 	/*addComponent(co: GameComponent) {
 		co.parent = this;
 		this.components.push(co);
 	}
 	*/
 
-	addComponent<T extends GameComponent>(type: new () => T): T {
-		var temp = new type();
-		temp.parent = this;
-		temp.init();
-		this.components.push(temp);
+	addComponent<T extends GameComponent>(
+		type: new (parent: GameObject) => T
+	): T {
+		var tempComponent = new type(this);
+		tempComponent.Enable();
+		tempComponent.init();
+		this.components.push(tempComponent);
 		console.log(
-			`Added Component ${Color.COMPONENT}${type.name}${Color.DEFAULT} to ${Color.GAMEOBJECT}GameObject ID: ${this.id} ${Color.DEFAULT}"${this.name}"${Color.CLEAR}`
+			`Added Component ${LogColor.COMPONENT}${type.name}${LogColor.DEFAULT} to ${LogColor.GAMEOBJECT}GameObject ID: ${this.id} ${LogColor.DEFAULT}"${this.name}"${LogColor.CLEAR}`
 		);
-		return temp;
+		return tempComponent;
 	}
 
 	getComponent<T extends GameComponent>(type: new () => T): T {
@@ -86,5 +102,13 @@ export class GameObject {
 		return a;
 	}
 
-	removeComponent(): void {}
+	removeComponent<T extends GameComponent>(type: new () => T): void {
+		for (var co of this.components) {
+			if (co instanceof type) {
+				co.Disable();
+				this.components.splice(this.components.indexOf(co), 1);
+				return;
+			}
+		}
+	}
 }

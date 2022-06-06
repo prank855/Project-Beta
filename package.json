@@ -7,7 +7,7 @@
 		"dev:client": "webpack serve",
 		"dev:server": "tsc-watch -p ./src/Server --onSuccess \"node dist/Server/index.js\"",
 		"start:server": "node index.js",
-		"build:client": "webpack && cp -r ./src/Client/assets/* ./dist",
+		"build:client": "webpack && cp -r ./src/pages/assets/* ./dist",
 		"build:server": "tsc -p ./src/Server",
 		"build": "npm run build:client && npm run build:server",
 		"test": "echo \"Error: no test specified\" && exit 1"

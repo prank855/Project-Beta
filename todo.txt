@@ -9,3 +9,5 @@ mouse input
 ++batch network packets instead of sending one by one
 
 dictionary<PacketType,anon func OR per case class> instead of switch
+
+optimize sprite rendering !!!! IMPORTANT

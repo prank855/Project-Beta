@@ -4,7 +4,7 @@ import { Vector2 } from '../../Engine/Vector2';
 export class Sprite {
 	image: HTMLCanvasElement | null = null;
 	transform: Transform | null = null;
-	pixelPerUnit: number = 1;
+	pixelsPerUnit: number = 1;
 	scale: number = 1;
 	origin: Vector2 = new Vector2(0.5, 0.5);
 }

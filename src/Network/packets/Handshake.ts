@@ -1,7 +1,8 @@
+import { NetworkID } from '../NetworkID';
 import { NetworkPacket } from '../NetworkPacket';
 import { PacketType } from '../PacketType';
 
 export class Handshake implements NetworkPacket {
 	type = PacketType.Handshake;
-	data = { text: 'Hello' };
+	data: { networkID: NetworkID } = { networkID: 0 };
 }

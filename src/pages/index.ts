@@ -1,4 +1,4 @@
-import { GameLoader } from '../DemoGame/Client/GameLoader';
+import { DemoGameLoader } from '../DemoGame/Client/DemoGameLoader';
 
 window.onload = () => {
 	//Entry point for Client
@@ -7,6 +7,6 @@ window.onload = () => {
 		'background: #222; color: #bada55'
 	);
 
-	var loader = new GameLoader();
+	var loader = new DemoGameLoader();
 	loader.init();
 };

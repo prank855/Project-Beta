@@ -1,6 +1,8 @@
 import { ClientNetworking } from '../../../Client/systems/ClientNetworking';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
+import { GameObject } from '../../../Engine/GameObject';
+import { WorldHandler } from './WorldHandler';
 
 export class ClientGameManager extends GameComponent {
 	static instance: ClientGameManager;
@@ -8,8 +10,8 @@ export class ClientGameManager extends GameComponent {
 
 	private serverURL: string = `ws://kvm.joshh.moe:8080`;
 
-	constructor() {
-		super();
+	constructor(parent: GameObject) {
+		super(parent);
 		if (ClientGameManager.instance == null) {
 			ClientGameManager.instance = this;
 			console.log(`Game Manager created.`);
@@ -28,7 +30,15 @@ export class ClientGameManager extends GameComponent {
 		};
 	}
 
-	start(): void {}
+	start(): void {
+		this.SetupWorld();
+	}
+
+	worldHandler: WorldHandler | undefined;
+	SetupWorld() {
+		this.worldHandler = this.parent.addComponent(WorldHandler);
+		this.worldHandler.CreateWorld();
+	}
 
 	update(): void {}
 }

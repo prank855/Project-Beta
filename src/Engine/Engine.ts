@@ -2,7 +2,7 @@ import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
-import { Color } from './types/Color';
+import { LogColor } from './types/LogColor';
 
 export class Engine {
 	public static instance: Engine;
@@ -24,7 +24,7 @@ export class Engine {
 
 	start() {
 		console.log(
-			`Started ENGINE with Scene: ${Color.SCENE}"${this.currentScene.name}"${Color.CLEAR}`
+			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.name}"${LogColor.CLEAR}`
 		);
 
 		for (var s of this.systems) {
@@ -69,7 +69,9 @@ export class Engine {
 
 	addSystem<T extends System>(type: new () => T): T {
 		var temp = new type();
-		console.log(`Added System: ${Color.SYSTEM}${type.name}${Color.CLEAR}`);
+		console.log(
+			`Added System: ${LogColor.SYSTEM}${type.name}${LogColor.CLEAR}`
+		);
 		temp.init();
 		this.systems.push(temp);
 		return temp;
@@ -88,7 +90,7 @@ export class Engine {
 		this.scenes.push(scene);
 	}
 
-	getScene(): Scene {
+	getCurrentScene(): Scene {
 		return this.currentScene;
 	}
 

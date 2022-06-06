@@ -1,5 +1,5 @@
 import { GameObject } from './GameObject';
-import { Color } from './types/Color';
+import { LogColor } from './types/LogColor';
 
 export class Scene {
 	name: string = 'Untitled Scene';
@@ -22,7 +22,7 @@ export class Scene {
 	addGameObject(go: GameObject) {
 		this.gameObjects.push(go);
 		console.log(
-			`Added ${Color.GAMEOBJECT}GameObject ID: ${go.id} ${Color.DEFAULT}"${go.name}"${Color.CLEAR}`
+			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.id} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
 	}
 
@@ -33,5 +33,9 @@ export class Scene {
 				return;
 			}
 		}
+	}
+
+	getGameObjects(): GameObject[] {
+		return this.gameObjects;
 	}
 }

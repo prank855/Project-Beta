@@ -1,11 +1,14 @@
 import { System } from '../../Engine/System';
+import { NetworkID } from '../../Network/NetworkID';
 import { PacketBatch } from '../../Network/PacketBatch';
+import { Handshake } from '../../Network/packets/Handshake';
 import { PacketType } from '../../Network/PacketType';
 
 export class ClientNetworking extends System {
 	ws: WebSocket | null = null;
 	url: string = 'no server url';
 	connected: boolean = false;
+	networkID: NetworkID | undefined;
 
 	init() {}
 	start() {}
@@ -28,7 +31,12 @@ export class ClientNetworking extends System {
 				for (var packet of packetBatch.packets) {
 					if (packet.type == PacketType.Handshake) {
 						this.connected = true;
-						console.warn(`Successful Server Connection`);
+						var handshakePacket = packet as Handshake;
+						this.networkID = handshakePacket.data.networkID;
+						console.warn(
+							`Successful Server Connection`,
+							`Network ID set to ${this.networkID}`
+						);
 						return;
 					}
 				}

@@ -1,4 +1,3 @@
-import { ClientGameManager } from '../../DemoGame/Client/components/GameManager';
 import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
 import { Time } from '../../Engine/systems/Time';
@@ -60,12 +59,12 @@ export class RendererSystem extends System {
 			if (!this.screenSystem.canvas) return;
 			var spriteHeight =
 				sprite.image.height *
-				(sprite.scale / sprite.pixelPerUnit) *
+				(sprite.scale / sprite.pixelsPerUnit) *
 				this.cameraSystem.getZoom();
 
 			var spriteWidth =
 				sprite.image.width *
-				(sprite.scale / sprite.pixelPerUnit) *
+				(sprite.scale / sprite.pixelsPerUnit) *
 				this.cameraSystem.getZoom();
 
 			if (
@@ -79,12 +78,12 @@ export class RendererSystem extends System {
 						sprite.image,
 						pos.x -
 							sprite.image.width *
-								(sprite.scale / sprite.pixelPerUnit) *
+								(sprite.scale / sprite.pixelsPerUnit) *
 								sprite.origin.x *
 								this.cameraSystem.getZoom(),
 						pos.y -
 							sprite.image.height *
-								(sprite.scale / sprite.pixelPerUnit) *
+								(sprite.scale / sprite.pixelsPerUnit) *
 								sprite.origin.y *
 								this.cameraSystem.getZoom(),
 						spriteWidth,

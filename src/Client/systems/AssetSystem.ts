@@ -25,7 +25,7 @@ export class AssetSystem extends System {
 		this.imagesToLoad.push(i);
 	}
 
-	async loadAssets() {
+	loadAssets() {
 		for (var i of this.imagesToLoad) {
 			console.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
 			switch (i.assetType) {

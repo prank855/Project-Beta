@@ -1,4 +1,4 @@
-export enum Color {
+export enum LogColor {
 	DEFAULT = '\x1b[0m',
 	CLEAR = '\x1b[0m',
 	COMPONENT = '\x1b[33m',
