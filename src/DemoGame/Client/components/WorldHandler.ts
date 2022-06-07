@@ -4,12 +4,9 @@ import { Player } from './Player';
 import { World } from './World';
 
 export class WorldHandler extends GameComponent {
-	start(): void {}
-	update(): void {}
-
 	world: World | undefined;
 	player: Player | undefined;
-	serializedVars: string[] = ['world', 'player'];
+	override serializedVars: string[] = ['world', 'player'];
 	CreateWorld() {
 		console.log(`Create World`);
 		var worldGO = new GameObject('World');

@@ -30,19 +30,19 @@ module.exports = {
 		),
 		new CleanWebpackPlugin(),
 	  ),
-	module: {
+	  module: {
 		rules: [
-			{
-				test: /\.m?ts$/,
-				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
-					options: {
-						cacheDirectory: true,
-					},
-				},
-			},
-		],
+		  {
+			test: /\.tsx?$/,
+			exclude: /node_modules/,
+			use: [
+			  {
+				loader: 'ts-loader',
+			  },
+			  
+		   ]
+		 }
+	   ]
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.png', '.html'],

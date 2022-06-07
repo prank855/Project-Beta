@@ -12,7 +12,7 @@ export class ChunkRenderer extends GameComponent {
 	chunk: Chunk | undefined;
 
 	spriteRenderer: SpriteRenderer | undefined;
-	start(): void {
+	override start(): void {
 		this.chunk = this.parent.getComponent(Chunk);
 		this.spriteRenderer = this.parent.addComponent(SpriteRenderer);
 		this.setupChunkImage();
@@ -20,7 +20,7 @@ export class ChunkRenderer extends GameComponent {
 
 	rendered: boolean = false;
 
-	update(): void {
+	override update(): void {
 		if (!this.rendered) this.rendered = this.setupChunkImage();
 	}
 

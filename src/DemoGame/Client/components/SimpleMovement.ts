@@ -8,10 +8,9 @@ export class SimpleMovement extends GameComponent {
 	inputSystem: Input | undefined;
 
 	speed: number = 2;
-
-	start() {}
 	private lastKeys: string[] = [];
-	update() {
+
+	override update() {
 		if (this.parent) {
 			var keys = Input.getKeys();
 

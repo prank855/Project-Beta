@@ -10,7 +10,7 @@ export class ClientGameManager extends GameComponent {
 
 	private serverURL: string = `ws://kvm.joshh.moe:8080`;
 
-	serializedVars: string[] = [this.serverURL];
+	override serializedVars: string[] = [this.serverURL];
 
 	constructor(parent: GameObject) {
 		super(parent);
@@ -22,7 +22,7 @@ export class ClientGameManager extends GameComponent {
 		}
 	}
 
-	init(): void {
+	override init(): void {
 		this.net = Engine.instance.getSystem(ClientNetworking);
 
 		this.net.connect(this.serverURL);
@@ -32,7 +32,7 @@ export class ClientGameManager extends GameComponent {
 		};
 	}
 
-	start(): void {
+	override start(): void {
 		this.SetupWorld();
 		console.warn(
 			'Serialized Scene',
@@ -45,6 +45,4 @@ export class ClientGameManager extends GameComponent {
 		this.worldHandler = this.parent.addComponent(WorldHandler);
 		this.worldHandler.CreateWorld();
 	}
-
-	update(): void {}
 }

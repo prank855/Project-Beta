@@ -4,12 +4,10 @@ import { Tile } from './Tile';
 export class Chunk extends GameComponent {
 	size: number = 16;
 	tiles: Tile[] = [];
-	serializedVars: string[] = ['size', 'tiles'];
-	init(): void {
+	override serializedVars: string[] = ['size', 'tiles'];
+	override init(): void {
 		this.FillTiles();
 	}
-	start(): void {}
-	update(): void {}
 
 	private FillTiles() {
 		for (var i = 0; i < this.size * this.size; i++) {

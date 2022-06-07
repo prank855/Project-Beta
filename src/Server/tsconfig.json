@@ -17,7 +17,8 @@
 		"noImplicitAny": true,
 		"noImplicitThis": true,
 		"esModuleInterop": true,
-		"noImplicitOverride": true
+		"noImplicitOverride": true,
+		"forceConsistentCasingInFileNames": true
 	},
 	"exclude": ["node_modules"],
 	"files": ["./index.ts"]

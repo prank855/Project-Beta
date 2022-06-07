@@ -6,9 +6,9 @@ import { ChunkRenderer } from './ChunkRenderer';
 
 export class World extends GameComponent {
 	chunks: Chunk[] = [];
-	serializedVars: string[] = ['chunks'];
+	override serializedVars: string[] = ['chunks'];
 	renderDistance: number = 2;
-	init() {
+	override init() {
 		for (var x = -this.renderDistance; x < this.renderDistance + 1; x++) {
 			for (var y = -this.renderDistance; y < this.renderDistance + 1; y++) {
 				this.CreateChunk(new Vector2(x, y));
@@ -16,8 +16,6 @@ export class World extends GameComponent {
 			}
 		}
 	}
-	start(): void {}
-	update(): void {}
 	private CreateChunk(position: Vector2): Chunk {
 		var go = new GameObject();
 

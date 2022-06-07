@@ -9,14 +9,14 @@ export class SpriteRenderer extends GameComponent {
 	private renderer: RendererSystem | undefined;
 	sprite: Sprite = new Sprite();
 
-	start() {
+	override start() {
 		if (Engine.instance.getSystem(RendererSystem)) {
 			this.renderer = Engine.instance.getSystem(RendererSystem);
 		} else {
 			throw `Did not find Renderer System`;
 		}
 	}
-	update() {
+	override update() {
 		if (this.assetName != '' && !this.loadedAsset) {
 			var img = Engine.instance
 				.getSystem(AssetSystem)

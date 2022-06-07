@@ -8,6 +8,8 @@ import { Viewport } from './Viewport';
 import { ScreenSystem } from './ScreenSystem';
 
 export class RendererSystem extends System {
+	start(): void {}
+	update(): void {}
 	screenSystem: ScreenSystem | undefined;
 	cameraSystem: Viewport | undefined;
 	sprites: Sprite[] = [];
@@ -15,13 +17,11 @@ export class RendererSystem extends System {
 	debug: boolean = true;
 	filtering: RenderFilterType = RenderFilterType.POINT;
 	spriteCalls: number = 0;
-	init() {
+	override init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
 		this.cameraSystem = Engine.instance.getSystem(Viewport);
 	}
-	start() {}
-	update(): void {}
-	lateUpdate() {
+	override lateUpdate() {
 		this.spriteCalls = 0;
 		if (this.screenSystem) {
 			let ctx = this.screenSystem.context;
