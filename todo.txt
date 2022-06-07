@@ -34,3 +34,6 @@ serialize scene
 load serialized scene
 
 transfer world logic into server
+
+black bars if not widescreen
+OR max aspect ratio like 16:9

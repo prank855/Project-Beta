@@ -62,6 +62,7 @@ module.exports = {
 		allowedHosts: "all",
 	},
 	optimization: {
+		runtimeChunk: true,
 		splitChunks: {
 			chunks: "all",
 		  },
@@ -74,6 +75,6 @@ module.exports = {
 				},
 			}),
 		],
-		minimize: false,
+		minimize: true,
 	},
 };
