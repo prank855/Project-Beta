@@ -13,9 +13,8 @@ import { AssetType } from '../../Client/types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
 import { EngineDebugRenderer } from '../../Client/systems/EngineDebugRenderer';
 import { ComponentStore } from '../../Engine/ComponentStore';
-import { GameComponent } from '../../Engine/GameComponent';
 
-export class DemoGameLoader {
+export class DemoGameClientLoader {
 	init() {
 		var engine = new Engine();
 		engine.environment = Environment.CLIENT;

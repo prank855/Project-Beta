@@ -49,14 +49,18 @@ module.exports = {
 	},
 	devtool: `inline-source-map`,
 	devServer: {
-		contentBase: ['./dist', './src/pages/assets'],
+		static: ['./dist', './src/pages/assets'],
+		client: {
+			progress: true
+		},
 		port: 3000,
+		server: 'http',
 		host: '0.0.0.0',
 		historyApiFallback: true,
-		overlay: true,
+		//overlay: true,
 		compress: true,
 		hot: true,
-		disableHostCheck: true,
+		allowedHosts: "all",
 	},
 	optimization: {
 		splitChunks: {

@@ -16,7 +16,8 @@
 		"allowSyntheticDefaultImports": true,
 		"noImplicitAny": true,
 		"noImplicitThis": true,
-		"esModuleInterop": true
+		"esModuleInterop": true,
+		"noImplicitOverride": true
 	},
 	"exclude": ["node_modules"],
 	"files": ["./index.ts"]

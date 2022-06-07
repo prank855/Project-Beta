@@ -27,6 +27,8 @@ improve on Tile class
 
 put world logic into server
 
+performance metrics
+
 serialize scene
 
 load serialized scene

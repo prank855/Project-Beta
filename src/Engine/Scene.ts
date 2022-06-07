@@ -46,6 +46,19 @@ export class Scene {
 		return this.gameObjects;
 	}
 
+	getGameObjectByName(name: string): GameObject {
+		throw new Error(`Not implemented`);
+	}
+	getGameObjectByID(): GameObject {
+		throw new Error(`Not implemented`);
+	}
+	getGameObjectsByName(name: string): GameObject[] {
+		throw new Error(`Not implemented`);
+	}
+	getGameObjectsByID(): GameObject[] {
+		throw new Error(`Not implemented`);
+	}
+
 	getGameObjectAmount(gos?: GameObject[], count?: { value: number }): number {
 		if (!gos) {
 			gos = this.gameObjects;

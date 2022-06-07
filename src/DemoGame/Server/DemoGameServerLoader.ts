@@ -5,7 +5,7 @@ import { Scene } from '../../Engine/Scene';
 import { ServerGameManager } from './components/ServerGameManager';
 import { ServerNetworking } from '../../Server/systems/ServerNetworking';
 
-export class ServerLoader {
+export class DemoGameServerLoader {
 	constructor() {}
 	init() {
 		var engine = new Engine();

@@ -6,7 +6,7 @@ export class ServerGameManager extends GameComponent {
 	static instance: ServerGameManager | undefined;
 	private net: ServerNetworking | undefined;
 
-	start(): void {
+	override start(): void {
 		if (ServerGameManager.instance == null) {
 			ServerGameManager.instance = this;
 			console.log(`Server Game Manager created.`);
@@ -18,6 +18,4 @@ export class ServerGameManager extends GameComponent {
 			throw `Could not find ServerNetworking system`;
 		}
 	}
-
-	update(): void {}
 }

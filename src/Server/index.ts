@@ -1,3 +1,3 @@
-import { ServerLoader } from '../DemoGame/Server/ServerLoader';
-let loader = new ServerLoader();
+import { DemoGameServerLoader } from '../DemoGame/Server/DemoGameServerLoader';
+let loader = new DemoGameServerLoader();
 loader.init();
