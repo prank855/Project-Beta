@@ -21,3 +21,13 @@ web worker for rendering
 get render/update timing info
 
 jsdoc /** */ on all engine types
+
+CURRENT:
+asset manager scene (forces initial scene to load assets then loads into main)
+
+
+serialize scene
+
+load serialized scene
+
+transfer world logic into server

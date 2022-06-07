@@ -9,10 +9,11 @@ export class WorldHandler extends GameComponent {
 
 	world: World | undefined;
 	player: Player | undefined;
+	serializedVars: string[] = ['world', 'player'];
 	CreateWorld() {
 		console.log(`Create World`);
 		var worldGO = new GameObject('World');
-		var world = worldGO.addComponent(World);
+		this.world = worldGO.addComponent(World);
 		this.parent.addChild(worldGO);
 		this.CreatePlayer();
 	}

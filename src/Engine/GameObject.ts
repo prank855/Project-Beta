@@ -1,4 +1,6 @@
+import { ComponentStore } from './ComponentStore';
 import { GameComponent } from './GameComponent';
+import { SerializedGameObject } from './SerializedGameObject';
 import { Transform } from './Transform';
 import { LogColor } from './types/LogColor';
 import { Vector2 } from './Vector2';
@@ -26,6 +28,23 @@ export class GameObject {
 		for (var go of this.children) {
 			go.start();
 		}
+	}
+
+	serialize(): SerializedGameObject {
+		var serialized = new SerializedGameObject();
+		serialized.id = this.id;
+		serialized.name = this.name;
+		serialized.transform = this.transform;
+		serialized.parent = this.parent?.id;
+		serialized.components = [];
+		for (var co of this.components) {
+			serialized.components.push(co.serialize());
+		}
+		serialized.children = [];
+		for (var child of this.children) {
+			serialized.children.push(child.serialize());
+		}
+		return serialized;
 	}
 
 	update() {
@@ -76,6 +95,23 @@ export class GameObject {
 		this.components.push(tempComponent);
 		console.log(
 			`Added Component ${LogColor.COMPONENT}${type.name}${LogColor.DEFAULT} to ${LogColor.GAMEOBJECT}GameObject ID: ${this.id} ${LogColor.DEFAULT}"${this.name}"${LogColor.CLEAR}`
+		);
+		return tempComponent;
+	}
+
+	addComponentFromString(componentName: string): GameComponent {
+		var tempComponent = new (ComponentStore.getComponent(
+			'ClientGameManager'
+		) as typeof GameComponent)(this);
+		tempComponent.Enable();
+		tempComponent.init();
+		this.components.push(tempComponent);
+		console.log(
+			`Added Component ${LogColor.COMPONENT}${
+				(tempComponent as any).constructor.name
+			}${LogColor.DEFAULT} to ${LogColor.GAMEOBJECT}GameObject ID: ${this.id} ${
+				LogColor.DEFAULT
+			}"${this.name}"${LogColor.CLEAR}`
 		);
 		return tempComponent;
 	}

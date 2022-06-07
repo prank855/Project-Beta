@@ -1,10 +1,17 @@
 import { GameObject } from './GameObject';
+import { SerializedGameObject } from './SerializedGameObject';
 import { LogColor } from './types/LogColor';
 
 export class Scene {
-	name: string = 'Untitled Scene';
+	private name: string;
 	private gameObjects: GameObject[] = [];
 	private removeQueue: GameObject[] = [];
+	constructor(sceneName: string) {
+		this.name = sceneName;
+	}
+	getName() {
+		return this.name;
+	}
 	update() {
 		for (var go of this.removeQueue) {
 			this.gameObjects.splice(this.gameObjects.indexOf(go), 1);
@@ -53,5 +60,15 @@ export class Scene {
 			}
 		}
 		return count.value;
+	}
+
+	serialize(): { gameObjects: SerializedGameObject[] } {
+		var serialized: { gameObjects: SerializedGameObject[] } = {
+			gameObjects: [],
+		};
+		for (var go of this.gameObjects) {
+			serialized.gameObjects.push(go.serialize());
+		}
+		return serialized;
 	}
 }

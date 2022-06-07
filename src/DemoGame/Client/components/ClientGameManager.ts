@@ -10,6 +10,8 @@ export class ClientGameManager extends GameComponent {
 
 	private serverURL: string = `ws://kvm.joshh.moe:8080`;
 
+	serializedVars: string[] = [this.serverURL];
+
 	constructor(parent: GameObject) {
 		super(parent);
 		if (ClientGameManager.instance == null) {
@@ -32,6 +34,10 @@ export class ClientGameManager extends GameComponent {
 
 	start(): void {
 		this.SetupWorld();
+		console.warn(
+			'Serialized Scene',
+			Engine.instance.getCurrentScene().serialize()
+		);
 	}
 
 	worldHandler: WorldHandler | undefined;

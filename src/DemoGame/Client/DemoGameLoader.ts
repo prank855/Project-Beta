@@ -12,6 +12,8 @@ import { SoundSystem } from '../../Client/systems/SoundSystem';
 import { AssetType } from '../../Client/types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
 import { EngineDebugRenderer } from '../../Client/systems/EngineDebugRenderer';
+import { ComponentStore } from '../../Engine/ComponentStore';
+import { GameComponent } from '../../Engine/GameComponent';
 
 export class DemoGameLoader {
 	init() {
@@ -34,14 +36,15 @@ export class DemoGameLoader {
 		assetSystem.addAsset('Grass1', 'grass.png', AssetType.Image);
 		assetSystem.addAsset('Player', 'Player.png', AssetType.Image);
 
-		var clientScene = new Scene();
-		clientScene.name = 'Client Scene';
+		var clientScene = new Scene('Client Scene');
 		engine.addScene(clientScene);
+
+		ComponentStore.registerComponent(ClientGameManager);
 
 		/*Create Game Manager*/ {
 			var gameManager = new GameObject();
 			gameManager.name = 'Client Game';
-			gameManager.addComponent(ClientGameManager);
+			gameManager.addComponentFromString('ClientGameManager');
 			clientScene.addGameObject(gameManager);
 		}
 

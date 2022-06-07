@@ -1,5 +1,8 @@
+import { Engine } from '../../Engine/Engine';
+import { Scene } from '../../Engine/Scene';
 import { System } from '../../Engine/System';
 import { AssetType } from '../types/AssetType';
+import { RendererSystem } from './RendererSystem';
 
 class imgToLoad {
 	assetName: string = '';
@@ -9,11 +12,27 @@ class imgToLoad {
 
 export class AssetSystem extends System {
 	private images: Map<string, HTMLCanvasElement> = new Map();
-	init() {}
+
+	private sceneName = 'Asset Loading Scene';
+	init() {
+		// create and load scene
+		var assetScene = new Scene(this.sceneName);
+		Engine.instance.addScene(assetScene);
+	}
+	_prevScene: string | undefined;
 	start() {
 		this.loadAssets();
+		this._prevScene = Engine.instance.getCurrentScene().getName();
+		Engine.instance.getSystem(RendererSystem).clearColor = 'Black';
+		Engine.instance.setScene(this.sceneName);
 	}
-	update() {}
+	isLoading: boolean = true;
+	update() {
+		this.isLoading = imgToLoad.length != 0;
+		if (!this.isLoading) {
+			if (this._prevScene) Engine.instance.setScene(this._prevScene);
+		}
+	}
 
 	imagesToLoad: imgToLoad[] = [];
 

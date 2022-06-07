@@ -9,7 +9,7 @@ export class Engine {
 	environment: Environment = Environment.NONE;
 	systems: System[] = [];
 	private scenes: Scene[] = [];
-	private currentScene: Scene = new Scene();
+	private currentScene: Scene = new Scene('null scene');
 
 	framerate = 60;
 	frame: number = 0;
@@ -20,11 +20,14 @@ export class Engine {
 		}
 		Engine.instance = this;
 		this.addSystem(Time);
+		this.registerEngineComponents();
 	}
 
 	start() {
 		console.log(
-			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.name}"${LogColor.CLEAR}`
+			`Started ENGINE with Scene: ${
+				LogColor.SCENE
+			}"${this.currentScene.getName()}"${LogColor.CLEAR}`
 		);
 
 		for (var s of this.systems) {
@@ -33,6 +36,8 @@ export class Engine {
 
 		this.loop();
 	}
+
+	private registerEngineComponents() {}
 
 	private loop() {
 		let self = this;
@@ -101,9 +106,11 @@ export class Engine {
 		return this.currentScene;
 	}
 
+	private sceneToSet: string = '';
 	setScene(sceneName: string) {
+		this.sceneToSet = sceneName;
 		for (var s of this.scenes) {
-			if (s.name == sceneName) {
+			if (s.getName() == sceneName) {
 				this.currentScene = s;
 				return;
 			}

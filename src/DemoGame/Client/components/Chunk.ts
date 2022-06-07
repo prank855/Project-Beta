@@ -4,6 +4,7 @@ import { Tile } from './Tile';
 export class Chunk extends GameComponent {
 	size: number = 16;
 	tiles: Tile[] = [];
+	serializedVars: string[] = ['size', 'tiles'];
 	init(): void {
 		this.FillTiles();
 	}
@@ -11,7 +12,6 @@ export class Chunk extends GameComponent {
 	update(): void {}
 
 	private FillTiles() {
-		console.warn(`Fill Tiles`);
 		for (var i = 0; i < this.size * this.size; i++) {
 			this.tiles[i] = this.CreateTile();
 		}
