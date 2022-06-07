@@ -33,15 +33,17 @@ export class SimpleMovement extends GameComponent {
 			/*Camera Control*/ {
 				var camera = Engine.instance.getSystem(Viewport);
 
-				var deltaX =
-					(this.parent.transform.position.x - camera.position.x) *
-					Time.deltaTime;
-				camera.position.x += deltaX;
+				if (Time.deltaTime < 1) {
+					var deltaX =
+						(this.parent.transform.position.x - camera.position.x) *
+						Time.deltaTime;
+					camera.position.x += deltaX;
 
-				var deltaY =
-					(this.parent.transform.position.y - camera.position.y) *
-					Time.deltaTime;
-				camera.position.y += deltaY;
+					var deltaY =
+						(this.parent.transform.position.y - camera.position.y) *
+						Time.deltaTime;
+					camera.position.y += deltaY;
+				}
 
 				if (keys.includes('ArrowUp')) {
 					Engine.instance.getSystem(Viewport).zoom *=

@@ -1,3 +1,4 @@
+import { DebugUtil } from './DebugUtil';
 import { Environment } from './Environment';
 import { Scene } from './Scene';
 import { System } from './System';

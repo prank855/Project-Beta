@@ -68,11 +68,11 @@ export class EngineDebugRenderer extends System {
 		);
 		this.AddText(
 			this.sceneBody,
-			`Camera Position: ${Engine.instance
+			`Viewport Pos: ${Engine.instance
 				.getSystem(Viewport)
-				.position.toString()}`
+				.position.toString(2)}`
 		);
-		this.AddText(this.sceneBody, `Scene View "${scene.name}"`);
+		this.AddText(this.sceneBody, `Scene View "${scene.getName()}"`);
 		for (var go of scene.getGameObjects()) {
 			this.WriteGameObject(this.sceneBody, go, 1);
 		}

@@ -20,7 +20,11 @@ export class Vector2 {
 		return temp;
 	}
 
-	toString(): string {
-		return `(${this.x}, ${this.y})`;
+	toString(precision: number): string {
+		//Math.round((num + Number.EPSILON) * 100) / 100
+		var power = Math.pow(10, precision);
+		var x = Math.round((this.x + Number.EPSILON) * power) / power;
+		var y = Math.round((this.y + Number.EPSILON) * power) / power;
+		return `(${x}, ${y})`;
 	}
 }
