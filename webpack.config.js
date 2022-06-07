@@ -5,14 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
-
-pages = ['index','editor']
+pages = ['index', 'editor'];
 module.exports = {
 	mode: 'development',
 	entry: pages.reduce((config, page) => {
 		config[page] = `./src/pages/${page}.ts`;
 		return config;
-	  }, {}),
+	}, {}),
 	target: 'web',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -20,29 +19,28 @@ module.exports = {
 	},
 	plugins: [].concat(
 		pages.map(
-		  (page) =>
-			new HtmlWebPackPlugin({
-			  inject: true,
-			  template: `./src/pages/${page}.html`,
-			  filename: `${page}.html`,
-			  chunks: [page],
-			})
+			(page) =>
+				new HtmlWebPackPlugin({
+					inject: true,
+					template: `./src/pages/${page}.html`,
+					filename: `${page}.html`,
+					chunks: [page],
+				})
 		),
-		new CleanWebpackPlugin(),
-	  ),
-	  module: {
+		new CleanWebpackPlugin()
+	),
+	module: {
 		rules: [
-		  {
-			test: /\.tsx?$/,
-			exclude: /node_modules/,
-			use: [
-			  {
-				loader: 'ts-loader',
-			  },
-			  
-		   ]
-		 }
-	   ]
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+					},
+				],
+			},
+		],
 	},
 	resolve: {
 		extensions: ['.tsx', '.ts', '.js', '.png', '.html'],
@@ -51,7 +49,7 @@ module.exports = {
 	devServer: {
 		static: ['./dist', './src/pages/assets'],
 		client: {
-			progress: true
+			progress: true,
 		},
 		port: 3000,
 		server: 'http',
@@ -59,13 +57,13 @@ module.exports = {
 		historyApiFallback: true,
 		compress: true,
 		hot: true,
-		allowedHosts: "all",
+		allowedHosts: 'all',
 	},
 	optimization: {
 		runtimeChunk: true,
 		splitChunks: {
-			chunks: "all",
-		  },
+			chunks: 'all',
+		},
 		minimizer: [
 			new TerserPlugin({
 				extractComments: true,

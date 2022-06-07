@@ -23,13 +23,6 @@
 	},
 	"homepage": "https://github.com/prank855/Project-Beta#readme",
 	"dependencies": {
-		"@babel/core": "^7.18.2",
-		"@babel/plugin-proposal-class-properties": "^7.17.12",
-		"@babel/plugin-proposal-optional-chaining": "^7.17.12",
-		"@babel/polyfill": "^7.12.1",
-		"@babel/preset-env": "^7.18.2",
-		"@babel/preset-typescript": "^7.17.12",
-		"babel-loader": "^8.2.5",
 		"clean-webpack-plugin": "^4.0.0",
 		"html-webpack-plugin": "^5.5.0",
 		"prettier": "^2.6.2",
@@ -41,8 +34,6 @@
 		"webpack-dev-server": "^4.9.2"
 	},
 	"devDependencies": {
-		"@babel/plugin-transform-runtime": "^7.18.2",
-		"@babel/runtime": "^7.18.3",
 		"@types/ws": "^8.5.3",
 		"ts-loader": "^9.3.0"
 	}
