@@ -14,9 +14,9 @@ INetworkSerializable interface
 put world logic into server
 
 
-assetmanager scene (forces initial scene to load assets then loads into main)
+asset manager scene (forces initial scene to load assets then loads into main)
 
-webworker for rendering
+web worker for rendering
 
 get render/update timing info
 

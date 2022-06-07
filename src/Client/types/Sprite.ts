@@ -6,5 +6,5 @@ export class Sprite {
 	transform: Transform | null = null;
 	pixelsPerUnit: number = 1;
 	scale: number = 1;
-	origin: Vector2 = new Vector2(0.5, 0.5);
+	origin: Vector2 = new Vector2(0, 0);
 }

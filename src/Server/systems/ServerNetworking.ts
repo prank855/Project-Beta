@@ -4,6 +4,7 @@ import { Handshake } from '../../Network/packets/Handshake';
 import WebSocket from 'ws';
 import { NetworkPacket } from '../../Network/NetworkPacket';
 import { NetworkUtil } from '../../Network/NetworkUtil';
+import { getOutputFileNames, IncompleteCompletionsCache } from 'typescript';
 
 export class ServerNetworking extends System {
 	wss: WebSocket.Server | null = null;
@@ -23,6 +24,7 @@ export class ServerNetworking extends System {
 	private initSocketEvents(wss: WebSocket.Server) {
 		console.log('WebSocket Server initialized');
 		wss.on('connection', (ws, req) => {
+			console.log(`Client Connected: ${this.getObfuscatedIPAdress(req)}`);
 			var hs = new Handshake();
 			hs.data.networkID = NetworkUtil.generateUniqueNetworkID();
 			this.sendPacket(ws, hs);
@@ -34,8 +36,16 @@ export class ServerNetworking extends System {
 
 			ws.onclose = () => {
 				// client disconnected
+				console.log(`Client Disconnected: ${this.getObfuscatedIPAdress(req)}`);
 			};
 		});
+	}
+
+	getObfuscatedIPAdress(req: any): string {
+		return `${req.socket.remoteAddress?.substring(
+			7, // remove weird initial format
+			7 + 6 // removes last 6 number of ip
+		)}.XXX.XX`;
 	}
 
 	sendPacket(ws: WebSocket, packet: NetworkPacket) {

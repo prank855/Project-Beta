@@ -1,8 +1,4 @@
-import { SpriteRenderer } from '../../../Client/components/SpriteRenderer';
 import { GameComponent } from '../../../Engine/GameComponent';
-import { GameObject } from '../../../Engine/GameObject';
-import { Vector2 } from '../../../Engine/Vector2';
-import { ChunkRenderer } from './ChunkRenderer';
 import { Tile } from './Tile';
 
 export class Chunk extends GameComponent {

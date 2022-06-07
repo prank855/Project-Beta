@@ -3,6 +3,7 @@ import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
 import { System } from '../../Engine/System';
 import { Time } from '../../Engine/systems/Time';
+import { Viewport } from './Viewport';
 import { RendererSystem } from './RendererSystem';
 
 export class EngineDebugRenderer extends System {
@@ -64,6 +65,12 @@ export class EngineDebugRenderer extends System {
 		this.AddText(
 			this.sceneBody,
 			`Game Objects: ${scene.getGameObjectAmount()}`
+		);
+		this.AddText(
+			this.sceneBody,
+			`Camera Position: ${Engine.instance
+				.getSystem(Viewport)
+				.position.toString()}`
 		);
 		this.AddText(this.sceneBody, `Scene View "${scene.name}"`);
 		for (var go of scene.getGameObjects()) {

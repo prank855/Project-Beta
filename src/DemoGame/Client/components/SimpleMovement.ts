@@ -1,4 +1,4 @@
-import { CameraSystem } from '../../../Client/systems/CameraSystem';
+import { Viewport } from '../../../Client/systems/Viewport';
 import { Input } from '../../../Client/systems/Input';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
@@ -31,7 +31,7 @@ export class SimpleMovement extends GameComponent {
 			}
 
 			/*Camera Control*/ {
-				var camera = Engine.instance.getSystem(CameraSystem);
+				var camera = Engine.instance.getSystem(Viewport);
 
 				var deltaX =
 					(this.parent.transform.position.x - camera.position.x) *
@@ -44,11 +44,11 @@ export class SimpleMovement extends GameComponent {
 				camera.position.y += deltaY;
 
 				if (keys.includes('ArrowUp')) {
-					Engine.instance.getSystem(CameraSystem).zoom *=
+					Engine.instance.getSystem(Viewport).zoom *=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
 				}
 				if (keys.includes('ArrowDown')) {
-					Engine.instance.getSystem(CameraSystem).zoom /=
+					Engine.instance.getSystem(Viewport).zoom /=
 						Math.E ** (Time.deltaTime * Math.log(1.5));
 				}
 			}

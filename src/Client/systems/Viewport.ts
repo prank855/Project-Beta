@@ -1,10 +1,12 @@
 import { System } from '../../Engine/System';
 import { Vector2 } from '../../Engine/Vector2';
 
-export class CameraSystem extends System {
+export class Viewport extends System {
 	position: Vector2 = new Vector2();
 	zoom: number = 1;
-	size: number = 32;
+
+	/* Amount of units across either direction the camera can see at default zoom */
+	unitsAcross: number = 32;
 
 	getZoom(): number {
 		let min = 0;
@@ -13,7 +15,7 @@ export class CameraSystem extends System {
 		} else {
 			min = innerWidth;
 		}
-		return this.zoom * (min / this.size);
+		return this.zoom * (min / this.unitsAcross);
 	}
 
 	toScreenSpace(vec: Vector2): Vector2 {

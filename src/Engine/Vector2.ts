@@ -19,4 +19,8 @@ export class Vector2 {
 		temp.y = v.y;
 		return temp;
 	}
+
+	toString(): string {
+		return `(${this.x}, ${this.y})`;
+	}
 }

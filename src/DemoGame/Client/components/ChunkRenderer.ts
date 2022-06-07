@@ -2,8 +2,10 @@ import { SpriteRenderer } from '../../../Client/components/SpriteRenderer';
 import { AssetSystem } from '../../../Client/systems/AssetSystem';
 import { ScreenSystem } from '../../../Client/systems/ScreenSystem';
 import { AssetType } from '../../../Client/types/AssetType';
+import { Origin } from '../../../Client/types/Origin';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
+import { Vector2 } from '../../../Engine/Vector2';
 import { Chunk } from './Chunk';
 
 export class ChunkRenderer extends GameComponent {
@@ -44,6 +46,7 @@ export class ChunkRenderer extends GameComponent {
 		}
 		if (!this.spriteRenderer) return false;
 		this.spriteRenderer.sprite.pixelsPerUnit = imgSize;
+		this.spriteRenderer.sprite.origin = Origin.BOTTOM_LEFT;
 		this.spriteRenderer.setImage(this.canvas);
 		return true;
 	}

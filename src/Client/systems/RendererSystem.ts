@@ -4,12 +4,12 @@ import { Time } from '../../Engine/systems/Time';
 import { Vector2 } from '../../Engine/Vector2';
 import { RenderFilterType } from '../types/RenderFilterType';
 import { Sprite } from '../types/Sprite';
-import { CameraSystem } from './CameraSystem';
+import { Viewport } from './Viewport';
 import { ScreenSystem } from './ScreenSystem';
 
 export class RendererSystem extends System {
 	screenSystem: ScreenSystem | null = null;
-	cameraSystem: CameraSystem | null = null;
+	cameraSystem: Viewport | null = null;
 	sprites: Sprite[] = [];
 	clearColor: string = 'White';
 	debug: boolean = true;
@@ -17,7 +17,7 @@ export class RendererSystem extends System {
 	spriteCalls: number = 0;
 	init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
-		this.cameraSystem = Engine.instance.getSystem(CameraSystem);
+		this.cameraSystem = Engine.instance.getSystem(Viewport);
 	}
 	start() {}
 	update(): void {}

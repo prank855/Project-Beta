@@ -3,7 +3,7 @@ import { Environment } from '../../Engine/Environment';
 import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
 import { AssetSystem } from '../../Client/systems/AssetSystem';
-import { CameraSystem } from '../../Client/systems/CameraSystem';
+import { Viewport } from '../../Client/systems/Viewport';
 import { ClientNetworking } from '../../Client/systems/ClientNetworking';
 import { Input } from '../../Client/systems/Input';
 import { RendererSystem } from '../../Client/systems/RendererSystem';
@@ -23,7 +23,7 @@ export class DemoGameLoader {
 		engine.addSystem(SoundSystem);
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);
-		engine.addSystem(CameraSystem).zoom = 2;
+		engine.addSystem(Viewport).unitsAcross = 16;
 		engine.addSystem(RendererSystem).clearColor = 'Blue';
 		engine.addSystem(EngineDebugRenderer);
 		engine.addSystem(ClientNetworking);

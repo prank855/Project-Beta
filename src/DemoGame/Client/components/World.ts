@@ -7,10 +7,11 @@ import { ChunkRenderer } from './ChunkRenderer';
 export class World extends GameComponent {
 	chunks: Chunk[] = [];
 	init() {
-		var renderDistance = 2;
-		for (var x = -renderDistance; x < renderDistance; x++) {
-			for (var y = -renderDistance; y < renderDistance; y++) {
+		var renderDistance = 4; // chunks from center
+		for (var x = -renderDistance; x < renderDistance + 1; x++) {
+			for (var y = -renderDistance; y < renderDistance + 1; y++) {
 				this.CreateChunk(new Vector2(x, y));
+				console.log(x, y);
 			}
 		}
 	}

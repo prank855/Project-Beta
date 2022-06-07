@@ -22,7 +22,7 @@ export class ClientNetworking extends System {
 
 	private initSocketEvents(ws: WebSocket) {
 		ws.onopen = () => {
-			console.log(`Connecting to "${this.url}"`);
+			console.log(`Connected to "${this.url}"`);
 		};
 
 		ws.onmessage = (msg) => {
@@ -43,8 +43,25 @@ export class ClientNetworking extends System {
 			}
 			this.events.OnPacketBatch(packetBatch);
 		};
+		var self = this;
+		ws.onclose = () => {
+			// retry connection in 3 secs
+			console.warn('Disconnected from server, trying again in 3 seconds');
+			this.reconnect(3);
+		};
 
-		ws.onclose = () => {};
+		ws.onerror = () => {
+			console.warn('Could not access server, trying again in 3 seconds');
+			this.reconnect(3);
+		};
+	}
+
+	reconnect(seconds: number) {
+		this.connected = false;
+		this.networkID = undefined;
+		setTimeout(() => {
+			this.connect(this.url);
+		}, seconds * 1000);
 	}
 
 	events = {
