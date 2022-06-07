@@ -3,12 +3,18 @@ import { Input } from '../../../Client/systems/Input';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { Time } from '../../../Engine/systems/Time';
+import { Vector2 } from '../../../Engine/Vector2';
 
 export class SimpleMovement extends GameComponent {
 	inputSystem: Input | undefined;
 
 	speed: number = 2;
 	private lastKeys: string[] = [];
+
+	override start(): void {
+		var camera = Engine.instance.getSystem(Viewport);
+		camera.position = Vector2.Copy(this.parent.transform.position);
+	}
 
 	override update() {
 		if (this.parent) {

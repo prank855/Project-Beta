@@ -57,7 +57,6 @@ module.exports = {
 		server: 'http',
 		host: '0.0.0.0',
 		historyApiFallback: true,
-		//overlay: true,
 		compress: true,
 		hot: true,
 		allowedHosts: "all",

@@ -80,9 +80,9 @@ export class RendererSystem extends System {
 
 			if (
 				offSetPos.x + spriteWidth >= 0 &&
-				offSetPos.x <= this.screenSystem.canvas.width &&
+				offSetPos.x < this.screenSystem.canvas.width &&
 				offSetPos.y + spriteHeight >= 0 &&
-				offSetPos.y <= this.screenSystem.canvas.height
+				offSetPos.y < this.screenSystem.canvas.height
 			) {
 				if (this.screenSystem.context) {
 					this.spriteCalls++;

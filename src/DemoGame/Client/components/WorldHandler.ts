@@ -1,5 +1,6 @@
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
+import { Vector2 } from '../../../Engine/Vector2';
 import { Player } from './Player';
 import { World } from './World';
 
