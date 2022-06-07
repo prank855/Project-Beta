@@ -5,7 +5,7 @@ import { Handshake } from '../../Network/packets/Handshake';
 import { PacketType } from '../../Network/PacketType';
 
 export class ClientNetworking extends System {
-	ws: WebSocket | null = null;
+	ws: WebSocket | undefined;
 	url: string = 'no server url';
 	connected: boolean = false;
 	networkID: NetworkID | undefined;

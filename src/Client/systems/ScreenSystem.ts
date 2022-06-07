@@ -1,8 +1,8 @@
 import { System } from '../../Engine/System';
 
 export class ScreenSystem extends System {
-	canvas: HTMLCanvasElement | null = null;
-	context: CanvasRenderingContext2D | null = null;
+	canvas: HTMLCanvasElement | undefined;
+	context: CanvasRenderingContext2D | undefined;
 	init() {
 		let canvas = document.createElement('canvas');
 		canvas.id = 'canvas';

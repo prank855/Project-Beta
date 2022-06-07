@@ -7,7 +7,7 @@ import { NetworkUtil } from '../../Network/NetworkUtil';
 import { getOutputFileNames, IncompleteCompletionsCache } from 'typescript';
 
 export class ServerNetworking extends System {
-	wss: WebSocket.Server | null = null;
+	wss: WebSocket.Server | undefined;
 	port: number = 8080;
 
 	init() {}

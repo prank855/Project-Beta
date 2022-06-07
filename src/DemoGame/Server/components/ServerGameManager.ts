@@ -3,8 +3,8 @@ import { GameComponent } from '../../../Engine/GameComponent';
 import { ServerNetworking } from '../../../Server/systems/ServerNetworking';
 
 export class ServerGameManager extends GameComponent {
-	static instance: ServerGameManager | null = null;
-	private net: ServerNetworking | null = null;
+	static instance: ServerGameManager | undefined;
+	private net: ServerNetworking | undefined;
 
 	start(): void {
 		if (ServerGameManager.instance == null) {

@@ -8,8 +8,8 @@ import { Viewport } from './Viewport';
 import { ScreenSystem } from './ScreenSystem';
 
 export class RendererSystem extends System {
-	screenSystem: ScreenSystem | null = null;
-	cameraSystem: Viewport | null = null;
+	screenSystem: ScreenSystem | undefined;
+	cameraSystem: Viewport | undefined;
 	sprites: Sprite[] = [];
 	clearColor: string = 'White';
 	debug: boolean = true;

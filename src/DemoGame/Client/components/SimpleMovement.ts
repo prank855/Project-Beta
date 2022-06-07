@@ -5,7 +5,7 @@ import { GameComponent } from '../../../Engine/GameComponent';
 import { Time } from '../../../Engine/systems/Time';
 
 export class SimpleMovement extends GameComponent {
-	inputSystem: Input | null = null;
+	inputSystem: Input | undefined;
 
 	speed: number = 2;
 

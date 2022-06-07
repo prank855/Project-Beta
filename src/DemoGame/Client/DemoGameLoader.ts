@@ -25,7 +25,7 @@ export class DemoGameLoader {
 		engine.addSystem(SoundSystem);
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);
-		engine.addSystem(Viewport).unitsAcross = 16;
+		engine.addSystem(Viewport).unitsAcross = 20;
 		engine.addSystem(RendererSystem).clearColor = 'Blue';
 		engine.addSystem(EngineDebugRenderer);
 		engine.addSystem(ClientNetworking);

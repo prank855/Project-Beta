@@ -6,7 +6,7 @@ import { WorldHandler } from './WorldHandler';
 
 export class ClientGameManager extends GameComponent {
 	static instance: ClientGameManager;
-	private net: ClientNetworking | null = null;
+	private net: ClientNetworking | undefined;
 
 	private serverURL: string = `ws://kvm.joshh.moe:8080`;
 

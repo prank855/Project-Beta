@@ -10,7 +10,7 @@ export class GameObject {
 	id: number;
 	name: string;
 	transform = new Transform();
-	parent: GameObject | null = null;
+	parent: GameObject | undefined;
 	components: GameComponent[] = [];
 	children: GameObject[] = [];
 

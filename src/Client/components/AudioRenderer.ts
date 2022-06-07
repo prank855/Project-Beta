@@ -3,7 +3,7 @@ import { GameComponent } from '../../Engine/GameComponent';
 import { SoundSystem } from '../systems/SoundSystem';
 
 export class AudioRenderer extends GameComponent {
-	private renderer: SoundSystem | null = null;
+	private renderer: SoundSystem | undefined;
 
 	playCount: number = 0;
 

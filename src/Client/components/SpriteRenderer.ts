@@ -6,7 +6,7 @@ import { RendererSystem } from '../systems/RendererSystem';
 import { AssetType } from '../types/AssetType';
 
 export class SpriteRenderer extends GameComponent {
-	private renderer: RendererSystem | null = null;
+	private renderer: RendererSystem | undefined;
 	sprite: Sprite = new Sprite();
 
 	start() {

@@ -106,9 +106,7 @@ export class Engine {
 		return this.currentScene;
 	}
 
-	private sceneToSet: string = '';
 	setScene(sceneName: string) {
-		this.sceneToSet = sceneName;
 		for (var s of this.scenes) {
 			if (s.getName() == sceneName) {
 				this.currentScene = s;
