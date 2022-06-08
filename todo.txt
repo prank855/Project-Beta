@@ -37,3 +37,11 @@ transfer world logic into server
 
 black bars if not widescreen
 OR max aspect ratio like 16:9
+
+floating div element as game logger/output/text box thing
+
+tile map renderer(engine component) instead of chunkrenderer
+
+tilemap<type> generic?
+
+sprite layers / z cord
