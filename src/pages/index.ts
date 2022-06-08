@@ -9,4 +9,23 @@ window.onload = () => {
 
 	var loader = new DemoGameClientLoader();
 	loader.init();
+
+	var githubTextbox = document.createElement('div');
+	githubTextbox.id = 'Github Link Box';
+	githubTextbox.style.position = 'absolute';
+	githubTextbox.style.left = '0px';
+	githubTextbox.style.bottom = '0px';
+	githubTextbox.style.backgroundColor = 'rgba(.5,.5,.5,.5)';
+
+	var githubLink = document.createElement('a');
+	githubLink.innerHTML = 'View Code Repository';
+	githubLink.href = 'https://github.com/prank855/Project-Beta/';
+	githubLink.target = '_blank';
+	githubLink.rel = 'noopener noreferrer';
+	githubLink.style.color = 'White';
+	githubLink.style.font = '20px Arial';
+
+	githubTextbox.appendChild(githubLink);
+
+	document.body.appendChild(githubTextbox);
 };

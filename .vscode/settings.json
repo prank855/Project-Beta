@@ -3,10 +3,14 @@
 		"gameobject",
 		"joshh",
 		"jsdoc",
+		"noopener",
+		"noreferrer",
 		"readding",
+		"Textbox",
 		"unhalt",
 		"unhalted"
 	],
 	"cSpell.ignoreWords": ["trollface"],
-	"typescript.tsdk": "node_modules/typescript/lib"
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"cSpell.language": "en,en-US"
 }

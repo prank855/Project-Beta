@@ -17,7 +17,9 @@ export class EngineDebugRenderer extends System {
 	}
 	setupViews() {
 		this.sceneBox.appendChild(this.sceneBody);
+		this.sceneBox.id = 'Engine Debug Renderer';
 		let style = this.sceneBody.style;
+		style.font = '18px Arial';
 		style.backgroundColor = `rgba(.5,.5,.5,.5)`;
 		style.position = 'absolute';
 		style.top = `${0}px`;
