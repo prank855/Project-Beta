@@ -1,6 +1,5 @@
 import { Engine } from '../../Engine/Engine';
 import { System } from '../../Engine/System';
-import { Time } from '../../Engine/systems/Time';
 import { Vector2 } from '../../Engine/Vector2';
 import { RenderFilterType } from '../types/RenderFilterType';
 import { Sprite } from '../types/Sprite';

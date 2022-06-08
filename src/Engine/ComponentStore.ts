@@ -1,4 +1,3 @@
-import { GameComponent } from './GameComponent';
 import { GameObject } from './GameObject';
 
 /** Handles storing components to retrieve via strings */

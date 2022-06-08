@@ -7,5 +7,6 @@
 		"unhalt",
 		"unhalted"
 	],
-	"cSpell.ignoreWords": ["trollface"]
+	"cSpell.ignoreWords": ["trollface"],
+	"typescript.tsdk": "node_modules/typescript/lib"
 }
