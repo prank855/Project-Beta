@@ -1,47 +1,26 @@
-Handshake server/client and assign ids
-SyncVar? https://mirror-networking.gitbook.io/docs/guides/synchronization/syncvars
+engine stuff:
+
+SyncVars? https://mirror-networking.gitbook.io/docs/guides/synchronization/syncvars
 reference sprites instead of readding to queue
-sprite depth/z value/height/ordering/layer
-sprite bounding boxes if image not loaded
-sprite render smooth/point
-private systems
+sprite bounding boxes if image not loaded (??? shouldn't matter since all images will load regardless)
+private systems ???? idk what i meant here
 mouse input
 ++batch network packets instead of sending one by one
-
-improve on Tile class
-INetworkSerializable interface
-
-
-
-
+INetworkSerializable interface !!
 asset manager scene (forces initial scene to load assets then loads into main)
-
 web worker for rendering
-
 get render/update timing info
-
 jsdoc /** */ on all engine types
-
-CURRENT:
-improve on Tile class
-
-put world logic into server
-
 performance metrics
-
-serialize scene
-
+serialize scene 
 load serialized scene
-
-transfer world logic into server
-
-black bars if not widescreen
-OR max aspect ratio like 16:9
-
+black bars if not widescreen OR max aspect ratio like 16:9
 floating div element as game logger/output/text box thing
+sprite depth/z value/height/ordering/layer
 
+game stuff: 
+
+improve on Tile class ?
+put world logic into server
 tile map renderer(engine component) instead of chunkrenderer
-
 tilemap<type> generic?
-
-sprite layers / z cord
