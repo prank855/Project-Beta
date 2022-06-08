@@ -2,7 +2,7 @@
 
 lmao xddd
 
-git clone {this rep url}
+git clone {this repo url}
 cd project-beta
 npm i // install packages
 
