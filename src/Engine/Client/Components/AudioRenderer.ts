@@ -1,6 +1,6 @@
-import { Engine } from '../../Engine/Engine';
-import { GameComponent } from '../../Engine/GameComponent';
-import { SoundSystem } from '../systems/SoundSystem';
+import { Engine } from '../../Engine';
+import { GameComponent } from '../../GameComponent';
+import { SoundSystem } from '../Systems/SoundSystem';
 
 export class AudioRenderer extends GameComponent {
 	private renderer: SoundSystem | undefined;

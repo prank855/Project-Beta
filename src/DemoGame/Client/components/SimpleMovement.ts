@@ -1,9 +1,8 @@
-import { Viewport } from '../../../Client/systems/Viewport';
-import { Input } from '../../../Client/systems/Input';
+import { Viewport } from '../../../Engine/Client/Systems/Viewport';
+import { Input } from '../../../Engine/Client/Systems/Input';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
-import { Time } from '../../../Engine/systems/Time';
-import { Vector2 } from '../../../Engine/types/Vector2';
+import { Time } from '../../../Engine/Systems/Time';
 
 export class SimpleMovement extends GameComponent {
 	inputSystem: Input | undefined;
@@ -42,12 +41,12 @@ export class SimpleMovement extends GameComponent {
 					var deltaX =
 						(this.parent.transform.position.x - camera.position.x) *
 						Time.deltaTime;
-					camera.position.x += deltaX;
+					camera.position.x += deltaX * 3;
 
 					var deltaY =
 						(this.parent.transform.position.y - camera.position.y) *
 						Time.deltaTime;
-					camera.position.y += deltaY;
+					camera.position.y += deltaY * 3;
 				}
 
 				if (keys.includes('ArrowUp')) {

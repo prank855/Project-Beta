@@ -1,9 +1,9 @@
 import { ComponentStore } from './ComponentStore';
 import { GameComponent } from './GameComponent';
 import { SerializedGameObject } from './SerializedGameObject';
-import { LogColor } from './types/LogColor';
-import { Transform } from './types/Transform';
-import { Logger } from './util/Logger';
+import { LogColor } from './Types/LogColor';
+import { Transform } from './Types/Transform';
+import { Logger } from './Util/Logger';
 
 export class GameObject {
 	//TODO: enable/disable like GameComponent

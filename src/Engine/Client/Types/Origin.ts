@@ -1,4 +1,4 @@
-import { Vector2 } from '../../Engine/types/Vector2';
+import { Vector2 } from '../../Types/Vector2';
 
 export class Origin {
 	static readonly TOP_LEFT = new Vector2(0, 0);

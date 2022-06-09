@@ -1,4 +1,4 @@
-import { System } from '../../Engine/System';
+import { System } from '../../System';
 
 /** Handles client input */
 export class Input extends System {

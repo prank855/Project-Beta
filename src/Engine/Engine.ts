@@ -1,9 +1,9 @@
 import { Scene } from './Scene';
 import { System } from './System';
-import { Time } from './systems/Time';
-import { LogColor } from './types/LogColor';
-import { Environment } from './types/Environment';
-import { Logger } from './util/Logger';
+import { Time } from './Systems/Time';
+import { LogColor } from './Types/LogColor';
+import { Environment } from './Types/Environment';
+import { Logger } from './Util/Logger';
 
 export class Engine {
 	public static instance: Engine;

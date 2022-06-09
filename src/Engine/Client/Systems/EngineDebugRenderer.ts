@@ -1,8 +1,8 @@
-import { Engine } from '../../Engine/Engine';
-import { GameObject } from '../../Engine/GameObject';
-import { Scene } from '../../Engine/Scene';
-import { System } from '../../Engine/System';
-import { Time } from '../../Engine/systems/Time';
+import { Engine } from '../../Engine';
+import { GameObject } from '../../GameObject';
+import { Scene } from '../../Scene';
+import { System } from '../../System';
+import { Time } from '../../Systems/Time';
 import { Viewport } from './Viewport';
 import { RendererSystem } from './RendererSystem';
 
@@ -75,6 +75,7 @@ export class EngineDebugRenderer extends System {
 				.getSystem(Viewport)
 				.position.toString(2)}`
 		);
+		return;
 		this.AddText(this.sceneBody, `Scene View "${scene.Name}"`);
 		for (var go of scene.GameObjects) {
 			this.WriteGameObject(this.sceneBody, go, 1);

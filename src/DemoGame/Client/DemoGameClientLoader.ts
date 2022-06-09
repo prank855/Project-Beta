@@ -1,18 +1,18 @@
 import { Engine } from '../../Engine/Engine';
 import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
-import { AssetSystem } from '../../Client/systems/AssetSystem';
-import { Viewport } from '../../Client/systems/Viewport';
-import { ClientNetworking } from '../../Client/systems/ClientNetworking';
-import { Input } from '../../Client/systems/Input';
-import { RendererSystem } from '../../Client/systems/RendererSystem';
-import { ScreenSystem } from '../../Client/systems/ScreenSystem';
-import { SoundSystem } from '../../Client/systems/SoundSystem';
-import { AssetType } from '../../Client/types/AssetType';
+import { AssetSystem } from '../../Engine/Client/Systems/AssetSystem';
+import { Viewport } from '../../Engine/Client/Systems/Viewport';
+import { ClientNetworking } from '../../Engine/Client/Systems/ClientNetworking';
+import { Input } from '../../Engine/Client/Systems/Input';
+import { RendererSystem } from '../../Engine/Client/Systems/RendererSystem';
+import { ScreenSystem } from '../../Engine/Client/Systems/ScreenSystem';
+import { SoundSystem } from '../../Engine/Client/Systems/SoundSystem';
+import { AssetType } from '../../Engine/Client/Types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
-import { EngineDebugRenderer } from '../../Client/systems/EngineDebugRenderer';
+import { EngineDebugRenderer } from '../../Engine/Client/Systems/EngineDebugRenderer';
 import { ComponentStore } from '../../Engine/ComponentStore';
-import { Environment } from '../../Engine/types/Environment';
+import { Environment } from '../../Engine/Types/Environment';
 
 export class DemoGameClientLoader {
 	init() {

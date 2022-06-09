@@ -1,4 +1,4 @@
-import { System } from '../../Engine/System';
+import { System } from '../../System';
 
 /** Handles creation/retrieval canvas2d and drawing context */
 export class ScreenSystem extends System {

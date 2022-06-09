@@ -1,7 +1,7 @@
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
-import { Logger } from '../../../Engine/util/Logger';
-import { ServerNetworking } from '../../../Server/systems/ServerNetworking';
+import { Logger } from '../../../Engine/Util/Logger';
+import { ServerNetworking } from '../../../Engine/Server/Systems/ServerNetworking';
 
 export class ServerGameManager extends GameComponent {
 	static instance: ServerGameManager | undefined;

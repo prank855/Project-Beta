@@ -25,6 +25,11 @@ export class Vector2 {
 		return new Vector2(this.x, this.y);
 	}
 
+	/** Returns this vector normalized */
+	normalize(): Vector2 {
+		throw new Error('Vector2.normalize not implemented');
+	}
+
 	/** Return string as "(x, y)" to rounded precision OR defaults to 2 decimal places */
 	toString(precision: number | undefined = 2): string {
 		//Math.round((num + Number.EPSILON) * 100) / 100

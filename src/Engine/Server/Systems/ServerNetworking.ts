@@ -1,10 +1,10 @@
-import { System } from '../../Engine/System';
-import { PacketBatch } from '../../Engine/Network/PacketBatch';
-import { Handshake } from '../../Engine/Network/Packets/Handshake';
+import { System } from '../../System';
+import { PacketBatch } from '../../Network/PacketBatch';
+import { Handshake } from '../../Network/Packets/Handshake';
 import WebSocket from 'ws';
-import { NetworkPacket } from '../../Engine/Network/NetworkPacket';
-import { NetworkUtil } from '../../Engine/Network/NetworkUtil';
-import { Logger } from '../../Engine/util/Logger';
+import { NetworkPacket } from '../../Network/NetworkPacket';
+import { NetworkUtil } from '../../Network/NetworkUtil';
+import { Logger } from '../../Util/Logger';
 
 /** Handles incoming networked clients  */
 export class ServerNetworking extends System {

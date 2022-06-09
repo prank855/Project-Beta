@@ -1,8 +1,8 @@
-import { Engine } from '../../Engine/Engine';
-import { Logger } from '../../Engine/util/Logger';
-import { Scene } from '../../Engine/Scene';
-import { System } from '../../Engine/System';
-import { AssetType } from '../types/AssetType';
+import { Engine } from '../../Engine';
+import { Logger } from '../../Util/Logger';
+import { Scene } from '../../Scene';
+import { System } from '../../System';
+import { AssetType } from '../Types/AssetType';
 import { RendererSystem } from './RendererSystem';
 
 class imgToLoad {

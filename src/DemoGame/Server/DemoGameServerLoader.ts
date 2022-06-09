@@ -2,8 +2,8 @@ import { Engine } from '../../Engine/Engine';
 import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
 import { ServerGameManager } from './components/ServerGameManager';
-import { ServerNetworking } from '../../Server/systems/ServerNetworking';
-import { Environment } from '../../Engine/types/Environment';
+import { ServerNetworking } from '../../Engine/Server/Systems/ServerNetworking';
+import { Environment } from '../../Engine/Types/Environment';
 
 export class DemoGameServerLoader {
 	constructor() {}

@@ -1,6 +1,6 @@
-import { SpriteRenderer } from '../../../Client/components/SpriteRenderer';
-import { AssetSystem } from '../../../Client/systems/AssetSystem';
-import { Origin } from '../../../Client/types/Origin';
+import { SpriteRenderer } from '../../../Engine/Client/Components/SpriteRenderer';
+import { AssetSystem } from '../../../Engine/Client/Systems/AssetSystem';
+import { Origin } from '../../../Engine/Client/Types/Origin';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { Chunk } from './Chunk';

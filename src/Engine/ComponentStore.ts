@@ -1,5 +1,5 @@
 import { GameObject } from './GameObject';
-import { Logger } from './util/Logger';
+import { Logger } from './Util/Logger';
 
 /** Handles storing components to retrieve via strings */
 export class ComponentStore {

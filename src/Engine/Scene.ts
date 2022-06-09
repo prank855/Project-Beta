@@ -1,7 +1,7 @@
 import { GameObject } from './GameObject';
-import { Logger } from './util/Logger';
+import { Logger } from './Util/Logger';
 import { SerializedGameObject } from './SerializedGameObject';
-import { LogColor } from './types/LogColor';
+import { LogColor } from './Types/LogColor';
 
 export class Scene {
 	private name: string;

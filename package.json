@@ -5,10 +5,10 @@
 	"main": "index.js",
 	"scripts": {
 		"dev:client": "webpack serve",
-		"dev:server": "tsc-watch -p ./src/Server --onSuccess \"node dist/Server/index.js\"",
+		"dev:server": "tsc-watch -p ./src/ServerEntry --onSuccess \"node dist/ServerEntry/index.js\"",
 		"start:server": "node index.js",
 		"build:client": "webpack && cp -r ./src/pages/assets/* ./dist",
-		"build:server": "tsc -p ./src/Server",
+		"build:server": "tsc -p ./src/ServerEntry",
 		"build": "npm run build:client && npm run build:server",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

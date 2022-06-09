@@ -1,4 +1,4 @@
-import { System } from '../../Engine/System';
+import { System } from '../../System';
 
 /** Handles sound */
 export class SoundSystem extends System {

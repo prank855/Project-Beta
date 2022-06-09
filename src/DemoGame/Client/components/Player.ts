@@ -1,5 +1,5 @@
-import { SpriteRenderer } from '../../../Client/components/SpriteRenderer';
-import { Origin } from '../../../Client/types/Origin';
+import { SpriteRenderer } from '../../../Engine/Client/Components/SpriteRenderer';
+import { Origin } from '../../../Engine/Client/Types/Origin';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { SimpleMovement } from './SimpleMovement';
 

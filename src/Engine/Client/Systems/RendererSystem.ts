@@ -1,10 +1,10 @@
-import { Engine } from '../../Engine/Engine';
-import { System } from '../../Engine/System';
-import { RenderFilterType } from '../types/RenderFilterType';
-import { Sprite } from '../types/Sprite';
+import { Engine } from '../../Engine';
+import { System } from '../../System';
+import { RenderFilterType } from '../Types/RenderFilterType';
+import { Sprite } from '../Types/Sprite';
 import { Viewport } from './Viewport';
 import { ScreenSystem } from './ScreenSystem';
-import { Vector2 } from '../../Engine/types/Vector2';
+import { Vector2 } from '../../Types/Vector2';
 
 /** Handles rendering sprites to canvas */
 export class RendererSystem extends System {
