@@ -7,7 +7,7 @@ import { ChunkRenderer } from './ChunkRenderer';
 export class World extends GameComponent {
 	chunks: Chunk[] = [];
 	override serializedVars: string[] = ['chunks'];
-	renderDistance: number = 4;
+	renderDistance: number = 3;
 	override init() {
 		for (var x = -this.renderDistance; x < this.renderDistance + 1; x++) {
 			for (var y = -this.renderDistance; y < this.renderDistance + 1; y++) {

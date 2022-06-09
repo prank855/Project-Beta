@@ -29,3 +29,7 @@ global Logger class
 rework scene view to use serialized objects instead of direct scene
 
 go through engine classes and private things that should be private
+
+rework pages implementation
+ - auto find index.html
+ - Assets folder within DemoGame folder instead of in pages

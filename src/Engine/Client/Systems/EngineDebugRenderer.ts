@@ -75,8 +75,8 @@ export class EngineDebugRenderer extends System {
 				.getSystem(Viewport)
 				.position.toString(2)}`
 		);
-		return;
-		this.AddText(this.sceneBody, `Scene View "${scene.Name}"`);
+		// hierarchy
+		this.AddText(this.sceneBody, `Scene Hierarchy "${scene.Name}"`);
 		for (var go of scene.GameObjects) {
 			this.WriteGameObject(this.sceneBody, go, 1);
 		}
