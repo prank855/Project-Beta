@@ -1,9 +1,9 @@
 import { Logger } from '../../Engine/util/Logger';
 import { System } from '../../Engine/System';
-import { NetworkID } from '../../Network/NetworkID';
-import { PacketBatch } from '../../Network/PacketBatch';
-import { Handshake } from '../../Network/packets/Handshake';
-import { PacketType } from '../../Network/PacketType';
+import { NetworkID } from '../../Engine/Network/types/NetworkID';
+import { PacketBatch } from '../../Engine/Network/PacketBatch';
+import { Handshake } from '../../Engine/Network/Packets/Handshake';
+import { PacketType } from '../../Engine/Network/PacketType';
 
 /**Handles connections to ServerNetworking */
 export class ClientNetworking extends System {

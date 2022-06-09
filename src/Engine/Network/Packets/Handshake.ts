@@ -1,4 +1,4 @@
-import { NetworkID } from '../NetworkID';
+import { NetworkID } from '../types/NetworkID';
 import { NetworkPacket } from '../NetworkPacket';
 import { PacketType } from '../PacketType';
 

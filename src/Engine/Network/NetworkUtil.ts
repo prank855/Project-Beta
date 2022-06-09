@@ -1,4 +1,4 @@
-import { NetworkID } from './NetworkID';
+import { NetworkID } from './types/NetworkID';
 
 export class NetworkUtil {
 	private static netIDS: number[] = [];
