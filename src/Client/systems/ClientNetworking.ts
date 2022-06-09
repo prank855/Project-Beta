@@ -5,6 +5,7 @@ import { PacketBatch } from '../../Network/PacketBatch';
 import { Handshake } from '../../Network/packets/Handshake';
 import { PacketType } from '../../Network/PacketType';
 
+/**Handles connections to ServerNetworking */
 export class ClientNetworking extends System {
 	ws: WebSocket | undefined;
 	url: string = 'no server url';

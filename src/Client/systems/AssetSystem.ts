@@ -11,6 +11,7 @@ class imgToLoad {
 	assetType: AssetType = AssetType.Image;
 }
 
+/**Handles Asset Loading / Retrieving */
 export class AssetSystem extends System {
 	private images: Map<string, HTMLCanvasElement> = new Map();
 

@@ -6,6 +6,7 @@ import { Time } from '../../Engine/systems/Time';
 import { Viewport } from './Viewport';
 import { RendererSystem } from './RendererSystem';
 
+/** Shows debug view of Engine within client */
 export class EngineDebugRenderer extends System {
 	updateRate = 4;
 	sceneBox = document.createElement('div');

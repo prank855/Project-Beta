@@ -6,6 +6,7 @@ import { NetworkPacket } from '../../Network/NetworkPacket';
 import { NetworkUtil } from '../../Network/NetworkUtil';
 import { Logger } from '../../Engine/Logger';
 
+/** Handles incoming networked clients  */
 export class ServerNetworking extends System {
 	wss: WebSocket.Server | undefined;
 	port: number = 8080;

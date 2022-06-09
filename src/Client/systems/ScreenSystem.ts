@@ -1,5 +1,6 @@
 import { System } from '../../Engine/System';
 
+/** Handles creation/retrieval canvas2d and drawing context */
 export class ScreenSystem extends System {
 	private canvas: HTMLCanvasElement;
 	context: CanvasRenderingContext2D | null = null;

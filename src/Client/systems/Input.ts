@@ -1,5 +1,6 @@
 import { System } from '../../Engine/System';
 
+/** Handles client input */
 export class Input extends System {
 	private static keys: string[] = [];
 

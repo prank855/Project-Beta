@@ -1,5 +1,6 @@
 import { System } from '../../Engine/System';
 
+/** Handles sound */
 export class SoundSystem extends System {
 	waves: HTMLAudioElement[] = [];
 	masterVolume: number = 1;

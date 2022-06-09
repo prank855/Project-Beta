@@ -6,6 +6,7 @@ import { Sprite } from '../types/Sprite';
 import { Viewport } from './Viewport';
 import { ScreenSystem } from './ScreenSystem';
 
+/** Handles rendering sprites to canvas */
 export class RendererSystem extends System {
 	start(): void {}
 	update(): void {}

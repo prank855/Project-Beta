@@ -1,5 +1,6 @@
 import { System } from '../System';
 
+/** Handles Time*/
 export class Time extends System {
 	static lastTime: number = 0;
 	static deltaTime: number = 0;
