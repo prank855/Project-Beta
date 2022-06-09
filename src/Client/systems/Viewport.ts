@@ -1,5 +1,5 @@
 import { System } from '../../Engine/System';
-import { Vector2 } from '../../Engine/Vector2';
+import { Vector2 } from '../../Engine/types/Vector2';
 
 /** Handles position and actions of camera view */
 export class Viewport extends System {

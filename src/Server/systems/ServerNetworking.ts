@@ -4,7 +4,7 @@ import { Handshake } from '../../Network/packets/Handshake';
 import WebSocket from 'ws';
 import { NetworkPacket } from '../../Network/NetworkPacket';
 import { NetworkUtil } from '../../Network/NetworkUtil';
-import { Logger } from '../../Engine/Logger';
+import { Logger } from '../../Engine/util/Logger';
 
 /** Handles incoming networked clients  */
 export class ServerNetworking extends System {

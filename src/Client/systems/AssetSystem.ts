@@ -1,5 +1,5 @@
 import { Engine } from '../../Engine/Engine';
-import { Logger } from '../../Engine/Logger';
+import { Logger } from '../../Engine/util/Logger';
 import { Scene } from '../../Engine/Scene';
 import { System } from '../../Engine/System';
 import { AssetType } from '../types/AssetType';

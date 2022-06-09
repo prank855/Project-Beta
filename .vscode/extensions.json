@@ -3,6 +3,8 @@
 		"esbenp.prettier-vscode",
 		"gruntfuggly.todo-tree",
 		"streetsidesoftware.code-spell-checker",
-		"aaron-bond.better-comments"
+		"aaron-bond.better-comments",
+		"simonsiefke.prettier-vscode",
+		"ms-vscode.vscode-typescript-next"
 	]
 }

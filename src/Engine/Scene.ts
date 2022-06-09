@@ -1,5 +1,5 @@
 import { GameObject } from './GameObject';
-import { Logger } from './Logger';
+import { Logger } from './util/Logger';
 import { SerializedGameObject } from './SerializedGameObject';
 import { LogColor } from './types/LogColor';
 

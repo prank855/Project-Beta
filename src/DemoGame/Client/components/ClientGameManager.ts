@@ -2,7 +2,7 @@ import { ClientNetworking } from '../../../Client/systems/ClientNetworking';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
-import { Logger } from '../../../Engine/Logger';
+import { Logger } from '../../../Engine/util/Logger';
 import { WorldHandler } from './WorldHandler';
 
 export class ClientGameManager extends GameComponent {

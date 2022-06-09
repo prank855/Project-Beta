@@ -1,10 +1,9 @@
-import { DebugUtil } from './DebugUtil';
-import { Environment } from './Environment';
-import { Logger } from './Logger';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
 import { LogColor } from './types/LogColor';
+import { Environment } from './types/Environment';
+import { Logger } from './util/Logger';
 
 export class Engine {
 	public static instance: Engine;
@@ -37,7 +36,9 @@ export class Engine {
 		this.registerEngineComponents();
 	}
 
+	/** Starts the engine */
 	start() {
+		//TODO: check if engine is not already running
 		Logger.log(
 			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.Name}"${LogColor.CLEAR}`
 		);
@@ -93,6 +94,7 @@ export class Engine {
 		}
 	}
 
+	/** Adds system to Engine */
 	addSystem<T extends System>(type: new () => T): T {
 		var temp = new type();
 		Logger.log(`Added System: ${LogColor.SYSTEM}${type.name}${LogColor.CLEAR}`);
@@ -101,6 +103,7 @@ export class Engine {
 		return temp;
 	}
 
+	/** Retrieves existing System */
 	getSystem<T extends System>(type: new () => T): T {
 		for (var s of this.systems) {
 			if (s instanceof type) {

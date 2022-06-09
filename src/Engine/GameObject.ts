@@ -1,12 +1,12 @@
 import { ComponentStore } from './ComponentStore';
 import { GameComponent } from './GameComponent';
-import { Logger } from './Logger';
 import { SerializedGameObject } from './SerializedGameObject';
-import { Transform } from './Transform';
 import { LogColor } from './types/LogColor';
-import { Vector2 } from './Vector2';
+import { Transform } from './types/Transform';
+import { Logger } from './util/Logger';
 
 export class GameObject {
+	//TODO: enable/disable like GameComponent
 	static latestID = 0;
 	private id: number;
 	name: string;
@@ -15,6 +15,7 @@ export class GameObject {
 	private components: GameComponent[] = [];
 	private children: GameObject[] = [];
 
+	//TODO: move start logic into this class instead of system
 	started: boolean = false;
 
 	constructor(name?: string | undefined) {
@@ -74,12 +75,14 @@ export class GameObject {
 			return this.transform;
 		}
 		var tempTrans = new Transform();
-		tempTrans.position = Vector2.Copy(
-			this.parent.getWorldPosition().position
-		).add(this.transform.position);
+		tempTrans.position = this.parent
+			.getWorldPosition()
+			.position.Copy()
+			.add(this.transform.position);
 		return tempTrans;
 	}
 
+	/** Appends a GameObject to this GameObject */
 	addChild(go: GameObject) {
 		go.parent = this;
 		this.children.push(go);
@@ -88,12 +91,6 @@ export class GameObject {
 	getChildren(): GameObject[] {
 		return this.children;
 	}
-
-	/*addComponent(co: GameComponent) {
-		co.parent = this;
-		this.components.push(co);
-	}
-	*/
 
 	addComponent<T extends GameComponent>(
 		type: new (parent: GameObject) => T

@@ -1,6 +1,6 @@
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
-import { Vector2 } from '../../../Engine/Vector2';
+import { Vector2 } from '../../../Engine/types/Vector2';
 import { Chunk } from './Chunk';
 import { ChunkRenderer } from './ChunkRenderer';
 

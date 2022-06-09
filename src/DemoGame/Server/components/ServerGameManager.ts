@@ -1,6 +1,6 @@
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
-import { Logger } from '../../../Engine/Logger';
+import { Logger } from '../../../Engine/util/Logger';
 import { ServerNetworking } from '../../../Server/systems/ServerNetworking';
 
 export class ServerGameManager extends GameComponent {

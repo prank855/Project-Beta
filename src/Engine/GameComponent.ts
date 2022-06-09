@@ -46,10 +46,13 @@ export class GameComponent {
 	get Enabled() {
 		return this.enabled;
 	}
+	/** Enables Component */
 	Enable() {
 		this.enabled = true;
 		this.onEnable();
 	}
+
+	/** Disables Component */
 	Disable() {
 		this.enabled = false;
 		this.onDisable();

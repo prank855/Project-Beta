@@ -1,5 +1,5 @@
 import { SerializedComponent } from './SerializedComponent';
-import { Transform } from './Transform';
+import { Transform } from './types/Transform';
 
 export class SerializedGameObject {
 	id: number | undefined;

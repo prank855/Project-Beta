@@ -7,9 +7,7 @@
 		"noreferrer",
 		"readding",
 		"Textbox",
-		"tilemap",
-		"unhalt",
-		"unhalted"
+		"tilemap"
 	],
 	"cSpell.ignoreWords": ["trollface"],
 	"typescript.tsdk": "node_modules/typescript/lib",

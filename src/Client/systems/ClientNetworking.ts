@@ -1,4 +1,4 @@
-import { Logger } from '../../Engine/Logger';
+import { Logger } from '../../Engine/util/Logger';
 import { System } from '../../Engine/System';
 import { NetworkID } from '../../Network/NetworkID';
 import { PacketBatch } from '../../Network/PacketBatch';

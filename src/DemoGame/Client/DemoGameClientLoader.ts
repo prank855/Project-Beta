@@ -1,5 +1,4 @@
 import { Engine } from '../../Engine/Engine';
-import { Environment } from '../../Engine/Environment';
 import { GameObject } from '../../Engine/GameObject';
 import { Scene } from '../../Engine/Scene';
 import { AssetSystem } from '../../Client/systems/AssetSystem';
@@ -13,6 +12,7 @@ import { AssetType } from '../../Client/types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
 import { EngineDebugRenderer } from '../../Client/systems/EngineDebugRenderer';
 import { ComponentStore } from '../../Engine/ComponentStore';
+import { Environment } from '../../Engine/types/Environment';
 
 export class DemoGameClientLoader {
 	init() {

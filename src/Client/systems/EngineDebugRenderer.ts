@@ -8,7 +8,7 @@ import { RendererSystem } from './RendererSystem';
 
 /** Shows debug view of Engine within client */
 export class EngineDebugRenderer extends System {
-	updateRate = 4;
+	updateRate = 2;
 	sceneBox = document.createElement('div');
 	sceneBody = document.createElement('div');
 
