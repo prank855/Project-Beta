@@ -8,9 +8,8 @@ import { ServerNetworking } from '../../Server/systems/ServerNetworking';
 export class DemoGameServerLoader {
 	constructor() {}
 	init() {
-		var engine = new Engine();
-		engine.environment = Environment.SERVER;
-		engine.framerate = 20;
+		var engine = new Engine(Environment.NODE);
+		engine.FrameRate = 10;
 
 		let net = engine.addSystem(ServerNetworking);
 		net.startServer(8080);

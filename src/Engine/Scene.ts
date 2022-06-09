@@ -10,9 +10,11 @@ export class Scene {
 	constructor(sceneName: string) {
 		this.name = sceneName;
 	}
-	getName() {
+
+	public get Name() {
 		return this.name;
 	}
+
 	update() {
 		for (var go of this.removeQueue) {
 			this.gameObjects.splice(this.gameObjects.indexOf(go), 1);
@@ -30,20 +32,20 @@ export class Scene {
 	addGameObject(go: GameObject) {
 		this.gameObjects.push(go);
 		Logger.log(
-			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.id} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
+			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.ID} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
 	}
 
 	removeGameObject(goID: number) {
 		for (var go of this.gameObjects) {
-			if (go.id == goID) {
+			if (go.ID == goID) {
 				this.removeQueue.push(go);
 				return;
 			}
 		}
 	}
 
-	getGameObjects(): GameObject[] {
+	get GameObjects() {
 		return this.gameObjects;
 	}
 

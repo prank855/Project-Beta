@@ -16,9 +16,8 @@ import { ComponentStore } from '../../Engine/ComponentStore';
 
 export class DemoGameClientLoader {
 	init() {
-		var engine = new Engine();
-		engine.environment = Environment.CLIENT;
-		engine.framerate = 0;
+		var engine = new Engine(Environment.WEB);
+		engine.FrameRate = 0;
 
 		engine.addSystem(Input);
 		engine.addSystem(SoundSystem);

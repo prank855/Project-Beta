@@ -23,7 +23,7 @@ export class AssetSystem extends System {
 	_prevScene: string | undefined;
 	start() {
 		this.loadAssets();
-		this._prevScene = Engine.instance.getCurrentScene().getName();
+		this._prevScene = Engine.instance.CurrentScene.Name;
 		Engine.instance.getSystem(RendererSystem).clearColor = 'Black';
 		Engine.instance.setScene(this.sceneName);
 	}

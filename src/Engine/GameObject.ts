@@ -8,18 +8,22 @@ import { Vector2 } from './Vector2';
 
 export class GameObject {
 	static latestID = 0;
-	id: number;
+	private id: number;
 	name: string;
 	transform = new Transform();
 	parent: GameObject | undefined;
-	components: GameComponent[] = [];
-	children: GameObject[] = [];
+	private components: GameComponent[] = [];
+	private children: GameObject[] = [];
 
 	started: boolean = false;
 
 	constructor(name?: string | undefined) {
 		this.id = GameObject.latestID++;
 		this.name = name || `GameObject (${this.id})`;
+	}
+
+	get Children() {
+		return this.children;
 	}
 
 	start() {
@@ -29,6 +33,10 @@ export class GameObject {
 		for (var go of this.children) {
 			go.start();
 		}
+	}
+
+	get ID() {
+		return this.id;
 	}
 
 	serialize(): SerializedGameObject {

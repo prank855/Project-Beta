@@ -21,7 +21,9 @@ game stuff:
 
 improve on Tile class ?
 put world logic into server
-tile map renderer(engine component) instead of chunkrenderer
+tile map renderer(engine component) instead of chunk renderer
 tilemap<type> generic?
 
 global Logger class
+
+rework scene view to use serialized objects instead of direct scene

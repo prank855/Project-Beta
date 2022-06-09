@@ -8,18 +8,30 @@ import { LogColor } from './types/LogColor';
 
 export class Engine {
 	public static instance: Engine;
-	environment: Environment = Environment.NONE;
-	systems: System[] = [];
+	private environment: Environment | undefined;
+	private systems: System[] = [];
 	private scenes: Scene[] = [];
 	private currentScene: Scene = new Scene('null scene');
 
-	framerate = 60;
-	frame: number = 0;
+	private framerate = 60;
+	private frame: number = 0;
 
-	constructor() {
+	set FrameRate(fps: number) {
+		if (fps < 0) {
+			fps = 0;
+		}
+		this.framerate = fps;
+	}
+
+	get Frame() {
+		return this.frame;
+	}
+
+	constructor(environment: Environment) {
 		if (Engine.instance != null) {
 			return;
 		}
+		this.environment = environment;
 		Engine.instance = this;
 		this.addSystem(Time);
 		this.registerEngineComponents();
@@ -27,9 +39,7 @@ export class Engine {
 
 	start() {
 		Logger.log(
-			`Started ENGINE with Scene: ${
-				LogColor.SCENE
-			}"${this.currentScene.getName()}"${LogColor.CLEAR}`
+			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.Name}"${LogColor.CLEAR}`
 		);
 
 		for (var s of this.systems) {
@@ -74,8 +84,10 @@ export class Engine {
 			s.lateUpdate();
 		}
 
-		if (this.framerate == 0) {
+		if (this.framerate == 0 && this.environment == Environment.WEB) {
 			requestAnimationFrame(self.loop.bind(this));
+		} else if (this.framerate == 0) {
+			throw new Error('You cannot have 0 FPS within a Node Environment');
 		} else {
 			setImmediate(self.loop.bind(this));
 		}
@@ -102,13 +114,13 @@ export class Engine {
 		this.scenes.push(scene);
 	}
 
-	getCurrentScene(): Scene {
+	get CurrentScene() {
 		return this.currentScene;
 	}
 
 	setScene(sceneName: string) {
 		for (var s of this.scenes) {
-			if (s.getName() == sceneName) {
+			if (s.Name == sceneName) {
 				this.currentScene = s;
 				return;
 			}

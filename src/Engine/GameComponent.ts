@@ -2,12 +2,15 @@ import { GameObject } from './GameObject';
 import { SerializedComponent } from './SerializedComponent';
 
 export class GameComponent {
+	static latestID = 0;
+	private id: number;
 	parent: GameObject;
 	private enabled: boolean = false;
 
 	serializedVars: string[] = [];
 
 	constructor(parent: GameObject) {
+		this.id = GameComponent.latestID++;
 		this.parent = parent;
 	}
 	init(): void {}
@@ -16,10 +19,15 @@ export class GameComponent {
 	onEnable(): void {}
 	onDisable(): void {}
 
+	get ID() {
+		return this.id;
+	}
+
 	serialize(): SerializedComponent {
 		var serialized = new SerializedComponent();
 		serialized.name = (this as any).constructor.name;
-		serialized.parentID = this.parent.id;
+		serialized.id = this.id;
+		serialized.parentID = this.parent.ID;
 		serialized.enabled = this.enabled;
 		serialized.vars = new Map<string, any>();
 		for (var str of this.serializedVars) {
@@ -35,7 +43,7 @@ export class GameComponent {
 		return serialized;
 	}
 
-	isEnabled(): boolean {
+	get Enabled() {
 		return this.enabled;
 	}
 	Enable() {
