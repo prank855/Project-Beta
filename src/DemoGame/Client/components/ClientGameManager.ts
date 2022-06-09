@@ -2,6 +2,7 @@ import { ClientNetworking } from '../../../Client/systems/ClientNetworking';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
+import { Logger } from '../../../Engine/Logger';
 import { WorldHandler } from './WorldHandler';
 
 export class ClientGameManager extends GameComponent {
@@ -16,7 +17,7 @@ export class ClientGameManager extends GameComponent {
 		super(parent);
 		if (ClientGameManager.instance == null) {
 			ClientGameManager.instance = this;
-			console.log(`Game Manager created.`);
+			Logger.log(`Game Manager created.`);
 		} else {
 			//throw `There are more than one ClientGameManager components in scene.`;
 		}

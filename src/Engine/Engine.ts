@@ -1,5 +1,6 @@
 import { DebugUtil } from './DebugUtil';
 import { Environment } from './Environment';
+import { Logger } from './Logger';
 import { Scene } from './Scene';
 import { System } from './System';
 import { Time } from './systems/Time';
@@ -25,7 +26,7 @@ export class Engine {
 	}
 
 	start() {
-		console.log(
+		Logger.log(
 			`Started ENGINE with Scene: ${
 				LogColor.SCENE
 			}"${this.currentScene.getName()}"${LogColor.CLEAR}`
@@ -82,9 +83,7 @@ export class Engine {
 
 	addSystem<T extends System>(type: new () => T): T {
 		var temp = new type();
-		console.log(
-			`Added System: ${LogColor.SYSTEM}${type.name}${LogColor.CLEAR}`
-		);
+		Logger.log(`Added System: ${LogColor.SYSTEM}${type.name}${LogColor.CLEAR}`);
 		temp.init();
 		this.systems.push(temp);
 		return temp;

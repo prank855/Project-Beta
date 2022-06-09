@@ -4,6 +4,7 @@ import { Handshake } from '../../Network/packets/Handshake';
 import WebSocket from 'ws';
 import { NetworkPacket } from '../../Network/NetworkPacket';
 import { NetworkUtil } from '../../Network/NetworkUtil';
+import { Logger } from '../../Engine/Logger';
 
 export class ServerNetworking extends System {
 	wss: WebSocket.Server | undefined;
@@ -16,14 +17,14 @@ export class ServerNetworking extends System {
 	startServer(port: number) {
 		this.port = port;
 		this.wss = new WebSocket.Server({ port: this.port });
-		console.log(`Listening on port :${this.port}`);
+		Logger.log(`Listening on port :${this.port}`);
 		this.initSocketEvents(this.wss);
 	}
 
 	private initSocketEvents(wss: WebSocket.Server) {
-		console.log('WebSocket Server initialized');
+		Logger.log('WebSocket Server initialized');
 		wss.on('connection', (ws, req) => {
-			console.log(
+			Logger.log(
 				`Client Connected: ${this.getObfuscatedIPAdress(
 					req
 				)} [${new Date().toLocaleString('en-US')}]`
@@ -39,7 +40,7 @@ export class ServerNetworking extends System {
 
 			ws.onclose = () => {
 				// client disconnected
-				console.log(`Client Disconnected: ${this.getObfuscatedIPAdress(req)}`);
+				Logger.log(`Client Disconnected: ${this.getObfuscatedIPAdress(req)}`);
 			};
 		});
 	}

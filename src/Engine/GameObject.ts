@@ -1,5 +1,6 @@
 import { ComponentStore } from './ComponentStore';
 import { GameComponent } from './GameComponent';
+import { Logger } from './Logger';
 import { SerializedGameObject } from './SerializedGameObject';
 import { Transform } from './Transform';
 import { LogColor } from './types/LogColor';
@@ -93,7 +94,7 @@ export class GameObject {
 		tempComponent.Enable();
 		tempComponent.init();
 		this.components.push(tempComponent);
-		console.log(
+		Logger.log(
 			`Added Component ${LogColor.COMPONENT}${type.name}${LogColor.DEFAULT} to ${LogColor.GAMEOBJECT}GameObject ID: ${this.id} ${LogColor.DEFAULT}"${this.name}"${LogColor.CLEAR}`
 		);
 		return tempComponent;
@@ -106,7 +107,7 @@ export class GameObject {
 		tempComponent.Enable();
 		tempComponent.init();
 		this.components.push(tempComponent);
-		console.log(
+		Logger.log(
 			`Added Component ${LogColor.COMPONENT}${
 				(tempComponent as any).constructor.name
 			}${LogColor.DEFAULT} to ${LogColor.GAMEOBJECT}GameObject ID: ${this.id} ${

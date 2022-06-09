@@ -1,3 +1,4 @@
+import { Logger } from '../../Engine/Logger';
 import { System } from '../../Engine/System';
 import { NetworkID } from '../../Network/NetworkID';
 import { PacketBatch } from '../../Network/PacketBatch';
@@ -22,7 +23,7 @@ export class ClientNetworking extends System {
 
 	private initSocketEvents(ws: WebSocket) {
 		ws.onopen = () => {
-			console.log(`Connected to "${this.url}"`);
+			Logger.log(`Connected to "${this.url}"`);
 		};
 
 		ws.onmessage = (msg) => {

@@ -1,4 +1,5 @@
 import { GameObject } from './GameObject';
+import { Logger } from './Logger';
 
 /** Handles storing components to retrieve via strings */
 export class ComponentStore {
@@ -11,10 +12,10 @@ export class ComponentStore {
 		if (this.registered.includes(className)) return;
 		this.registered.push(className);
 		if (this.components.has(className)) {
-			console.log(`Already have ${className} stored`);
+			Logger.log(`Already have ${className} stored`);
 			return;
 		}
-		console.warn(`Added ${className} to ComponentStore`);
+		Logger.warn(`Added ${className} to ComponentStore`);
 		this.components.set(className, componentClass);
 	}
 	static getComponent(componentName: string): Function {

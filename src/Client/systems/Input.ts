@@ -10,7 +10,6 @@ export class Input extends System {
 					return;
 				}
 			}
-			//console.log(e.key);
 			Input.keys.push(e.key);
 		});
 		window.addEventListener('keyup', (e) => {

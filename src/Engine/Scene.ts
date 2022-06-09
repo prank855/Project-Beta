@@ -1,4 +1,5 @@
 import { GameObject } from './GameObject';
+import { Logger } from './Logger';
 import { SerializedGameObject } from './SerializedGameObject';
 import { LogColor } from './types/LogColor';
 
@@ -28,7 +29,7 @@ export class Scene {
 
 	addGameObject(go: GameObject) {
 		this.gameObjects.push(go);
-		console.log(
+		Logger.log(
 			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.id} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
 	}

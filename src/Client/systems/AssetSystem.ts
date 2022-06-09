@@ -1,4 +1,5 @@
 import { Engine } from '../../Engine/Engine';
+import { Logger } from '../../Engine/Logger';
 import { Scene } from '../../Engine/Scene';
 import { System } from '../../Engine/System';
 import { AssetType } from '../types/AssetType';
@@ -46,7 +47,7 @@ export class AssetSystem extends System {
 
 	loadAssets() {
 		for (var i of this.imagesToLoad) {
-			console.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
+			Logger.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
 			switch (i.assetType) {
 				case AssetType.Image: {
 					this.loadImage(i.assetName, i.url);
@@ -93,7 +94,7 @@ export class AssetSystem extends System {
 			canvas.height = img.height;
 			canvas.getContext('2d')?.drawImage(img, 0, 0);
 			this.images.set(assetName, canvas);
-			console.log(`Loaded Image ${assetName} ${url}`);
+			Logger.log(`Loaded Image ${assetName} ${url}`);
 		};
 	}
 	private loadSound(assetName: string, url: string) {}

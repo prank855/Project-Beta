@@ -36,7 +36,6 @@ export class RendererSystem extends System {
 				ctx.fillRect(0, 0, innerWidth, innerHeight);
 
 				//Draw Sprites
-				//console.log(`Amount of Sprite Calls: ${this.sprites.length}`);
 				for (var s of this.sprites) {
 					this.drawSprite(s);
 				}
