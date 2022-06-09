@@ -70,7 +70,7 @@ export class GameObject {
 	}
 
 	getWorldPosition(): Transform {
-		if (this.parent == null) {
+		if (!this.parent) {
 			return this.transform;
 		}
 		var tempTrans = new Transform();

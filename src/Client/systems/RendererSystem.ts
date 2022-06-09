@@ -16,6 +16,7 @@ export class RendererSystem extends System {
 	debug: boolean = true;
 	filtering: RenderFilterType = RenderFilterType.POINT;
 	spriteCalls: number = 0;
+
 	override init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
 		this.cameraSystem = Engine.instance.getSystem(Viewport);
@@ -46,57 +47,60 @@ export class RendererSystem extends System {
 	}
 
 	drawSprite(sprite: Sprite): boolean {
-		var pos = new Vector2();
-		if (sprite.transform) {
-			pos = sprite.transform.position;
+		// check if systems exist
+		if (!(this.screenSystem && sprite.image && this.cameraSystem)) {
+			return false;
 		}
-		if (this.screenSystem && sprite.image && this.cameraSystem) {
-			pos = this.cameraSystem.toScreenSpace(pos);
-			if (!this.screenSystem.canvas) return false;
-			var spriteHeight =
-				sprite.image.height *
-				(sprite.scale / sprite.pixelsPerUnit) *
-				this.cameraSystem.getZoom();
+		if (!sprite.transform) return false;
 
-			var spriteWidth =
+		var spriteHeight =
+			sprite.image.height *
+			(sprite.scale / sprite.pixelsPerUnit) *
+			this.cameraSystem.currSpriteZoom;
+
+		var spriteWidth =
+			sprite.image.width *
+			(sprite.scale / sprite.pixelsPerUnit) *
+			this.cameraSystem.currSpriteZoom;
+
+		// get screen position
+		var pos = this.cameraSystem.toScreenSpace(sprite.transform.position);
+		// adjust position with offset
+		pos = new Vector2(
+			pos.x -
 				sprite.image.width *
-				(sprite.scale / sprite.pixelsPerUnit) *
-				this.cameraSystem.getZoom();
+					(sprite.scale / sprite.pixelsPerUnit) *
+					sprite.origin.x *
+					this.cameraSystem.currSpriteZoom,
+			pos.y -
+				sprite.image.height *
+					(sprite.scale / sprite.pixelsPerUnit) *
+					sprite.origin.y *
+					this.cameraSystem.currSpriteZoom
+		);
 
-			var offSetPos = new Vector2(
-				pos.x -
-					sprite.image.width *
-						(sprite.scale / sprite.pixelsPerUnit) *
-						sprite.origin.x *
-						this.cameraSystem.getZoom(),
-				pos.y -
-					sprite.image.height *
-						(sprite.scale / sprite.pixelsPerUnit) *
-						sprite.origin.y *
-						this.cameraSystem.getZoom()
-			);
-
-			if (
-				offSetPos.x + spriteWidth >= 0 &&
-				offSetPos.x < this.screenSystem.canvas.width &&
-				offSetPos.y + spriteHeight >= 0 &&
-				offSetPos.y < this.screenSystem.canvas.height
-			) {
-				if (this.screenSystem.context) {
-					this.spriteCalls++;
-					this.screenSystem.context.drawImage(
-						sprite.image,
-						offSetPos.x,
-						offSetPos.y,
-						spriteWidth,
-						spriteHeight
-					);
-					return true;
-				} else {
-					console.warn('image not loaded');
-				}
+		// check if sprite is in bounds of viewport
+		if (
+			pos.x + spriteWidth >= 0 &&
+			pos.x < this.screenSystem.screenWidth &&
+			pos.y + spriteHeight >= 0 &&
+			pos.y < this.screenSystem.screenHeight
+		) {
+			if (this.screenSystem.context) {
+				this.spriteCalls++;
+				this.screenSystem.context.drawImage(
+					sprite.image,
+					pos.x,
+					pos.y,
+					spriteWidth,
+					spriteHeight
+				);
+				return true;
+			} else {
+				console.warn('image not loaded');
 			}
 		}
+
 		return false;
 	}
 

@@ -8,27 +8,36 @@ export class Viewport extends System {
 	/* Amount of units across either direction the camera can see at default zoom */
 	unitsAcross: number = 32;
 
-	getZoom(): number {
+	private _currSpriteZoom: number = 0;
+	get currSpriteZoom() {
+		return this._currSpriteZoom;
+	}
+
+	private updateSpriteZoom() {
 		let min = 0;
 		if (window.innerHeight < window.innerWidth) {
 			min = innerHeight;
 		} else {
 			min = innerWidth;
 		}
-		return this.zoom * (min / this.unitsAcross);
+		this._currSpriteZoom = this.zoom * (min / this.unitsAcross);
 	}
 
 	toScreenSpace(vec: Vector2): Vector2 {
-		var temp = new Vector2();
-		var currZoom = this.getZoom();
-		temp.x =
-			vec.x * currZoom - this.position.x * currZoom + window.innerWidth / 2;
-		temp.y =
-			-vec.y * currZoom + this.position.y * currZoom + window.innerHeight / 2;
-		return temp;
+		return new Vector2(
+			vec.x * this._currSpriteZoom -
+				this.position.x * this._currSpriteZoom +
+				window.innerWidth / 2,
+			-vec.y * this._currSpriteZoom +
+				this.position.y * this._currSpriteZoom +
+				window.innerHeight / 2
+		);
 	}
 
 	init() {}
 	start() {}
 	update() {}
+	override lateUpdate(): void {
+		this.updateSpriteZoom();
+	}
 }

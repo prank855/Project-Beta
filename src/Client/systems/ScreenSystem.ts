@@ -1,26 +1,38 @@
 import { System } from '../../Engine/System';
 
 export class ScreenSystem extends System {
-	canvas: HTMLCanvasElement | undefined;
+	private canvas: HTMLCanvasElement;
 	context: CanvasRenderingContext2D | null = null;
+	constructor() {
+		super();
+		this.canvas = document.createElement('canvas');
+	}
 	init() {
-		let canvas = document.createElement('canvas');
-		canvas.id = 'canvas';
-		canvas.width = window.innerWidth;
-		canvas.height = window.innerHeight;
+		this.canvas.id = 'canvas';
+		this.canvas.width = window.innerWidth;
+		this.canvas.height = window.innerHeight;
 		window.addEventListener('resize', () => {
-			canvas.width = window.innerWidth;
-			canvas.height = window.innerHeight;
+			this.canvas.width = window.innerWidth;
+			this.canvas.height = window.innerHeight;
 		});
-		document.body.appendChild(canvas);
-		document.getElementById(canvas.id)?.addEventListener('contextmenu', (e) => {
-			e.preventDefault();
-		});
+		document.body.appendChild(this.canvas);
+		document
+			.getElementById(this.canvas.id)
+			?.addEventListener('contextmenu', (e) => {
+				e.preventDefault();
+			});
 		document.body.style.overflow = 'hidden';
 		document.body.style.margin = '0';
 		//document.body.style.cursor = 'none';
-		this.canvas = canvas;
-		this.context = canvas.getContext('2d', { alpha: false });
+		this.context = this.canvas.getContext('2d', { alpha: false });
+	}
+	get screenWidth() {
+		if (!this.canvas) throw new Error('Canvas not found??');
+
+		return this.canvas.width;
+	}
+	get screenHeight() {
+		return this.canvas.height;
 	}
 	start() {}
 	update() {}
