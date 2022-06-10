@@ -34,3 +34,6 @@ go through engine classes and private things that should be private
 rework pages implementation
  - auto find index.html
  - Assets folder within DemoGame folder instead of in pages
+
+ single responisbility principle
+  - move serialization like GameObject.serialize into a seperate class that handles it instead

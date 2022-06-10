@@ -6,6 +6,7 @@ import { Environment } from './Types/Environment';
 import { Logger } from './Util/Logger';
 
 export class Engine {
+	//TODO: remove singleton if possible
 	public static instance: Engine;
 	private environment: Environment | undefined;
 	private systems: System[] = [];
