@@ -12,6 +12,7 @@ window.onload = () => {
 
 	var githubTextbox = document.createElement('div');
 	githubTextbox.id = 'Github Link Box';
+
 	githubTextbox.style.position = 'absolute';
 	githubTextbox.style.left = '0px';
 	githubTextbox.style.bottom = '0px';

@@ -1,19 +1,22 @@
+import { getOriginalNode } from 'typescript';
 import { ComponentStore } from './ComponentStore';
 import { GameComponent } from './GameComponent';
+import { Scene } from './Scene';
 import { SerializedGameObject } from './SerializedGameObject';
 import { LogColor } from './Types/LogColor';
 import { Transform } from './Types/Transform';
 import { Logger } from './Util/Logger';
 
 export class GameObject {
-	//TODO: enable/disable like GameComponent
+	sceneReference!: Scene;
 	static latestID = 0;
 	private id: number;
 	name: string;
 	transform = new Transform();
-	parent: GameObject | undefined;
+	parent!: GameObject;
 	private components: GameComponent[] = [];
 	private children: GameObject[] = [];
+	enabled: boolean = true;
 
 	//TODO: move start logic into this class instead of system
 	started: boolean = false;
@@ -23,10 +26,12 @@ export class GameObject {
 		this.name = name || `GameObject (${this.id})`;
 	}
 
-	get Children() {
+	/** Returns all children GameObjects of this GameObject */
+	get Children(): GameObject[] {
 		return this.children;
 	}
 
+	/** Starts the GameObject and all of its Components */
 	start() {
 		for (var co of this.components) {
 			co.start();
@@ -57,19 +62,45 @@ export class GameObject {
 		return serialized;
 	}
 
+	/** Calls every frame */
 	update() {
 		for (let co of this.components) {
-			co.update();
+			if (co.isEnabled) {
+				co.update();
+			}
 		}
 		for (let go of this.children) {
-			if (!go.started) {
-				go.start();
-				go.started = true;
+			if (go.enabled) {
+				if (!go.started) {
+					go.start();
+					go.started = true;
+				}
+				go.update();
 			}
-			go.update();
 		}
 	}
 
+	/** Enabled this GameObject */
+	Enable() {
+		for (var go of this.children) {
+			go.Enable();
+		}
+		for (var co of this.components) {
+			co.Enable();
+		}
+	}
+
+	/** Disables this GameObject */
+	Disable() {
+		for (var go of this.children) {
+			go.Disable();
+		}
+		for (var co of this.components) {
+			co.Disable();
+		}
+	}
+
+	/** Returns world position */
 	getWorldPosition(): Transform {
 		if (!this.parent) {
 			return this.transform;
@@ -82,16 +113,13 @@ export class GameObject {
 		return tempTrans;
 	}
 
-	/** Appends a GameObject to this GameObject */
+	/** Appends a child GameObject to this GameObject */
 	addChild(go: GameObject) {
 		go.parent = this;
 		this.children.push(go);
 	}
 
-	getChildren(): GameObject[] {
-		return this.children;
-	}
-
+	/** Adds GameComponent to this GameObject */
 	addComponent<T extends GameComponent>(
 		type: new (parent: GameObject) => T
 	): T {
@@ -105,6 +133,7 @@ export class GameObject {
 		return tempComponent;
 	}
 
+	/** Adds a GameComponent to this GameObject via name */
 	addComponentFromString(componentName: string): GameComponent {
 		var tempComponent = new (ComponentStore.getComponent(
 			'ClientGameManager'
@@ -122,6 +151,7 @@ export class GameObject {
 		return tempComponent;
 	}
 
+	/** Finds and returns the first found GameComponent of type */
 	getComponent<T extends GameComponent>(
 		type: new (parent: GameObject) => T
 	): T {
@@ -133,6 +163,7 @@ export class GameObject {
 		throw 'Could not find the GameComponent';
 	}
 
+	/** Finds and returns all GameComponents of type */
 	getComponents<T extends GameComponent>(type: new () => T): T[] {
 		let a: T[] = [];
 		for (var co of this.components) {
@@ -146,6 +177,7 @@ export class GameObject {
 		return a;
 	}
 
+	/** Removes GameComponent from this GameObject */
 	removeComponent<T extends GameComponent>(type: new () => T): void {
 		for (var co of this.components) {
 			if (co instanceof type) {
@@ -154,5 +186,10 @@ export class GameObject {
 				return;
 			}
 		}
+	}
+
+	/** Removes this GameObject from scene */
+	Remove() {
+		throw new Error('GameObject.Remove() is not implemented yet');
 	}
 }

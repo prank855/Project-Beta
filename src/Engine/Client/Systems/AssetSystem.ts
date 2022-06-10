@@ -95,7 +95,7 @@ export class AssetSystem extends System {
 			canvas.height = img.height;
 			canvas.getContext('2d')?.drawImage(img, 0, 0);
 			this.images.set(assetName, canvas);
-			Logger.log(`Loaded Image ${assetName} ${url}`);
+			Logger.log(`Loaded Image ${assetName} "${url}"`);
 		};
 	}
 	private loadSound(assetName: string, url: string) {}

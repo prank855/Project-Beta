@@ -4,8 +4,13 @@ import { SerializedGameObject } from './SerializedGameObject';
 import { LogColor } from './Types/LogColor';
 
 export class Scene {
+	/** Name of this Scene */
 	private name: string;
+
+	/** Holds GameObjects within this scene */
 	private gameObjects: GameObject[] = [];
+
+	/** Holds GameObjects that will be removed next update */
 	private removeQueue: GameObject[] = [];
 	constructor(sceneName: string) {
 		this.name = sceneName;
@@ -15,27 +20,33 @@ export class Scene {
 		return this.name;
 	}
 
+	/** Calls every frame */
 	update() {
 		for (var go of this.removeQueue) {
 			this.gameObjects.splice(this.gameObjects.indexOf(go), 1);
 		}
 		this.removeQueue = [];
 		for (var go of this.gameObjects) {
-			if (!go.started) {
-				go.start();
-				go.started = true;
+			if (go.enabled) {
+				if (!go.started) {
+					go.start();
+					go.started = true;
+				}
+				go.update();
 			}
-			go.update();
 		}
 	}
 
+	/** Adds a GameObject to this scene */
 	addGameObject(go: GameObject) {
+		go.sceneReference = this;
 		this.gameObjects.push(go);
 		Logger.log(
 			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.ID} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
 	}
 
+	/** Removes a GameObject from this scene by next update */
 	removeGameObject(goID: number) {
 		for (var go of this.gameObjects) {
 			if (go.ID == goID) {
@@ -45,7 +56,8 @@ export class Scene {
 		}
 	}
 
-	get GameObjects() {
+	/** Returns list of GameObjects within scene */
+	get GameObjects(): GameObject[] {
 		return this.gameObjects;
 	}
 
@@ -62,6 +74,7 @@ export class Scene {
 		throw new Error(`Not implemented`);
 	}
 
+	/** Recursive operation that returns the amount of GameObjects within scene including all sub-children */
 	getGameObjectAmount(gos?: GameObject[], count?: { value: number }): number {
 		if (!gos) {
 			gos = this.gameObjects;
@@ -71,8 +84,8 @@ export class Scene {
 		}
 		for (var go of gos) {
 			count.value++;
-			if (go.getChildren().length != 0) {
-				this.getGameObjectAmount(go.getChildren(), count);
+			if (go.Children.length > 0) {
+				this.getGameObjectAmount(go.Children, count);
 			}
 		}
 		return count.value;

@@ -1,5 +1,5 @@
 export abstract class System {
-	/** called when system is created */
+	/** called when system is initialized */
 	abstract init(): void;
 
 	/** called when system is started */
@@ -8,6 +8,6 @@ export abstract class System {
 	/** called every frame */
 	abstract update(): void;
 
-	/** called every frame after all normal updates */
+	/** called after every frame */
 	lateUpdate() {}
 }

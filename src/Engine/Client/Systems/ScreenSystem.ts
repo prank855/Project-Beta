@@ -28,8 +28,6 @@ export class ScreenSystem extends System {
 		this.context = this.canvas.getContext('2d', { alpha: false });
 	}
 	get screenWidth() {
-		if (!this.canvas) throw new Error('Canvas not found??');
-
 		return this.canvas.width;
 	}
 	get screenHeight() {

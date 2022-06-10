@@ -3,9 +3,9 @@ import { SerializedComponent } from './SerializedComponent';
 
 export class GameComponent {
 	static latestID = 0;
-	private id: number;
+	protected id: number;
 	parent: GameObject;
-	private enabled: boolean = false;
+	protected enabled: boolean = false;
 
 	serializedVars: string[] = [];
 
@@ -13,12 +13,20 @@ export class GameComponent {
 		this.id = GameComponent.latestID++;
 		this.parent = parent;
 	}
+	/** Calls on GameComponent initialization */
 	init(): void {}
+	/** Calls on parent GameObject's start */
 	start(): void {}
+	/** Calls on every frame */
 	update(): void {}
+	/** Calls when GameComponent is enabled */
 	onEnable(): void {}
+	/** Calls when GameComponent is disabled */
 	onDisable(): void {}
 
+	get isEnabled(): boolean {
+		return this.enabled;
+	}
 	get ID() {
 		return this.id;
 	}
@@ -43,9 +51,6 @@ export class GameComponent {
 		return serialized;
 	}
 
-	get Enabled() {
-		return this.enabled;
-	}
 	/** Enables Component */
 	Enable() {
 		this.enabled = true;
