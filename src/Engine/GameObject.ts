@@ -27,7 +27,7 @@ export class GameObject {
 	}
 
 	/** Returns all children GameObjects of this GameObject */
-	get Children(): GameObject[] {
+	get getChildren(): GameObject[] {
 		return this.children;
 	}
 
@@ -41,7 +41,7 @@ export class GameObject {
 		}
 	}
 
-	get ID() {
+	get getID() {
 		return this.id;
 	}
 

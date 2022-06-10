@@ -37,7 +37,7 @@ export class EngineDebugRenderer extends System {
 	}
 	start(): void {
 		this.lastUpdate = Time.getCurrentTime();
-		this.sceneReference = Engine.instance.CurrentScene;
+		this.sceneReference = Engine.instance.getCurrentScene;
 	}
 
 	sceneReference: Scene | undefined;
@@ -47,7 +47,7 @@ export class EngineDebugRenderer extends System {
 		var curr = Time.getCurrentTime();
 		if (curr - this.lastUpdate >= 1 / this.updateRate) {
 			if (this.isHovered) return;
-			this.sceneReference = Engine.instance.CurrentScene;
+			this.sceneReference = Engine.instance.getCurrentScene;
 			this.WriteSceneView();
 			this.lastUpdate = curr;
 		}
@@ -76,30 +76,30 @@ export class EngineDebugRenderer extends System {
 				.position.toString(2)}`
 		);
 		// hierarchy
-		this.AddText(this.sceneBody, `Scene Hierarchy "${scene.Name}"`);
-		for (var go of scene.GameObjects) {
+		this.AddText(this.sceneBody, `Scene Hierarchy "${scene.getName}"`);
+		for (var go of scene.getGameObjects) {
 			this.WriteGameObject(this.sceneBody, go, 1);
 		}
 	}
 
 	WriteGameObject(root: Node, go: GameObject, padding: number) {
-		if (go.Children.length != 0) {
+		if (go.getChildren.length != 0) {
 			// create collapsible list
 			var details = document.createElement('details');
 			var summary = document.createElement('summary');
 			details.appendChild(summary);
 			summary.innerHTML = go.name;
-			if (go.Children.length < 4) {
+			if (go.getChildren.length < 4) {
 				details.open = true;
 			} else {
 				summary.style.paddingLeft = `${(padding - 1) * 16}px`;
-				summary.innerHTML = `${go.name} +${go.Children.length} children`;
+				summary.innerHTML = `${go.name} +${go.getChildren.length} children`;
 			}
 			var summaryText = document.createElement('div');
 			details.appendChild(summaryText);
 			this.addDiv(root, details);
 			padding++;
-			for (var child of go.Children) {
+			for (var child of go.getChildren) {
 				this.WriteGameObject(summaryText, child, padding);
 			}
 			padding--;

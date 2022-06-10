@@ -16,7 +16,7 @@ export class Scene {
 		this.name = sceneName;
 	}
 
-	public get Name() {
+	public get getName() {
 		return this.name;
 	}
 
@@ -42,14 +42,14 @@ export class Scene {
 		go.sceneReference = this;
 		this.gameObjects.push(go);
 		Logger.log(
-			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.ID} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
+			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.getID} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
 	}
 
 	/** Removes a GameObject from this scene by next update */
 	removeGameObject(goID: number) {
 		for (var go of this.gameObjects) {
-			if (go.ID == goID) {
+			if (go.getID == goID) {
 				this.removeQueue.push(go);
 				return;
 			}
@@ -57,7 +57,7 @@ export class Scene {
 	}
 
 	/** Returns list of GameObjects within scene */
-	get GameObjects(): GameObject[] {
+	get getGameObjects(): GameObject[] {
 		return this.gameObjects;
 	}
 
@@ -84,8 +84,8 @@ export class Scene {
 		}
 		for (var go of gos) {
 			count.value++;
-			if (go.Children.length > 0) {
-				this.getGameObjectAmount(go.Children, count);
+			if (go.getChildren.length > 0) {
+				this.getGameObjectAmount(go.getChildren, count);
 			}
 		}
 		return count.value;

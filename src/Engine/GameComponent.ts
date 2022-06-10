@@ -27,7 +27,7 @@ export class GameComponent {
 	get isEnabled(): boolean {
 		return this.enabled;
 	}
-	get ID() {
+	get getID() {
 		return this.id;
 	}
 
@@ -35,7 +35,7 @@ export class GameComponent {
 		var serialized = new SerializedComponent();
 		serialized.name = (this as any).constructor.name;
 		serialized.id = this.id;
-		serialized.parentID = this.parent.ID;
+		serialized.parentID = this.parent.getID;
 		serialized.enabled = this.enabled;
 		serialized.vars = new Map<string, any>();
 		for (var str of this.serializedVars) {

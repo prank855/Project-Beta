@@ -22,7 +22,7 @@ export class Engine {
 		this.framerate = fps;
 	}
 
-	get Frame() {
+	get getFrameCount() {
 		return this.frame;
 	}
 
@@ -40,7 +40,7 @@ export class Engine {
 	start() {
 		//TODO: check if engine is not already running
 		Logger.log(
-			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.Name}"${LogColor.CLEAR}`
+			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.getName}"${LogColor.CLEAR}`
 		);
 
 		for (var s of this.systems) {
@@ -117,13 +117,13 @@ export class Engine {
 		this.scenes.push(scene);
 	}
 
-	get CurrentScene() {
+	get getCurrentScene() {
 		return this.currentScene;
 	}
 
 	setScene(sceneName: string) {
 		for (var s of this.scenes) {
-			if (s.Name == sceneName) {
+			if (s.getName == sceneName) {
 				this.currentScene = s;
 				return;
 			}

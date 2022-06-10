@@ -11,20 +11,20 @@ export class SpriteArrayRenderer extends GameComponent {
 	private height: number = 1;
 
 	/** Width of SpriteArray Renderer */
-	get Width() {
+	get getWidth() {
 		return this.width;
 	}
 	/** Sets width of SpriteArray Renderer */
-	set Width(value: number) {
+	set setWidth(value: number) {
 		if (value < 0) value = 0;
 		this.width = value;
 	}
 	/** Height of SpriteArray Renderer */
-	get Height() {
+	get getHeight() {
 		return this.height;
 	}
 	/** Sets height of SpriteArray Renderer */
-	set Height(value: number) {
+	set setHeight(value: number) {
 		if (value < 0) value = 0;
 		this.height = value;
 	}

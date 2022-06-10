@@ -57,12 +57,12 @@ export class RendererSystem extends System {
 		var spriteHeight =
 			sprite.image.height *
 			(sprite.scale / sprite.pixelsPerUnit) *
-			this.cameraSystem.currSpriteZoom;
+			this.cameraSystem.getSpriteZoomScale;
 
 		var spriteWidth =
 			sprite.image.width *
 			(sprite.scale / sprite.pixelsPerUnit) *
-			this.cameraSystem.currSpriteZoom;
+			this.cameraSystem.getSpriteZoomScale;
 
 		// get screen position
 		var pos = this.cameraSystem.toScreenSpace(sprite.transform.position);
@@ -72,20 +72,20 @@ export class RendererSystem extends System {
 				sprite.image.width *
 					(sprite.scale / sprite.pixelsPerUnit) *
 					sprite.origin.x *
-					this.cameraSystem.currSpriteZoom,
+					this.cameraSystem.getSpriteZoomScale,
 			pos.y -
 				sprite.image.height *
 					(sprite.scale / sprite.pixelsPerUnit) *
 					sprite.origin.y *
-					this.cameraSystem.currSpriteZoom
+					this.cameraSystem.getSpriteZoomScale
 		);
 
 		// check if sprite is in bounds of viewport
 		if (
 			pos.x + spriteWidth >= 0 &&
-			pos.x < this.screenSystem.screenWidth &&
+			pos.x < this.screenSystem.getScreenWidth &&
 			pos.y + spriteHeight >= 0 &&
-			pos.y < this.screenSystem.screenHeight
+			pos.y < this.screenSystem.getScreenHeight
 		) {
 			if (this.screenSystem.context) {
 				this.spriteCalls++;

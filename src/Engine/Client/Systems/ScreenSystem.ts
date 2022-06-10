@@ -27,10 +27,10 @@ export class ScreenSystem extends System {
 		//document.body.style.cursor = 'none';
 		this.context = this.canvas.getContext('2d', { alpha: false });
 	}
-	get screenWidth() {
+	get getScreenWidth() {
 		return this.canvas.width;
 	}
-	get screenHeight() {
+	get getScreenHeight() {
 		return this.canvas.height;
 	}
 	start() {}

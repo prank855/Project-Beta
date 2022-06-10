@@ -10,7 +10,7 @@ export class Viewport extends System {
 	unitsAcross: number = 32;
 
 	private _currSpriteZoom: number = 0;
-	get currSpriteZoom() {
+	get getSpriteZoomScale() {
 		return this._currSpriteZoom;
 	}
 
