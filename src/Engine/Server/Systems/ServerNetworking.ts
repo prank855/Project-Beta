@@ -8,8 +8,8 @@ import { Logger } from '../../Util/Logger';
 
 /** Handles incoming networked clients  */
 export class ServerNetworking extends System {
-	wss: WebSocket.Server | undefined;
-	port: number = 8080;
+	private wss: WebSocket.Server | undefined;
+	private port: number = 8080;
 
 	init() {}
 	start() {}

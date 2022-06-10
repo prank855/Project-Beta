@@ -25,7 +25,7 @@ export class Logger {
 	}
 
 	/** Outputs directly to console */
-	static out(text: string) {
+	static print(text: string) {
 		console.log(`${text}`);
 	}
 }

@@ -14,7 +14,8 @@ export class Time extends System {
 		Time.deltaTime = curr - Time.lastTime;
 		Time.lastTime = curr;
 	}
-	start() {}
+
+	start(): void {}
 
 	update() {
 		let curr = Time.getCurrentTime();

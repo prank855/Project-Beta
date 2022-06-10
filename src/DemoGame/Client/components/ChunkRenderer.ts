@@ -31,7 +31,7 @@ export class ChunkRenderer extends GameComponent {
 		if (!ctx || !this.chunk) return false;
 		var assetSystem = Engine.instance.getSystem(AssetSystem);
 		for (var i = 0; i < this.chunk.size * this.chunk.size; i++) {
-			var img = assetSystem.getImg(this.chunk.tiles[i].tileImgSrc);
+			var img = assetSystem.getImage(this.chunk.tiles[i].tileImgSrc);
 			if (!img) return false;
 			ctx.drawImage(
 				img,

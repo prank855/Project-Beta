@@ -13,6 +13,8 @@ class imgToLoad {
 
 /**Handles Asset Loading / Retrieving */
 export class AssetSystem extends System {
+	/** Dictionary of images */
+	//TODO: load sprites instead of raw images to avoid sprite duplication?
 	private images: Map<string, HTMLCanvasElement> = new Map();
 
 	private sceneName = 'Asset Loading Scene';
@@ -28,7 +30,7 @@ export class AssetSystem extends System {
 		Engine.instance.getSystem(RendererSystem).clearColor = 'Black';
 		Engine.instance.setScene(this.sceneName);
 	}
-	isLoading: boolean = true;
+	private isLoading: boolean = true;
 	update() {
 		this.isLoading = imgToLoad.length != 0;
 		if (!this.isLoading) {
@@ -36,8 +38,9 @@ export class AssetSystem extends System {
 		}
 	}
 
-	imagesToLoad: imgToLoad[] = [];
+	private imagesToLoad: imgToLoad[] = [];
 
+	/** Adds an Asset to be loaded by the AssetSystem */
 	addAsset(assetName: string, url: string, assetType: AssetType) {
 		let i = new imgToLoad();
 		i.assetName = assetName;
@@ -46,7 +49,7 @@ export class AssetSystem extends System {
 		this.imagesToLoad.push(i);
 	}
 
-	loadAssets() {
+	private loadAssets() {
 		for (var i of this.imagesToLoad) {
 			Logger.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
 			switch (i.assetType) {
@@ -62,7 +65,7 @@ export class AssetSystem extends System {
 		}
 	}
 
-	getImg(assetName: string): HTMLCanvasElement | null {
+	getImage(assetName: string): HTMLCanvasElement | null {
 		var img = this.images.get(assetName);
 		if (img) {
 			return img;

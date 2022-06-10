@@ -7,10 +7,26 @@ import { PacketType } from '../../Network/PacketType';
 
 /**Handles connections to ServerNetworking */
 export class ClientNetworking extends System {
-	ws: WebSocket | undefined;
-	url: string = 'no server url';
-	connected: boolean = false;
-	networkID: NetworkID | undefined;
+	private websocket: WebSocket | undefined;
+	private url: string = 'no server url';
+	private connected: boolean = false;
+	private networkID: NetworkID | undefined;
+
+	get isConnected() {
+		return this.connected;
+	}
+
+	get getNetworkID() {
+		return this.networkID;
+	}
+
+	get getURL() {
+		return this.url;
+	}
+
+	get getWebSocket() {
+		return this.websocket;
+	}
 
 	init() {}
 	start() {}
@@ -18,8 +34,8 @@ export class ClientNetworking extends System {
 
 	connect(url: string) {
 		this.url = url;
-		this.ws = new WebSocket(url);
-		this.initSocketEvents(this.ws);
+		this.websocket = new WebSocket(url);
+		this.initSocketEvents(this.websocket);
 	}
 
 	private initSocketEvents(ws: WebSocket) {
@@ -58,7 +74,7 @@ export class ClientNetworking extends System {
 		};
 	}
 
-	reconnect(seconds: number) {
+	private reconnect(seconds: number) {
 		this.connected = false;
 		this.networkID = undefined;
 		setTimeout(() => {

@@ -1,4 +1,5 @@
 export class DebugUtil {
+	/** Stalls program for X amount of seconds */
 	static BusyWait(secondsToWait: number) {
 		var start = new Date().getTime();
 		var end = start;
