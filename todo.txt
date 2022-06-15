@@ -35,5 +35,5 @@ rework pages implementation
  - auto find index.html
  - Assets folder within DemoGame folder instead of in pages
 
- single responisbility principle
-  - move serialization like GameObject.serialize into a seperate class that handles it instead
+ single responsibility principle
+  - move serialization like GameObject.serialize into a separate class that handles it instead
