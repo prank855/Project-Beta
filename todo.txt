@@ -37,3 +37,5 @@ rework pages implementation
 
  single responsibility principle
   - move serialization like GameObject.serialize into a separate class that handles it instead
+
+Make a SceneHandler? so it can be removed from the engine class

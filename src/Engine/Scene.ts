@@ -10,6 +10,9 @@ export class Scene {
 	/** Holds GameObjects within this scene */
 	private gameObjects: GameObject[] = [];
 
+	/** Holds a map of GameObject id's to its corresponding GameObject */
+	private gameObjectFromID = new Map<number, GameObject>();
+
 	/** Holds GameObjects that will be removed next update */
 	private removeQueue: GameObject[] = [];
 	constructor(sceneName: string) {
@@ -24,6 +27,7 @@ export class Scene {
 	update() {
 		for (var go of this.removeQueue) {
 			this.gameObjects.splice(this.gameObjects.indexOf(go), 1);
+			this.gameObjectFromID.delete(go.getID);
 		}
 		this.removeQueue = [];
 		for (var go of this.gameObjects) {
@@ -41,6 +45,7 @@ export class Scene {
 	addGameObject(go: GameObject) {
 		go.sceneReference = this;
 		this.gameObjects.push(go);
+		this.gameObjectFromID.set(go.getID, go);
 		Logger.log(
 			`Added ${LogColor.GAMEOBJECT}GameObject ID: ${go.getID} ${LogColor.DEFAULT}"${go.name}"${LogColor.CLEAR}`
 		);
@@ -64,8 +69,9 @@ export class Scene {
 	getGameObjectByName(name: string): GameObject {
 		throw new Error(`Not implemented`);
 	}
-	getGameObjectByID(): GameObject {
-		throw new Error(`Not implemented`);
+	getGameObjectByID(id: number): GameObject {
+		// the ! assures that a real gameobject will return
+		return this.gameObjectFromID.get(id)!;
 	}
 	getGameObjectsByName(name: string): GameObject[] {
 		throw new Error(`Not implemented`);

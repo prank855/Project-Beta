@@ -39,12 +39,12 @@ export class SimpleMovement extends GameComponent {
 
 				if (Time.deltaTime < 1) {
 					var deltaX =
-						(this.parent.transform.position.x - camera.position.x) *
+						(this.parent.transform.position.x + 0.5 - camera.position.x) *
 						Time.deltaTime;
 					camera.position.x += deltaX * 3;
 
 					var deltaY =
-						(this.parent.transform.position.y - camera.position.y) *
+						(this.parent.transform.position.y + 0.5 - camera.position.y) *
 						Time.deltaTime;
 					camera.position.y += deltaY * 3;
 				}
