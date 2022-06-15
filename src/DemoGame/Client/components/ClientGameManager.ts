@@ -3,7 +3,7 @@ import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
 import { GameObject } from '../../../Engine/GameObject';
 import { Logger } from '../../../Engine/Util/Logger';
-import { WorldHandler } from './WorldHandler';
+import { WorldHandler } from './World/WorldHandler';
 
 export class ClientGameManager extends GameComponent {
 	static instance: ClientGameManager;

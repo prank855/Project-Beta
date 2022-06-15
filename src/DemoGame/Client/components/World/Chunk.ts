@@ -1,4 +1,4 @@
-import { GameComponent } from '../../../Engine/GameComponent';
+import { GameComponent } from '../../../../Engine/GameComponent';
 import { Tile } from './Tile';
 
 export class Chunk extends GameComponent {

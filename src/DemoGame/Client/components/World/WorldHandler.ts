@@ -1,8 +1,7 @@
-import { GameComponent } from '../../../Engine/GameComponent';
-import { GameObject } from '../../../Engine/GameObject';
-import { Logger } from '../../../Engine/Util/Logger';
-import { Vector2 } from '../../../Engine/Types/Vector2';
-import { Player } from './Player';
+import { GameComponent } from '../../../../Engine/GameComponent';
+import { GameObject } from '../../../../Engine/GameObject';
+import { Logger } from '../../../../Engine/Util/Logger';
+import { Player } from '../Player';
 import { World } from './World';
 
 export class WorldHandler extends GameComponent {

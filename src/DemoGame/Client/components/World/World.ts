@@ -1,8 +1,8 @@
-import { GameComponent } from '../../../Engine/GameComponent';
-import { GameObject } from '../../../Engine/GameObject';
-import { Vector2 } from '../../../Engine/Types/Vector2';
+import { GameComponent } from '../../../../Engine/GameComponent';
+import { GameObject } from '../../../../Engine/GameObject';
+import { Vector2 } from '../../../../Engine/Types/Vector2';
+import { ChunkRenderer } from '../ChunkRenderer';
 import { Chunk } from './Chunk';
-import { ChunkRenderer } from './ChunkRenderer';
 
 export class World extends GameComponent {
 	chunks: Chunk[] = [];

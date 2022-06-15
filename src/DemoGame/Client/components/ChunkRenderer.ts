@@ -3,7 +3,7 @@ import { AssetSystem } from '../../../Engine/Client/Systems/AssetSystem';
 import { Origin } from '../../../Engine/Client/Types/Origin';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
-import { Chunk } from './Chunk';
+import { Chunk } from './World/Chunk';
 
 export class ChunkRenderer extends GameComponent {
 	chunk: Chunk | undefined;
