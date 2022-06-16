@@ -34,31 +34,6 @@ export class SimpleMovement extends GameComponent {
 				}
 			}
 
-			/*Camera Control*/ {
-				let camera = Engine.instance.getSystem(Viewport);
-
-				if (Time.deltaTime < 1) {
-					let deltaX =
-						(this.parent.transform.position.x + 0.5 - camera.position.x) *
-						Time.deltaTime;
-					camera.position.x += deltaX * 3;
-
-					let deltaY =
-						(this.parent.transform.position.y + 0.5 - camera.position.y) *
-						Time.deltaTime;
-					camera.position.y += deltaY * 3;
-				}
-
-				if (keys.includes('ArrowUp')) {
-					Engine.instance.getSystem(Viewport).zoom *=
-						Math.E ** (Time.deltaTime * Math.log(1.5));
-				}
-				if (keys.includes('ArrowDown')) {
-					Engine.instance.getSystem(Viewport).zoom /=
-						Math.E ** (Time.deltaTime * Math.log(1.5));
-				}
-			}
-
 			this.lastKeys = keys;
 		}
 	}

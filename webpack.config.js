@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 pages = ['index', 'editor'];
 module.exports = {
@@ -17,7 +18,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
 	},
-	plugins: [].concat(
+	plugins: [new ForkTsCheckerWebpackPlugin()].concat(
 		pages.map(
 			(page) =>
 				new HtmlWebPackPlugin({
@@ -32,13 +33,11 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.tsx?$/,
-				exclude: /node_modules/,
-				use: [
-					{
-						loader: 'ts-loader',
-					},
-				],
+				test: /\.m?ts$/,
+				exclude: /(node_modules|bower_components)/,
+				use: {
+					loader: 'babel-loader',
+				},
 			},
 		],
 	},
@@ -55,12 +54,12 @@ module.exports = {
 		server: 'http',
 		host: '0.0.0.0',
 		historyApiFallback: true,
+		//overlay: true,
 		compress: true,
 		hot: true,
 		allowedHosts: 'all',
 	},
 	optimization: {
-		runtimeChunk: true,
 		splitChunks: {
 			chunks: 'all',
 		},
@@ -73,6 +72,6 @@ module.exports = {
 				},
 			}),
 		],
-		minimize: true,
+		minimize: false,
 	},
 };

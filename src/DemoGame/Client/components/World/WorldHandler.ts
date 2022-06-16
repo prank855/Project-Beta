@@ -2,6 +2,7 @@ import { GameComponent } from '../../../../Engine/GameComponent';
 import { GameObject } from '../../../../Engine/GameObject';
 import { Vector2 } from '../../../../Engine/Types/Vector2';
 import { Logger } from '../../../../Engine/Util/Logger';
+import { CameraFollow } from '../CameraFollow';
 import { Player } from '../Player';
 import { World } from './World';
 
@@ -24,6 +25,9 @@ export class WorldHandler extends GameComponent {
 			Math.random() * 10,
 			Math.random() * 10
 		);
+		let cameraFollow = playerGO.addComponent(CameraFollow);
+		cameraFollow.speed = 2;
+		cameraFollow.allowZoom = false;
 		this.player = player;
 		this.parent.addChild(playerGO);
 	}

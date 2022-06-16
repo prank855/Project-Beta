@@ -42,4 +42,4 @@ Make a SceneHandler? so it can be removed from the engine class
 
 make singletons private and use static methods to call from the singleton instance
 
-chunks shouldnt be components?
+chunks shouldn't be components?

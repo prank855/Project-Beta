@@ -4,6 +4,7 @@ import { Time } from './Systems/Time';
 import { LogColor } from './Types/LogColor';
 import { Environment } from './Types/Environment';
 import { Logger } from './Util/Logger';
+import { setOriginalNode } from 'typescript';
 
 export class Engine {
 	//TODO: remove singleton if possible
@@ -59,7 +60,7 @@ export class Engine {
 		let currTime = Time.getCurrentTime();
 
 		let tickDelta = 1 / this.framerate;
-		if (this.framerate != 0) {
+		if (this.framerate > 0) {
 			let timeSinceLastFrame = currTime - Time.lastTime;
 			if (timeSinceLastFrame <= tickDelta) {
 				if (timeSinceLastFrame < tickDelta / 2) {
