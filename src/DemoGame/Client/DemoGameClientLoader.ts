@@ -17,7 +17,7 @@ import { Environment } from '../../Engine/Types/Environment';
 export class DemoGameClientLoader {
 	init() {
 		let engine = new Engine(Environment.WEB);
-		engine.FrameRate = 20;
+		engine.FrameRate = 0;
 
 		engine.addSystem(Input);
 		engine.addSystem(SoundSystem);
