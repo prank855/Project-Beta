@@ -33,9 +33,9 @@ export class Vector2 {
 	/** Return string as "(x, y)" to rounded precision OR defaults to 2 decimal places */
 	toString(precision: number | undefined = 2): string {
 		//Math.round((num + Number.EPSILON) * 100) / 100
-		var power = Math.pow(10, precision);
-		var x = Math.round((this.x + Number.EPSILON) * power) / power;
-		var y = Math.round((this.y + Number.EPSILON) * power) / power;
+		let power = Math.pow(10, precision);
+		let x = Math.round((this.x + Number.EPSILON) * power) / power;
+		let y = Math.round((this.y + Number.EPSILON) * power) / power;
 		return `(${x}, ${y})`;
 	}
 }

@@ -32,14 +32,14 @@ export class GameComponent {
 	}
 
 	serialize(): SerializedComponent {
-		var serialized = new SerializedComponent();
+		let serialized = new SerializedComponent();
 		serialized.name = (this as any).constructor.name;
 		serialized.id = this.id;
 		serialized.parentID = this.parent.getID;
 		serialized.enabled = this.enabled;
 		serialized.vars = new Map<string, any>();
-		for (var str of this.serializedVars) {
-			var variable = (this as any)[str];
+		for (let str of this.serializedVars) {
+			let variable = (this as any)[str];
 			if (variable instanceof GameComponent!) {
 				serialized.vars.set(str, (variable as GameComponent).serialize());
 			} else if (variable instanceof GameObject) {

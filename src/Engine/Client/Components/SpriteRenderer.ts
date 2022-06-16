@@ -18,7 +18,7 @@ export class SpriteRenderer extends GameComponent {
 	}
 	override update() {
 		if (this.assetName != '' && !this.loadedAsset) {
-			var img = Engine.instance
+			let img = Engine.instance
 				.getSystem(AssetSystem)
 				.getAsset(this.assetName, AssetType.Image);
 			if (img) {

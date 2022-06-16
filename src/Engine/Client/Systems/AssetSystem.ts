@@ -20,14 +20,14 @@ export class AssetSystem extends System {
 	private sceneName = 'Asset Loading Scene';
 	init() {
 		// create and load scene
-		var assetScene = new Scene(this.sceneName);
+		let assetScene = new Scene(this.sceneName);
 		Engine.instance.addScene(assetScene);
 	}
 	_prevScene: string | undefined;
 	start() {
 		this.loadAssets();
 		this._prevScene = Engine.instance.getCurrentScene.getName;
-		Engine.instance.getSystem(RendererSystem).clearColor = 'Black';
+		Engine.instance.getSystem(RendererSystem);
 		Engine.instance.setScene(this.sceneName);
 	}
 	private isLoading: boolean = true;
@@ -50,7 +50,7 @@ export class AssetSystem extends System {
 	}
 
 	private loadAssets() {
-		for (var i of this.imagesToLoad) {
+		for (let i of this.imagesToLoad) {
 			Logger.log(`Loading ${i.assetType}: ${i.assetName} "${i.url}"`);
 			switch (i.assetType) {
 				case AssetType.Image: {
@@ -66,7 +66,7 @@ export class AssetSystem extends System {
 	}
 
 	getImage(assetName: string): HTMLCanvasElement | null {
-		var img = this.images.get(assetName);
+		let img = this.images.get(assetName);
 		if (img) {
 			return img;
 		} else {
@@ -77,7 +77,7 @@ export class AssetSystem extends System {
 	getAsset(assetName: string, assetType: AssetType): HTMLCanvasElement | null {
 		switch (assetType) {
 			case AssetType.Image: {
-				var img = this.images.get(assetName);
+				let img = this.images.get(assetName);
 				if (img) {
 					return img;
 				}
@@ -87,13 +87,13 @@ export class AssetSystem extends System {
 	}
 
 	private loadImage(assetName: string, url: string) {
-		var img = new Image();
+		let img = new Image();
 		img.src = url;
 		img.onerror = () => {
 			throw `Could not find ${url}`;
 		};
 		img.onload = () => {
-			var canvas: HTMLCanvasElement = document.createElement('canvas');
+			let canvas: HTMLCanvasElement = document.createElement('canvas');
 			canvas.width = img.width;
 			canvas.height = img.height;
 			canvas.getContext('2d')?.drawImage(img, 0, 0);

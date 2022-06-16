@@ -10,74 +10,77 @@ import { Vector2 } from '../../Types/Vector2';
 export class RendererSystem extends System {
 	start(): void {}
 	update(): void {}
-	screenSystem: ScreenSystem | undefined;
-	cameraSystem: Viewport | undefined;
-	sprites: Sprite[] = [];
-	clearColor: string = 'White';
+	private screenSystem!: ScreenSystem;
+	private viewport!: Viewport;
+	private sprites: Sprite[] = [];
 	debug: boolean = true;
 	filtering: RenderFilterType = RenderFilterType.POINT;
 	spriteCalls: number = 0;
 
+	private canvas!: HTMLCanvasElement;
+	private context!: CanvasRenderingContext2D;
+
 	override init() {
 		this.screenSystem = Engine.instance.getSystem(ScreenSystem);
-		this.cameraSystem = Engine.instance.getSystem(Viewport);
+		this.context = this.screenSystem.getContext();
+		this.canvas = this.screenSystem.getCanvas();
+		this.viewport = Engine.instance.getSystem(Viewport);
 	}
 	override lateUpdate() {
 		this.spriteCalls = 0;
-		if (this.screenSystem) {
-			let ctx = this.screenSystem.context;
-			if (ctx) {
-				if ((this.filtering = RenderFilterType.POINT)) {
-					ctx.imageSmoothingEnabled = false;
-				}
-				if ((this.filtering = RenderFilterType.SMOOTH)) {
-					ctx.imageSmoothingEnabled = true;
-				}
-				//Clear Screen
-				ctx.fillStyle = this.clearColor;
-				ctx.fillRect(0, 0, innerWidth, innerHeight);
 
-				//Draw Sprites
-				for (var s of this.sprites) {
-					this.drawSprite(s);
-				}
-
-				this.sprites.length = 0;
-			}
+		switch (this.filtering) {
+			case RenderFilterType.POINT:
+				this.context.imageSmoothingEnabled = false;
+				break;
+			case RenderFilterType.SMOOTH:
+				this.context.imageSmoothingEnabled = true;
+				break;
 		}
+
+		// Clear screen
+		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+		//Draw Sprites
+		for (let s of this.sprites) {
+			this.drawSprite(s);
+		}
+
+		// Clear sprite array
+		this.sprites = [];
 	}
 
 	drawSprite(sprite: Sprite): boolean {
 		// check if systems exist
-		if (!(this.screenSystem && sprite.image && this.cameraSystem)) {
+		if (!sprite.image || !sprite.transform) {
 			return false;
 		}
-		if (!sprite.transform) return false;
 
-		var spriteHeight =
+		let spriteHeight =
 			sprite.image.height *
 			(sprite.scale / sprite.pixelsPerUnit) *
-			this.cameraSystem.getSpriteZoomScale;
+			this.viewport.getSpriteZoomScale;
 
-		var spriteWidth =
+		let spriteWidth =
 			sprite.image.width *
 			(sprite.scale / sprite.pixelsPerUnit) *
-			this.cameraSystem.getSpriteZoomScale;
+			this.viewport.getSpriteZoomScale;
 
 		// get screen position
-		var pos = this.cameraSystem.toScreenSpace(sprite.transform.position);
+		let pos = this.viewport.toScreenSpace(sprite.transform.position);
+
 		// adjust position with offset
 		pos = new Vector2(
 			pos.x -
 				sprite.image.width *
 					(sprite.scale / sprite.pixelsPerUnit) *
 					sprite.origin.x *
-					this.cameraSystem.getSpriteZoomScale,
+					this.viewport.getSpriteZoomScale,
 			pos.y -
 				sprite.image.height *
 					(sprite.scale / sprite.pixelsPerUnit) *
 					sprite.origin.y *
-					this.cameraSystem.getSpriteZoomScale
+					this.viewport.getSpriteZoomScale
 		);
 
 		// check if sprite is in bounds of viewport
@@ -87,9 +90,9 @@ export class RendererSystem extends System {
 			pos.y + spriteHeight >= 0 &&
 			pos.y < this.screenSystem.getScreenHeight
 		) {
-			if (this.screenSystem.context) {
+			if (this.context) {
 				this.spriteCalls++;
-				this.screenSystem.context.drawImage(
+				this.context.drawImage(
 					sprite.image,
 					pos.x,
 					pos.y,
@@ -97,8 +100,6 @@ export class RendererSystem extends System {
 					spriteHeight
 				);
 				return true;
-			} else {
-				console.warn('image not loaded');
 			}
 		}
 

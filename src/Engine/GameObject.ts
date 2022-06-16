@@ -33,10 +33,10 @@ export class GameObject {
 
 	/** Starts the GameObject and all of its Components */
 	start() {
-		for (var co of this.components) {
+		for (let co of this.components) {
 			co.start();
 		}
-		for (var go of this.children) {
+		for (let go of this.children) {
 			go.start();
 		}
 	}
@@ -46,17 +46,17 @@ export class GameObject {
 	}
 
 	serialize(): SerializedGameObject {
-		var serialized = new SerializedGameObject();
+		let serialized = new SerializedGameObject();
 		serialized.id = this.id;
 		serialized.name = this.name;
 		serialized.transform = this.transform;
 		serialized.parent = this.parent?.id;
 		serialized.components = [];
-		for (var co of this.components) {
+		for (let co of this.components) {
 			serialized.components.push(co.serialize());
 		}
 		serialized.children = [];
-		for (var child of this.children) {
+		for (let child of this.children) {
 			serialized.children.push(child.serialize());
 		}
 		return serialized;
@@ -82,20 +82,20 @@ export class GameObject {
 
 	/** Enabled this GameObject */
 	Enable() {
-		for (var go of this.children) {
+		for (let go of this.children) {
 			go.Enable();
 		}
-		for (var co of this.components) {
+		for (let co of this.components) {
 			co.Enable();
 		}
 	}
 
 	/** Disables this GameObject */
 	Disable() {
-		for (var go of this.children) {
+		for (let go of this.children) {
 			go.Disable();
 		}
-		for (var co of this.components) {
+		for (let co of this.components) {
 			co.Disable();
 		}
 	}
@@ -105,7 +105,7 @@ export class GameObject {
 		if (!this.parent) {
 			return this.transform;
 		}
-		var tempTrans = new Transform();
+		let tempTrans = new Transform();
 		tempTrans.position = this.parent
 			.getWorldPosition()
 			.position.Copy()
@@ -123,7 +123,7 @@ export class GameObject {
 	addComponent<T extends GameComponent>(
 		type: new (parent: GameObject) => T
 	): T {
-		var tempComponent = new type(this);
+		let tempComponent = new type(this);
 		tempComponent.Enable();
 		tempComponent.init();
 		this.components.push(tempComponent);
@@ -135,7 +135,7 @@ export class GameObject {
 
 	/** Adds a GameComponent to this GameObject via name */
 	addComponentFromString(componentName: string): GameComponent {
-		var tempComponent = new (ComponentStore.getComponent(
+		let tempComponent = new (ComponentStore.getComponent(
 			'ClientGameManager'
 		) as typeof GameComponent)(this);
 		tempComponent.Enable();
@@ -155,7 +155,7 @@ export class GameObject {
 	getComponent<T extends GameComponent>(
 		type: new (parent: GameObject) => T
 	): T {
-		for (var co of this.components) {
+		for (let co of this.components) {
 			if (co instanceof type) {
 				return co;
 			}
@@ -166,7 +166,7 @@ export class GameObject {
 	/** Finds and returns all GameComponents of type */
 	getComponents<T extends GameComponent>(type: new () => T): T[] {
 		let a: T[] = [];
-		for (var co of this.components) {
+		for (let co of this.components) {
 			if (co instanceof type) {
 				a.push(co);
 			}
@@ -179,7 +179,7 @@ export class GameObject {
 
 	/** Removes GameComponent from this GameObject */
 	removeComponent<T extends GameComponent>(type: new () => T): void {
-		for (var co of this.components) {
+		for (let co of this.components) {
 			if (co instanceof type) {
 				co.Disable();
 				this.components.splice(this.components.indexOf(co), 1);

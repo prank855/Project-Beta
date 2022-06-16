@@ -1,5 +1,6 @@
 import { Transform } from '../../Types/Transform';
 import { Vector2 } from '../../Types/Vector2';
+import { Origin } from './Origin';
 
 export class Sprite {
 	/** Raw image of Sprite */
@@ -11,5 +12,5 @@ export class Sprite {
 	/** Scale of sprite */
 	scale: number = 1;
 	/** Origin of sprite relative to [0-1] */
-	origin: Vector2 = new Vector2(0, 0);
+	origin: Vector2 = Origin.BOTTOM_LEFT;
 }

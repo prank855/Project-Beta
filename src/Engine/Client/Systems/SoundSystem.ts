@@ -7,7 +7,7 @@ export class SoundSystem extends System {
 	init() {}
 	start() {}
 	update() {
-		for (var w of this.waves) {
+		for (let w of this.waves) {
 			if (w) {
 				w.volume *= this.masterVolume;
 				w.play();

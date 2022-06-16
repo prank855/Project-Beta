@@ -8,17 +8,17 @@ import { Environment } from '../../Engine/Types/Environment';
 export class DemoGameServerLoader {
 	constructor() {}
 	init() {
-		var engine = new Engine(Environment.NODE);
+		let engine = new Engine(Environment.NODE);
 		engine.FrameRate = 10;
 
 		let net = engine.addSystem(ServerNetworking);
 		net.startServer(8080);
 
-		var serverScene = new Scene('Server Scene');
+		let serverScene = new Scene('Server Scene');
 		engine.addScene(serverScene);
 
 		{
-			var gameManager = new GameObject();
+			let gameManager = new GameObject();
 			gameManager.name = 'Server Game Manager';
 			gameManager.addComponent(ServerGameManager);
 			serverScene.addGameObject(gameManager);

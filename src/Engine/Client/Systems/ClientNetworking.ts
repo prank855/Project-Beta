@@ -44,12 +44,12 @@ export class ClientNetworking extends System {
 		};
 
 		ws.onmessage = (msg) => {
-			var packetBatch = JSON.parse(msg.data) as PacketBatch;
+			let packetBatch = JSON.parse(msg.data) as PacketBatch;
 			if (!this.connected) {
-				for (var packet of packetBatch.packets) {
+				for (let packet of packetBatch.packets) {
 					if (packet.type == PacketType.Handshake) {
 						this.connected = true;
-						var handshakePacket = packet as Handshake;
+						let handshakePacket = packet as Handshake;
 						this.networkID = handshakePacket.data.networkID;
 						console.warn(
 							`Successful Server Connection`,
@@ -61,7 +61,7 @@ export class ClientNetworking extends System {
 			}
 			this.events.OnPacketBatch(packetBatch);
 		};
-		var self = this;
+		let self = this;
 		ws.onclose = () => {
 			// retry connection in 3 secs
 			console.warn('Disconnected from server, trying again in 3 seconds');

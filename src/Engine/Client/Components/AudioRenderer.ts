@@ -32,7 +32,7 @@ export class AudioRenderer extends GameComponent {
 			this.volume = 0;
 		}
 		if (this.renderer) {
-			var temp = new Audio(this.soundSrc);
+			let temp = new Audio(this.soundSrc);
 			temp.volume = this.volume;
 			this.renderer.waves.push(temp);
 		}

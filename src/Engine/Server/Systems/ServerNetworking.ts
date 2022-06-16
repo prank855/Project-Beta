@@ -30,12 +30,12 @@ export class ServerNetworking extends System {
 					req
 				)} [${new Date().toLocaleString('en-US')}]`
 			);
-			var hs = new Handshake();
+			let hs = new Handshake();
 			hs.data.networkID = NetworkUtil.generateUniqueNetworkID();
 			this.sendPacket(ws, hs);
 
 			ws.onmessage = (msg) => {
-				var packetBatch = JSON.parse(msg.data.toString()) as PacketBatch;
+				let packetBatch = JSON.parse(msg.data.toString()) as PacketBatch;
 				this.events.OnPacketBatch(packetBatch);
 			};
 
@@ -54,7 +54,7 @@ export class ServerNetworking extends System {
 	}
 
 	sendPacket(ws: WebSocket, packet: NetworkPacket) {
-		var batch = new PacketBatch();
+		let batch = new PacketBatch();
 		batch.packets.push(packet);
 		this.sendPacketBatch(ws, batch);
 	}

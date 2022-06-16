@@ -10,13 +10,13 @@ export class Chunk extends GameComponent {
 	}
 
 	private FillTiles() {
-		for (var i = 0; i < this.size * this.size; i++) {
+		for (let i = 0; i < this.size * this.size; i++) {
 			this.tiles[i] = this.CreateTile();
 		}
 	}
 
 	private CreateTile(): Tile {
-		var tile = new Tile();
+		let tile = new Tile();
 		return tile;
 	}
 }

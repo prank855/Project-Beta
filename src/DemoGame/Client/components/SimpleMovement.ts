@@ -11,13 +11,13 @@ export class SimpleMovement extends GameComponent {
 	private lastKeys: string[] = [];
 
 	override start(): void {
-		var camera = Engine.instance.getSystem(Viewport);
+		let camera = Engine.instance.getSystem(Viewport);
 		camera.position = this.parent.transform.position.Copy();
 	}
 
 	override update() {
 		if (this.parent) {
-			var keys = Input.getKeys();
+			let keys = Input.getKeys();
 
 			/** Movement */ {
 				if (keys.includes('w')) {
@@ -35,15 +35,15 @@ export class SimpleMovement extends GameComponent {
 			}
 
 			/*Camera Control*/ {
-				var camera = Engine.instance.getSystem(Viewport);
+				let camera = Engine.instance.getSystem(Viewport);
 
 				if (Time.deltaTime < 1) {
-					var deltaX =
+					let deltaX =
 						(this.parent.transform.position.x + 0.5 - camera.position.x) *
 						Time.deltaTime;
 					camera.position.x += deltaX * 3;
 
-					var deltaY =
+					let deltaY =
 						(this.parent.transform.position.y + 0.5 - camera.position.y) *
 						Time.deltaTime;
 					camera.position.y += deltaY * 3;

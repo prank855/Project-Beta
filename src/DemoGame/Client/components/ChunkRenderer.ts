@@ -23,15 +23,15 @@ export class ChunkRenderer extends GameComponent {
 
 	canvas: HTMLCanvasElement = document.createElement('canvas');
 	setupChunkImage(): boolean {
-		var imgSize = 32;
+		let imgSize = 32;
 		if (!this.chunk) return false;
 		this.canvas.width = this.chunk.size * imgSize;
 		this.canvas.height = this.chunk.size * imgSize;
-		var ctx = this.canvas.getContext('2d');
+		let ctx = this.canvas.getContext('2d');
 		if (!ctx || !this.chunk) return false;
-		var assetSystem = Engine.instance.getSystem(AssetSystem);
-		for (var i = 0; i < this.chunk.size * this.chunk.size; i++) {
-			var img = assetSystem.getImage(this.chunk.tiles[i].tileImgSrc);
+		let assetSystem = Engine.instance.getSystem(AssetSystem);
+		for (let i = 0; i < this.chunk.size * this.chunk.size; i++) {
+			let img = assetSystem.getImage(this.chunk.tiles[i].tileImgSrc);
 			if (!img) return false;
 			ctx.drawImage(
 				img,

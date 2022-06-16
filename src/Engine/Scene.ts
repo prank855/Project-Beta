@@ -25,12 +25,12 @@ export class Scene {
 
 	/** Calls every frame */
 	update() {
-		for (var go of this.removeQueue) {
+		for (let go of this.removeQueue) {
 			this.gameObjects.splice(this.gameObjects.indexOf(go), 1);
 			this.gameObjectFromID.delete(go.getID);
 		}
 		this.removeQueue = [];
-		for (var go of this.gameObjects) {
+		for (let go of this.gameObjects) {
 			if (go.enabled) {
 				if (!go.started) {
 					go.start();
@@ -53,7 +53,7 @@ export class Scene {
 
 	/** Removes a GameObject from this scene by next update */
 	removeGameObject(goID: number) {
-		for (var go of this.gameObjects) {
+		for (let go of this.gameObjects) {
 			if (go.getID == goID) {
 				this.removeQueue.push(go);
 				return;
@@ -88,7 +88,7 @@ export class Scene {
 		if (!count) {
 			count = { value: 0 };
 		}
-		for (var go of gos) {
+		for (let go of gos) {
 			count.value++;
 			if (go.getChildren.length > 0) {
 				this.getGameObjectAmount(go.getChildren, count);
@@ -98,10 +98,10 @@ export class Scene {
 	}
 
 	serialize(): { gameObjects: SerializedGameObject[] } {
-		var serialized: { gameObjects: SerializedGameObject[] } = {
+		let serialized: { gameObjects: SerializedGameObject[] } = {
 			gameObjects: [],
 		};
-		for (var go of this.gameObjects) {
+		for (let go of this.gameObjects) {
 			serialized.gameObjects.push(go.serialize());
 		}
 		return serialized;

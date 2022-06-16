@@ -16,7 +16,7 @@ import { Environment } from '../../Engine/Types/Environment';
 
 export class DemoGameClientLoader {
 	init() {
-		var engine = new Engine(Environment.WEB);
+		let engine = new Engine(Environment.WEB);
 		engine.FrameRate = 0;
 
 		engine.addSystem(Input);
@@ -24,7 +24,7 @@ export class DemoGameClientLoader {
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);
 		engine.addSystem(Viewport).unitsAcross = 20;
-		engine.addSystem(RendererSystem).clearColor = 'Blue';
+		engine.addSystem(RendererSystem);
 		engine.addSystem(EngineDebugRenderer);
 		engine.addSystem(ClientNetworking);
 
@@ -34,13 +34,13 @@ export class DemoGameClientLoader {
 		assetSystem.addAsset('Grass1', 'grass.png', AssetType.Image);
 		assetSystem.addAsset('Player', 'Player.png', AssetType.Image);
 
-		var clientScene = new Scene('Client Scene');
+		let clientScene = new Scene('Client Scene');
 		engine.addScene(clientScene);
 
 		ComponentStore.registerComponent(ClientGameManager);
 
 		/*Create Game Manager*/ {
-			var gameManager = new GameObject();
+			let gameManager = new GameObject();
 			gameManager.name = 'Client Game';
 			gameManager.addComponentFromString('ClientGameManager');
 			clientScene.addGameObject(gameManager);

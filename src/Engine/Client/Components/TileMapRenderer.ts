@@ -41,7 +41,7 @@ export class SpriteArrayRenderer extends GameComponent {
 	}
 
 	SetTile(sprite: Sprite, position: Vector2) {
-		var index = position.x + position.y * this.height;
+		let index = position.x + position.y * this.height;
 		if (index > this.width * this.height) {
 			throw new Error('Trying to set a Tile out of bounds');
 		}
@@ -49,7 +49,7 @@ export class SpriteArrayRenderer extends GameComponent {
 	}
 
 	GetTile(position: Vector2): Sprite {
-		var index = position.x + position.y * this.height;
+		let index = position.x + position.y * this.height;
 		return this.sprites[index];
 	}
 

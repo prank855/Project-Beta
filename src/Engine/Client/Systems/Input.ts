@@ -30,8 +30,8 @@ export class Input extends System {
 	}
 
 	static getKeys(): string[] {
-		var temp = [];
-		for (var k of this.keys) {
+		let temp = [];
+		for (let k of this.keys) {
 			temp.push(k);
 		}
 		return temp;

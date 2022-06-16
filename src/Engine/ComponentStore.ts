@@ -8,7 +8,7 @@ export class ComponentStore {
 	static registered: string[] = [];
 
 	static registerComponent(componentClass: new (parent: GameObject) => {}) {
-		var className = new (componentClass as any)().constructor.name;
+		let className = new (componentClass as any)().constructor.name;
 		if (this.registered.includes(className)) return;
 		this.registered.push(className);
 		if (this.components.has(className)) {

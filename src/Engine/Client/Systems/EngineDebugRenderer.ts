@@ -44,7 +44,7 @@ export class EngineDebugRenderer extends System {
 
 	private lastUpdate = -1;
 	update() {
-		var curr = Time.getCurrentTime();
+		let curr = Time.getCurrentTime();
 		if (curr - this.lastUpdate >= 1 / this.updateRate) {
 			if (this.isHovered) return;
 			this.sceneReference = Engine.instance.getCurrentScene;
@@ -55,7 +55,7 @@ export class EngineDebugRenderer extends System {
 
 	WriteSceneView() {
 		if (!this.sceneReference) return;
-		var scene = this.sceneReference;
+		let scene = this.sceneReference;
 		this.sceneBody.innerHTML = '';
 		this.AddText(
 			this.sceneBody,
@@ -76,8 +76,9 @@ export class EngineDebugRenderer extends System {
 				.position.toString(2)}`
 		);
 		// hierarchy
+		return;
 		this.AddText(this.sceneBody, `Scene Hierarchy "${scene.getName}"`);
-		for (var go of scene.getGameObjects) {
+		for (let go of scene.getGameObjects) {
 			this.WriteGameObject(this.sceneBody, go, 1);
 		}
 	}
@@ -85,8 +86,8 @@ export class EngineDebugRenderer extends System {
 	WriteGameObject(root: Node, go: GameObject, padding: number) {
 		if (go.getChildren.length != 0) {
 			// create collapsible list
-			var details = document.createElement('details');
-			var summary = document.createElement('summary');
+			let details = document.createElement('details');
+			let summary = document.createElement('summary');
 			details.appendChild(summary);
 			summary.innerHTML = go.name;
 			if (go.getChildren.length < 4) {
@@ -95,16 +96,16 @@ export class EngineDebugRenderer extends System {
 				summary.style.paddingLeft = `${(padding - 1) * 16}px`;
 				summary.innerHTML = `${go.name} +${go.getChildren.length} children`;
 			}
-			var summaryText = document.createElement('div');
+			let summaryText = document.createElement('div');
 			details.appendChild(summaryText);
 			this.addDiv(root, details);
 			padding++;
-			for (var child of go.getChildren) {
+			for (let child of go.getChildren) {
 				this.WriteGameObject(summaryText, child, padding);
 			}
 			padding--;
 		} else {
-			var line = this.AddGameObject(root, go, padding++);
+			let line = this.AddGameObject(root, go, padding++);
 			padding--;
 		}
 	}
@@ -118,14 +119,14 @@ export class EngineDebugRenderer extends System {
 		go: GameObject,
 		padding: number = 0
 	): HTMLDivElement {
-		var textDiv = document.createElement('div');
+		let textDiv = document.createElement('div');
 		textDiv.style.paddingLeft = `${padding * 16}px`;
 		textDiv.innerHTML = go.name;
 		root.appendChild(textDiv);
 		return textDiv;
 	}
 	AddText(root: Node, text: string) {
-		var textDiv = document.createElement('div');
+		let textDiv = document.createElement('div');
 		textDiv.innerHTML = text;
 		root.appendChild(textDiv);
 	}

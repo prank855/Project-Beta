@@ -44,7 +44,7 @@ export class Engine {
 			`Started ENGINE with Scene: ${LogColor.SCENE}"${this.currentScene.getName}"${LogColor.CLEAR}`
 		);
 
-		for (var s of this.systems) {
+		for (let s of this.systems) {
 			s.start();
 		}
 
@@ -60,7 +60,7 @@ export class Engine {
 
 		let tickDelta = 1 / this.framerate;
 		if (this.framerate != 0) {
-			var timeSinceLastFrame = currTime - Time.lastTime;
+			let timeSinceLastFrame = currTime - Time.lastTime;
 			if (timeSinceLastFrame <= tickDelta) {
 				if (timeSinceLastFrame < tickDelta / 2) {
 					setTimeout(self.loop.bind(this));
@@ -74,7 +74,7 @@ export class Engine {
 		this.frame++;
 
 		// update systems
-		for (var s of this.systems) {
+		for (let s of this.systems) {
 			s.update();
 		}
 
@@ -82,7 +82,7 @@ export class Engine {
 		this.currentScene.update();
 
 		// late update systems
-		for (var s of this.systems) {
+		for (let s of this.systems) {
 			s.lateUpdate();
 		}
 
@@ -97,7 +97,7 @@ export class Engine {
 
 	/** Adds system to Engine */
 	addSystem<T extends System>(type: new () => T): T {
-		var temp = new type();
+		let temp = new type();
 		Logger.log(`Added System: ${LogColor.SYSTEM}${type.name}${LogColor.CLEAR}`);
 		temp.init();
 		this.systems.push(temp);
@@ -106,7 +106,7 @@ export class Engine {
 
 	/** Retrieves existing System */
 	getSystem<T extends System>(type: new () => T): T {
-		for (var s of this.systems) {
+		for (let s of this.systems) {
 			if (s instanceof type) {
 				return s;
 			}
@@ -123,7 +123,7 @@ export class Engine {
 	}
 
 	setScene(sceneName: string) {
-		for (var s of this.scenes) {
+		for (let s of this.scenes) {
 			if (s.getName == sceneName) {
 				this.currentScene = s;
 				return;

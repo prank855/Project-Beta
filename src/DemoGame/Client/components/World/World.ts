@@ -9,17 +9,17 @@ export class World extends GameComponent {
 	override serializedVars: string[] = ['chunks'];
 	renderDistance: number = 3;
 	override init() {
-		for (var x = -this.renderDistance; x < this.renderDistance + 1; x++) {
-			for (var y = -this.renderDistance; y < this.renderDistance + 1; y++) {
+		for (let x = -this.renderDistance; x < this.renderDistance + 1; x++) {
+			for (let y = -this.renderDistance; y < this.renderDistance + 1; y++) {
 				this.CreateChunk(new Vector2(x, y));
 			}
 		}
 	}
 	private CreateChunk(position: Vector2): Chunk {
-		var go = new GameObject();
+		let go = new GameObject();
 
 		go.name = `Chunk (${position.x}, ${position.y})`;
-		var chunk = go.addComponent(Chunk);
+		let chunk = go.addComponent(Chunk);
 		go.addComponent(ChunkRenderer);
 		go.transform.position = new Vector2(
 			position.x * chunk.size,
