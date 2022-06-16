@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
-const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -37,6 +36,9 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/typescript'],
+					},
 				},
 			},
 		],
@@ -54,7 +56,6 @@ module.exports = {
 		server: 'http',
 		host: '0.0.0.0',
 		historyApiFallback: true,
-		//overlay: true,
 		compress: true,
 		hot: true,
 		allowedHosts: 'all',
@@ -65,7 +66,7 @@ module.exports = {
 		},
 		minimizer: [
 			new TerserPlugin({
-				extractComments: true,
+				extractComments: false,
 				terserOptions: {
 					mangle: { keep_classnames: true },
 					compress: { ecma: 2015, passes: 1, unsafe: true },

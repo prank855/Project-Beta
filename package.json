@@ -9,8 +9,7 @@
 		"start:server": "node index.js",
 		"build:client": "webpack && cp -r ./src/pages/assets/* ./dist",
 		"build:server": "tsc -p ./src/ServerEntry",
-		"build": "npm run build:client && npm run build:server",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "npm run build:client && npm run build:server"
 	},
 	"repository": {
 		"type": "git",
@@ -24,7 +23,6 @@
 	"homepage": "https://github.com/prank855/Project-Beta#readme",
 	"dependencies": {
 		"clean-webpack-plugin": "^4.0.0",
-		"core-js": "^3.23.1",
 		"html-webpack-plugin": "^5.5.0",
 		"prettier": "^2.7.1",
 		"terser-webpack-plugin": "^5.3.3",
@@ -34,11 +32,7 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.18.5",
-		"@babel/plugin-transform-runtime": "^7.18.5",
-		"@babel/polyfill": "^7.12.1",
-		"@babel/preset-env": "^7.18.2",
 		"@babel/preset-typescript": "^7.17.12",
-		"@babel/runtime": "^7.18.3",
 		"@types/ws": "^8.5.3",
 		"babel-loader": "^8.2.5",
 		"fork-ts-checker-webpack-plugin": "^7.2.11",
