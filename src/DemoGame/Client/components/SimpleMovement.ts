@@ -5,7 +5,6 @@ import { GameComponent } from '../../../Engine/GameComponent';
 import { Time } from '../../../Engine/Systems/Time';
 import { IInputListener } from '../../../Engine/Client/Components/IInputListener';
 import { Vector2 } from '../../../Engine/Types/Vector2';
-import { getPositionOfLineAndCharacter } from 'typescript';
 
 export class SimpleMovement extends GameComponent implements IInputListener {
 	inputSystem: GlobalInput | undefined;
