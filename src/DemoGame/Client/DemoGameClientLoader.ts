@@ -4,7 +4,7 @@ import { Scene } from '../../Engine/Scene';
 import { AssetSystem } from '../../Engine/Client/Systems/AssetSystem';
 import { Viewport } from '../../Engine/Client/Systems/Viewport';
 import { ClientNetworking } from '../../Engine/Client/Systems/ClientNetworking';
-import { Input } from '../../Engine/Client/Systems/Input';
+import { GlobalInput } from '../../Engine/Client/Systems/GlobalInput';
 import { RendererSystem } from '../../Engine/Client/Systems/RendererSystem';
 import { ScreenSystem } from '../../Engine/Client/Systems/ScreenSystem';
 import { SoundSystem } from '../../Engine/Client/Systems/SoundSystem';
@@ -19,7 +19,7 @@ export class DemoGameClientLoader {
 		let engine = new Engine(Environment.WEB);
 		engine.FrameRate = 0;
 
-		engine.addSystem(Input);
+		engine.addSystem(GlobalInput);
 		engine.addSystem(SoundSystem);
 		engine.addSystem(ScreenSystem);
 		engine.addSystem(AssetSystem);

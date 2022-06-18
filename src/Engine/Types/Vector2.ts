@@ -8,15 +8,10 @@ export class Vector2 {
 		this.y = y;
 	}
 
+	/** Adds a vector to this vector */
 	add(vec: Vector2): Vector2 {
 		this.x += vec.x;
 		this.y += vec.y;
-		return this;
-	}
-
-	multiply(vec: Vector2): Vector2 {
-		this.x *= vec.x;
-		this.y *= vec.y;
 		return this;
 	}
 
@@ -25,9 +20,20 @@ export class Vector2 {
 		return new Vector2(this.x, this.y);
 	}
 
-	/** Returns this vector normalized */
-	normalize(): Vector2 {
-		throw new Error('Vector2.normalize not implemented');
+	/** Returns a new vector normalized */
+	get Normalized(): Vector2 {
+		var mag = this.Magnitude;
+		if (mag == 0) {
+			return new Vector2();
+		}
+		var normalized = this.Copy();
+		normalized.x /= mag;
+		normalized.y /= mag;
+		return normalized;
+	}
+
+	get Magnitude(): number {
+		return Math.sqrt(this.x * this.x + this.y * this.y);
 	}
 
 	/** Return string as "(x, y)" to rounded precision OR defaults to 2 decimal places */

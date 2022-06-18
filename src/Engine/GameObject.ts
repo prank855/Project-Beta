@@ -177,6 +177,10 @@ export class GameObject {
 		return a;
 	}
 
+	getAllComponents(): GameComponent[] {
+		return this.components;
+	}
+
 	/** Removes GameComponent from this GameObject */
 	removeComponent<T extends GameComponent>(type: new () => T): void {
 		for (let co of this.components) {

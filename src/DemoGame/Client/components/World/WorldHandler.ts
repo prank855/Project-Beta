@@ -1,3 +1,4 @@
+import { InputListener } from '../../../../Engine/Client/Components/InputListener';
 import { GameComponent } from '../../../../Engine/GameComponent';
 import { GameObject } from '../../../../Engine/GameObject';
 import { Vector2 } from '../../../../Engine/Types/Vector2';
@@ -20,6 +21,7 @@ export class WorldHandler extends GameComponent {
 	CreatePlayer() {
 		Logger.log(`Create Player`);
 		let playerGO = new GameObject('Player');
+		let iListener = playerGO.addComponent(InputListener);
 		let player = playerGO.addComponent(Player);
 		playerGO.transform.position = new Vector2(
 			Math.random() * 10,

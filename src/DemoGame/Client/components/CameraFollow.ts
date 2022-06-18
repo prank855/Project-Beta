@@ -1,4 +1,4 @@
-import { Input } from '../../../Engine/Client/Systems/Input';
+import { GlobalInput } from '../../../Engine/Client/Systems/GlobalInput';
 import { Viewport } from '../../../Engine/Client/Systems/Viewport';
 import { Engine } from '../../../Engine/Engine';
 import { GameComponent } from '../../../Engine/GameComponent';
@@ -37,7 +37,7 @@ export class CameraFollow extends GameComponent {
 		}
 	}
 	private Zoom() {
-		let keys = Input.getKeys();
+		let keys = GlobalInput.getKeys();
 		if (keys.includes('ArrowUp')) {
 			Engine.instance.getSystem(Viewport).zoom *=
 				Math.E ** (Time.deltaTime * Math.log(1.5));
