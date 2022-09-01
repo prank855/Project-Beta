@@ -17,7 +17,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
 	},
-	plugins: [new ForkTsCheckerWebpackPlugin()].concat(
+	plugins: [].concat(
 		pages.map(
 			(page) =>
 				new HtmlWebPackPlugin({
@@ -27,7 +27,8 @@ module.exports = {
 					chunks: [page],
 				})
 		),
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+		new ForkTsCheckerWebpackPlugin()
 	),
 	module: {
 		rules: [

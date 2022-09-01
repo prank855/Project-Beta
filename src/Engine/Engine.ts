@@ -4,7 +4,6 @@ import { Time } from './Systems/Time';
 import { LogColor } from './Types/LogColor';
 import { Environment } from './Types/Environment';
 import { Logger } from './Util/Logger';
-import { setOriginalNode, textChangeRangeIsUnchanged } from 'typescript';
 
 export class Engine {
 	//TODO: remove singleton if possible

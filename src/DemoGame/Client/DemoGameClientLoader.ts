@@ -10,7 +10,6 @@ import { ScreenSystem } from '../../Engine/Client/Systems/ScreenSystem';
 import { SoundSystem } from '../../Engine/Client/Systems/SoundSystem';
 import { AssetType } from '../../Engine/Client/Types/AssetType';
 import { ClientGameManager } from './components/ClientGameManager';
-import { EngineDebugRenderer } from '../../Engine/Client/Systems/EngineDebugRenderer';
 import { ComponentStore } from '../../Engine/ComponentStore';
 import { Environment } from '../../Engine/Types/Environment';
 
@@ -25,12 +24,9 @@ export class DemoGameClientLoader {
 		engine.addSystem(AssetSystem);
 		engine.addSystem(Viewport).unitsAcross = 20;
 		engine.addSystem(RendererSystem);
-		engine.addSystem(EngineDebugRenderer);
 		engine.addSystem(ClientNetworking);
 
 		let assetSystem = engine.getSystem(AssetSystem);
-		assetSystem.addAsset('Trollface', 'trollface.png', AssetType.Image);
-		assetSystem.addAsset('Smiley', 'smiley.png', AssetType.Image);
 		assetSystem.addAsset('Grass1', 'grass.png', AssetType.Image);
 		assetSystem.addAsset('Player', 'Player.png', AssetType.Image);
 
