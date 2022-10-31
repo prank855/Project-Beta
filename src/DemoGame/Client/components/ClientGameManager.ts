@@ -35,10 +35,6 @@ export class ClientGameManager extends GameComponent {
 
 	override start(): void {
 		this.SetupWorld();
-		console.warn(
-			'Serialized Scene',
-			Engine.instance.getCurrentScene.serialize()
-		);
 	}
 
 	worldHandler: WorldHandler | undefined;

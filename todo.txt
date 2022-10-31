@@ -1,5 +1,6 @@
 engine stuff:
 
+top level node instead scene (like godot)
 SyncVars? https://mirror-networking.gitbook.io/docs/guides/synchronization/syncvars
 reference sprites instead of readding to queue
 sprite bounding boxes if image not loaded (??? shouldn't matter since all images will load regardless)

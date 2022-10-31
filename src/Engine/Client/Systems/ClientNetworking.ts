@@ -51,10 +51,8 @@ export class ClientNetworking extends System {
 						this.connected = true;
 						let handshakePacket = packet as Handshake;
 						this.networkID = handshakePacket.data.networkID;
-						console.warn(
-							`Successful Server Connection`,
-							`Network ID set to ${this.networkID}`
-						);
+						Logger.warn(`Successful Server Connection`);
+						Logger.warn(`Network ID set to ${this.networkID}`);
 						return;
 					}
 				}

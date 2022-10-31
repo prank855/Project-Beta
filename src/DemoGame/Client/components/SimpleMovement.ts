@@ -9,7 +9,7 @@ import { Vector2 } from '../../../Engine/Types/Vector2';
 export class SimpleMovement extends GameComponent implements IInputListener {
 	inputSystem: GlobalInput | undefined;
 
-	speed: number = 2;
+	speed: number = 3;
 
 	override start(): void {
 		let camera = Engine.instance.getSystem(Viewport);
