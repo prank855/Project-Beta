@@ -66,6 +66,11 @@ export class Engine {
 					setTimeout(self.loop.bind(this));
 					return;
 				}
+				if (this.environment == Environment.NODE) {
+					// prevent cpu burning on server side waiting for millisecond perfect loops
+					setTimeout(self.loop.bind(this));
+					return;
+				}
 				setImmediate(self.loop.bind(this));
 				return;
 			}
